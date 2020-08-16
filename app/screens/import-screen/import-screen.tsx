@@ -193,6 +193,13 @@ export const ImportScreen: React.FunctionComponent<ImportScreenProps> = observer
             onPress={importFile}
             disabled = {fetchingCred}
           />
+          <Button
+            style={BUTTON}
+            textStyle={BUTTON_TEXT}
+            tx="importScreen.qrButton"
+            onPress={() => props.navigation.navigate("qr")}
+            disabled = {fetchingCred}
+          />
         </View>
 
         <BottomLogo/>

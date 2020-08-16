@@ -37,6 +37,7 @@
     "url":"URL",
     "submitButton": "Get Credential",
     "sampleButton": "Get Example Credential",
-    "tunnelSampleButton": "Get Tunnel Credential"
+    "tunnelSampleButton": "Get Tunnel Credential",
+    "qrButton": "Scan QR Code"
   }
 }

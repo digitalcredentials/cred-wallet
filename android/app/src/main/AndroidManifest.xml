@@ -2,6 +2,8 @@
   package="com.credmaker">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Needed for react native QR (https://github.com/moaazsidat/react-native-qrcode-scanner) -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
       android:name=".MainApplication"

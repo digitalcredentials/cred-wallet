@@ -2,14 +2,16 @@ import createNativeStackNavigator from "react-native-screens/createNativeStackNa
 import {
   MainScreen,
   DetailsScreen,
-  ImportScreen
+  ImportScreen,
+  QrScreen
 } from "../screens"
 
 export const PrimaryNavigator = createNativeStackNavigator(
   {
     main: { screen: MainScreen },
     details: { screen: DetailsScreen },
-    import: { screen: ImportScreen }
+    import: { screen: ImportScreen },
+    qr: { screen: QrScreen }
   },
   {
     headerMode: "none",
