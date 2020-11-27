@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import _ from 'lodash';
 
-import { SearchBar, Text } from '../../components';
+import { CredentialsSearchList, SearchBar, Text } from '../../components';
 import { HomeScreenProps } from './home.props';
 import { styles } from './home.styles';
 import { IMAGES } from '../../assets';
@@ -62,18 +62,9 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
     [extendedListOpacity.current],
   );
 
-  // TODO: move this callback to components
-  const renderShortList = useCallback(() => {
-    return (
-      <View>
-        <Text>EMPTY SECTION</Text>
-      </View>
-    );
-  }, []);
-
   const renderCurrentList = useCallback(
-    () => (isExtendedList ? renderExtendedList() : renderShortList()),
-    [isExtendedList, renderExtendedList, renderShortList],
+    () => (isExtendedList ? renderExtendedList() : <CredentialsSearchList />),
+    [isExtendedList, renderExtendedList],
   );
 
   return (
