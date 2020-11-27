@@ -9,10 +9,9 @@ export type VerifyPanelStatus =
   | 'biometric-verify'
   | 'verified';
 
-export interface ICertificate {
+export interface ICertificate extends IWithID {
   '@context': string[];
   type: string[];
-  id: string;
   issuerId: string;
   issuanceDate: string;
   credentialSubject: {
@@ -38,6 +37,11 @@ export interface IIssuer {
   url: string;
 }
 
+export interface ICredentials extends IWithID {
+  issuer: IIssuer;
+  certificates: ICertificate[];
+}
+
 export interface ICertificateDeeplink {
   challenge: any;
   requestUrl: any;
@@ -45,6 +49,10 @@ export interface ICertificateDeeplink {
 
 export interface ISubjectDID {
   did: string;
+}
+
+export interface IWithID {
+  id: string;
 }
 
 export interface ICertificateDeeplinkWithDID

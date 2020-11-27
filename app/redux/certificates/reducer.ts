@@ -1,7 +1,8 @@
 import { createReducer } from 'reduxsauce';
+import randomString from 'random-string';
 import _ from 'lodash';
 
-import { ICertificate, IIssuer } from '../../utils/types';
+import { ICredentials } from '../../utils/types';
 import {
   CertificatesAction,
   certificatesActionTypes,
@@ -12,10 +13,7 @@ import {
 
 export interface CertificatesState {
   data: {
-    [issuerId: string]: {
-      issuer: IIssuer;
-      certificates: ICertificate[];
-    };
+    [issuerId: string]: ICredentials;
   };
   isLoading: boolean;
   error: string | null;
@@ -54,6 +52,7 @@ const addCertificateSuccess: Handler<AddCertificateSuccessAction> = (
     data: {
       ...state.data,
       [issuer.id]: {
+        id: issuer.id,
         issuer,
         certificates: newIssuerCertificates,
       },

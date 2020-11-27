@@ -1,4 +1,5 @@
 export * from './BackgroundTouchableArea';
+export * from './CredentialsList';
 export * from './DefaultTextInput';
 export * from './DotsProgress';
 export * from './VerifyPanel';

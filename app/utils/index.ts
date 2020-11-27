@@ -1,6 +1,7 @@
 import queryString from 'query-string';
 import randomString from 'random-string';
 import { Platform } from 'react-native';
+
 import { Credential } from '../services/api/api.types';
 import { ICertificate, ICertificateDeeplink, IIssuer } from './types';
 

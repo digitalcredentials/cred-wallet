@@ -14,8 +14,8 @@ import _ from 'lodash';
 import { SearchBar, Text } from '../../components';
 import { HomeScreenProps } from './home.props';
 import { styles } from './home.styles';
-import { useIssuerCertificates } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
+import { CredentialsList } from '../../components/CredentialsList';
 
 const ANIMATION_DURATION = 250;
 
@@ -23,8 +23,6 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
   navigation,
 }) => {
   /* ------ State ------ */
-
-  const issuers = useIssuerCertificates();
   const extendedListOpacity = useRef(new Animated.Value(1));
 
   const [searchValue, setSearchValue] = useState<string>('');
@@ -53,32 +51,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
     startExtendedListAnimation(1);
   }, [startExtendedListAnimation]);
 
-  // TODO: move this callbacks to components
-  const renderExtendedList = useCallback(() => {
-    // TODO: change this FlatList with real data
-    return (
+  const renderExtendedList = useCallback(
+    () => (
       <Animated.View
         style={[styles.flexContainer, { opacity: extendedListOpacity.current }]}
       >
-        <FlatList
-          data={Object.values(issuers)}
-          renderItem={({ item }) => (
-            <View style={styles.issuerContainer}>
-              <Image style={styles.issuerImage} source={IMAGES.GRADUATION} />
-              <Text style={styles.issuerTitle}>{item.issuer.name}</Text>
-              <Text style={styles.issuerCertificates}>
-                {item.certificates.length} certificates
-              </Text>
-            </View>
-          )}
-          numColumns={2}
-          keyExtractor={(item, index) => `stub-container-${item}-${index}`}
-          showsVerticalScrollIndicator={false}
-          style={styles.listContainer}
-        />
+        <CredentialsList />
       </Animated.View>
-    );
-  }, [issuers, extendedListOpacity.current]);
+    ),
+    [extendedListOpacity.current],
+  );
 
   // TODO: move this callback to components
   const renderShortList = useCallback(() => {
