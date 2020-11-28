@@ -2,7 +2,8 @@
 
 # React Native ^0.63.2 with TypeScript Project!
 
-CredWallet is Awesome Project connected with protected exchange and store of education certificates based on React Native!
+CredWallet is an open source wallet project that implements the standards developed by the Digital Credentials Consortium, a network of higher education institutions. The wallet allows the exchange, storage, and management of education certificates. The reference implementation is developed in React Native. 
+
 The target platforms: Android, iOS.
 
 # Install
