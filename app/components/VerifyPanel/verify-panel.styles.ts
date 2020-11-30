@@ -1,5 +1,6 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
+import { FONTS } from '../../utils/fonts';
 
 interface VerifyPanelStyles {
   container: ViewStyle;
@@ -22,6 +23,7 @@ export const styles = StyleSheet.create<VerifyPanelStyles>({
   },
   panelHeaderTitle: {
     fontSize: 24,
+    fontFamily: FONTS.POPPINS_REGULAR,
   },
   panelHeaderAnimatedDotsContainer: {},
   listContainer: {

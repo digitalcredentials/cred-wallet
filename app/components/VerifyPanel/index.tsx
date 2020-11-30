@@ -260,16 +260,16 @@ export const VerifyPanel: React.FunctionComponent<VerifyPanelProps> = ({
       default:
         return 'Loading..';
       case PANEL_STATUS.PIN_CREATE:
-        return 'Create PIN';
+        return 'Create a pin';
       case PANEL_STATUS.PIN_CREATE_VERIFY:
-        return 'Verify PIN';
+        return 'Verify a pin';
       case PANEL_STATUS.PIN_ENTER:
       case PANEL_STATUS.PIN_VERIFY:
-        return 'Enter PIN';
+        return 'Enter a pin';
       case PANEL_STATUS.BIOMETRIC_VERIFY:
-        return 'Biometric Verify';
+        return 'Biometric verify..';
       case PANEL_STATUS.VERIFIED:
-        return 'Verified';
+        return 'Verified!';
     }
   }, [panelStatus]);
 
