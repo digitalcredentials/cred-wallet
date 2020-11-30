@@ -1,12 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  FlatList,
-  Animated,
-  Easing,
-  Image,
-} from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { View, TouchableOpacity, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import _ from 'lodash';
@@ -16,17 +9,26 @@ import { HomeScreenProps } from './home.props';
 import { styles } from './home.styles';
 import { IMAGES } from '../../assets';
 import { CredentialsList } from '../../components/CredentialsList';
+import { useDispatch } from 'react-redux';
+import { useSearchCertificatesCallback } from '../../redux/search';
 
 const ANIMATION_DURATION = 250;
 
 export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
   navigation,
 }) => {
+  const dispatch = useDispatch();
+  const onSearch = useSearchCertificatesCallback(dispatch);
+
   /* ------ State ------ */
   const extendedListOpacity = useRef(new Animated.Value(1));
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [isExtendedList, setIsExtendedList] = useState<boolean>(true);
+
+  useEffect(() => {
+    onSearch(searchValue);
+  }, [searchValue]);
 
   /* ------ Callbacks ------ */
 

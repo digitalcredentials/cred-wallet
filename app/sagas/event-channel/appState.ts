@@ -1,4 +1,3 @@
-import { useRoute } from '@react-navigation/native';
 import { AppState, AppStateStatus } from 'react-native';
 import { eventChannel } from 'redux-saga';
 import { take, call, cancelled } from 'redux-saga/effects';

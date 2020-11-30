@@ -4,10 +4,12 @@ import {
   AddCertificateAction,
   certificatesActionTypes,
 } from '../redux/certificates';
+import { searchActionTypes, SearchCertificateAction } from '../redux/search';
 
 import { getUser } from './user';
 import { addCertificate } from './certificates';
 import { appStateListenerSaga } from './event-channel';
+import { searchCertificate } from './search';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +23,12 @@ export default function* rootSaga() {
     takeLatest<AddCertificateAction>(
       certificatesActionTypes.ADD_CERTIFICATE,
       addCertificate,
+    ),
+
+    // Search
+    takeLatest<SearchCertificateAction>(
+      searchActionTypes.SEARCH_CERTIFICATE,
+      searchCertificate,
     ),
   ]);
 }
