@@ -62,6 +62,7 @@
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
 		<string>Poppins-Regular.ttf</string>
+		<string>SFProDisplay-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

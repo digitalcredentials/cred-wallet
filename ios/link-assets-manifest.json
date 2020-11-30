@@ -4,6 +4,10 @@
     {
       "path": "app/assets/fonts/Poppins-Regular.ttf",
       "sha1": "01d319c533f62ea29f03b5df8adfd4d93d2d2a38"
+    },
+    {
+      "path": "app/assets/fonts/SFProDisplay-Regular.ttf",
+      "sha1": "00e029c09a98fd014a7a1013e7efe357b40da352"
     }
   ]
 }

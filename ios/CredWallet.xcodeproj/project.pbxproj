@@ -19,6 +19,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		E1393F2F9B0C5667C7BAF408 /* libPods-CredWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62DBC5F81806D17A463AD60 /* libPods-CredWallet.a */; };
 		763C72C576E0486A91925CD8 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E3CF1350311433498998A6E /* Poppins-Regular.ttf */; };
+		7B015D16406E4F29B3F7CE4F /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01A45CFE73AF491D87A7E454 /* SFProDisplay-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		8E3CF1350311433498998A6E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../app/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		01A45CFE73AF491D87A7E454 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; name = "SFProDisplay-Regular.ttf"; path = "../app/assets/fonts/SFProDisplay-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 			isa = "PBXGroup";
 			children = (
 				8E3CF1350311433498998A6E /* Poppins-Regular.ttf */,
+				01A45CFE73AF491D87A7E454 /* SFProDisplay-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				763C72C576E0486A91925CD8 /* Poppins-Regular.ttf in Resources */,
+				7B015D16406E4F29B3F7CE4F /* SFProDisplay-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

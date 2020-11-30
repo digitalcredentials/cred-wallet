@@ -22,8 +22,8 @@ export const styles = StyleSheet.create<VerifyPanelStyles>({
     justifyContent: 'space-evenly',
   },
   panelHeaderTitle: {
-    fontSize: 24,
     fontFamily: FONTS.POPPINS_REGULAR,
+    fontSize: 34,
   },
   panelHeaderAnimatedDotsContainer: {},
   listContainer: {
@@ -68,6 +68,7 @@ export const cipherRowStyles = StyleSheet.create<CipherRowStyles>({
   cipherText: {
     textAlign: 'center',
     fontSize: 36,
+    fontFamily: FONTS.SF_PRO_DISPLAY_REGULAR,
   },
   biometricImage: {
     width: 75,
