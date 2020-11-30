@@ -10,31 +10,36 @@ import { RootState } from '../redux';
 import { ICertificate } from '../utils/types';
 
 export function* searchCertificate({ value }: SearchCertificateAction) {
-  const foundCertificates: ICertificate[] = yield select((state: RootState) => {
-    const foundCertificates: ICertificate[] = [];
+  let foundCertificates: ICertificate[] = [];
 
-    _.forEach(state.certificates.data, (credential) => {
-      // Ignore value cases
-      const regexp = new RegExp(value, 'i');
+  if (value) {
+    foundCertificates = yield select((state: RootState) => {
+      const foundCertificates: ICertificate[] = [];
 
-      // Check issuer fields
-      const isIssuerSearchField = credential.issuer.name.search(regexp) !== -1;
+      _.forEach(state.certificates.data, (credential) => {
+        // Ignore value cases
+        const regexp = new RegExp(value, 'i');
 
-      if (isIssuerSearchField) {
-        foundCertificates.push(...credential.certificates);
-      } else {
-        // Trying to find matches inside certificates
-        const filteredCertificates = _.filter(
-          credential.certificates,
-          (cert) => cert.credentialSubject.name.search(regexp) !== -1,
-        );
+        // Check issuer fields
+        const isIssuerSearchField =
+          credential.issuer.name.search(regexp) !== -1;
 
-        foundCertificates.push(...filteredCertificates);
-      }
+        if (isIssuerSearchField) {
+          foundCertificates.push(...credential.certificates);
+        } else {
+          // Trying to find matches inside certificates
+          const filteredCertificates = _.filter(
+            credential.certificates,
+            (cert) => cert.credentialSubject.name.search(regexp) !== -1,
+          );
+
+          foundCertificates.push(...filteredCertificates);
+        }
+      });
+
+      return foundCertificates;
     });
-
-    return foundCertificates;
-  });
+  }
 
   yield put<SearchCertificateSuccessAction>(
     searchActionCreators.searchCertificateSuccess(foundCertificates),
