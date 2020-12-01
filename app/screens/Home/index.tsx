@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View, TouchableOpacity, Animated, Easing } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Animated,
+  Easing,
+  StatusBar,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import _ from 'lodash';
@@ -11,6 +17,7 @@ import { IMAGES } from '../../assets';
 import { CredentialsList } from '../../components/CredentialsList';
 import { useDispatch } from 'react-redux';
 import { useSearchCertificatesCallback } from '../../redux/search';
+import { COLORS } from '../../utils/colors';
 
 const ANIMATION_DURATION = 250;
 
@@ -70,22 +77,21 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
   );
 
   return (
-    <SafeAreaView style={styles.root} edges={['top']}>
-      <View style={styles.flexContainer}>
-        <SearchBar
-          value={searchValue}
-          onChangeText={setSearchValue}
-          onFocus={onSearchFocus}
-          onBlur={onSearchBlur}
-        />
-        {renderCurrentList()}
-        <TouchableOpacity
-          style={styles.addCertificateButtonContainer}
-          onPress={() => navigation.navigate('QRScanner')}
-        >
-          <Text style={styles.addCertificateButtonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <View style={styles.root}>
+      <StatusBar backgroundColor={COLORS.BUNTING} barStyle="light-content" />
+      <SearchBar
+        value={searchValue}
+        onChangeText={setSearchValue}
+        onFocus={onSearchFocus}
+        onBlur={onSearchBlur}
+      />
+      {renderCurrentList()}
+      <TouchableOpacity
+        style={styles.addCertificateButtonContainer}
+        onPress={() => navigation.navigate('QRScanner')}
+      >
+        <Text style={styles.addCertificateButtonText}>+</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
