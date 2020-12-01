@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { TextInputProps, View, TextInput } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TextInput } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
@@ -44,24 +45,26 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = ({
   );
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <FontAwesomeIcon name="search" size={20} color={COLORS.SILVER} />
-      <DefaultTextInput
-        ref={inputRef}
-        focusable={false}
-        placeholder="Search"
-        returnKeyType="search"
-        // blurOnSubmit={false}
-        {...rest}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        style={[styles.input, propStyle]}
-      />
-      {isFocused && (
-        <TouchableOpacity onPress={onCancelPress} hitSlop={EXTENDED_HIT_SLOP}>
-          <IoniconsIcon name="close-circle" size={20} color={COLORS.SILVER} />
-        </TouchableOpacity>
-      )}
-    </TouchableOpacity>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <TouchableOpacity onPress={onPress} style={styles.searchContainer}>
+        <FontAwesomeIcon name="search" size={20} color={COLORS.SILVER} />
+        <DefaultTextInput
+          ref={inputRef}
+          focusable={false}
+          placeholder="Search"
+          returnKeyType="search"
+          // blurOnSubmit={false}
+          {...rest}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          style={[styles.input, propStyle]}
+        />
+        {isFocused && (
+          <TouchableOpacity onPress={onCancelPress} hitSlop={EXTENDED_HIT_SLOP}>
+            <IoniconsIcon name="close-circle" size={20} color={COLORS.SILVER} />
+          </TouchableOpacity>
+        )}
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
