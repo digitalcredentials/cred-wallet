@@ -4,4 +4,5 @@ export const IMAGES = {
   SIGNATURE: require('./images/signature.png'),
   MAN: require('./images/man.png'),
   GRADUATION: require('./images/graduation.png'),
+  CLOSE: require('./images/close.png'),
 };

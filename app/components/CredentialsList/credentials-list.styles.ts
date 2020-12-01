@@ -17,8 +17,10 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
   },
   issuerContainer: {
     flex: 1,
-    height: 150,
+    paddingTop: 15,
+    paddingBottom: 6,
     borderRadius: 14,
+    overflow: 'hidden',
     margin: 10,
     borderWidth: 1,
     borderColor: `${COLORS.BUNTING}99`,
@@ -26,21 +28,20 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
     alignItems: 'center',
   },
   issuerImage: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     marginBottom: 8,
   },
   issuerTitle: {
-    // TODO: fontFamily
-    fontFamily: FONTS.POPPINS_REGULAR,
-    fontWeight: '500',
-    fontSize: 14,
-    lineHeight: 17.5,
+    fontFamily: FONTS.POPPINS_600,
+    fontSize: 17,
+    lineHeight: 25,
   },
   issuerCertificates: {
-    // TODO: fontFamily
-    fontSize: 11,
-    lineHeight: 13,
-    marginBottom: 10,
+    marginTop: 1,
+    fontFamily: FONTS.POPPINS_REGULAR,
+    color: COLORS.BUNTING,
+    fontSize: 12,
+    lineHeight: 14,
   },
 });

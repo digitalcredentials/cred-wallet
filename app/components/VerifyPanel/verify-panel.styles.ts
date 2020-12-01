@@ -49,20 +49,19 @@ export const cipherRowStyles = StyleSheet.create<CipherRowStyles>({
   container: {
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 47,
     marginVertical: 10,
   },
   emptyContainer: {
     width: 75,
     height: 75,
-    marginHorizontal: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
   cipherContainer: {
     width: 75,
     height: 75,
-    marginHorizontal: 14,
     borderRadius: 37.5,
     borderWidth: 1,
     borderColor: COLORS.BUNTING,

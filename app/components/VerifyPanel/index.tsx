@@ -92,7 +92,7 @@ const CipherRow: React.FunctionComponent<CipherRowProps> = ({
         style={cipherRowStyles.emptyContainer}
         onPress={onRemovePress}
       >
-        <Icon name="close" size={50} />
+        <Image source={IMAGES.CLOSE} />
       </TouchableOpacity>
     ),
     [isDisabled, onRemovePress],
