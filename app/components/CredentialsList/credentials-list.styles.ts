@@ -1,4 +1,6 @@
 import { ViewStyle, StyleSheet, ImageStyle, TextStyle } from 'react-native';
+import { COLORS } from '../../utils/colors';
+import { FONTS } from '../../utils/fonts';
 
 interface IssuersListStyles {
   container: ViewStyle;
@@ -18,8 +20,8 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
     height: 150,
     borderRadius: 14,
     margin: 10,
-    // TODO: replace color by constant
-    backgroundColor: 'rgba(77, 87, 140, 0.4)',
+    borderWidth: 1,
+    borderColor: `${COLORS.BUNTING}99`,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -30,6 +32,7 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
   },
   issuerTitle: {
     // TODO: fontFamily
+    fontFamily: FONTS.POPPINS_REGULAR,
     fontWeight: '500',
     fontSize: 14,
     lineHeight: 17.5,
