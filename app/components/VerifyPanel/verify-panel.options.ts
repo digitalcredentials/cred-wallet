@@ -5,7 +5,7 @@ const CIPHERS_SECOND_ROW: number[] = [4, 5, 6];
 const CIPHERS_THIRD_ROW: number[] = [7, 8, 9];
 const CIPHERS_ZERO: number[] = [0];
 
-export const LETTERS = {
+export const CIPHER_LETTERS: Record<number, string[]> = {
   1: [],
   2: ['A', 'B', 'C'],
   3: ['D', 'E', 'F'],
@@ -27,6 +27,7 @@ export const CIPHERS_BY_ROWS: number[][] = [
 
 export const PIN_LENGTH = 4;
 
+// TODO: refactor to enum
 type VerifyPanelStatusKeys =
   | 'CHECK_BIOMETRIC_VERIFY'
   | 'CHECK_PIN_KEYCHAIN'

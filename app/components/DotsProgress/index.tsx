@@ -19,9 +19,10 @@ const DotView: React.FunctionComponent<DotProps> = ({ isFilled }) => {
 export const DotsProgress: React.FunctionComponent<DotsProgressProps> = ({
   dotsAmount,
   filledDotsAmount,
+  style: propStyle = {},
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, propStyle.container]}>
       {_.map(new Array(dotsAmount), (el, index) => (
         <DotView isFilled={index < filledDotsAmount} key={`dot-${index}`} />
       ))}

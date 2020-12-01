@@ -16,22 +16,22 @@ export const styles = StyleSheet.create<VerifyPanelStyles>({
     flex: 1,
   },
   panelHeaderContainer: {
-    flex: 1,
-    flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
   },
   panelHeaderTitle: {
+    marginTop: 40,
     fontFamily: FONTS.POPPINS_REGULAR,
+    color: COLORS.BUNTING,
     fontSize: 34,
   },
-  panelHeaderAnimatedDotsContainer: {},
+  panelHeaderAnimatedDotsContainer: {
+    marginTop: 30,
+  },
   listContainer: {
     flex: 1,
-    flexGrow: 3,
   },
   listContentContainer: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
   },
 });
@@ -41,6 +41,7 @@ interface CipherRowStyles {
   emptyContainer: ViewStyle;
   cipherContainer: ViewStyle;
   cipherText: TextStyle;
+  cipherLettersText: TextStyle;
   biometricImage: ImageStyle;
 }
 
@@ -48,20 +49,23 @@ export const cipherRowStyles = StyleSheet.create<CipherRowStyles>({
   container: {
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     marginVertical: 10,
   },
   emptyContainer: {
     width: 75,
     height: 75,
+    marginHorizontal: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
   cipherContainer: {
     width: 75,
     height: 75,
+    marginHorizontal: 14,
     borderRadius: 37.5,
-    backgroundColor: COLORS.PRIMARY,
+    borderWidth: 1,
+    borderColor: COLORS.BUNTING,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -69,6 +73,14 @@ export const cipherRowStyles = StyleSheet.create<CipherRowStyles>({
     textAlign: 'center',
     fontSize: 36,
     fontFamily: FONTS.SF_PRO_DISPLAY_REGULAR,
+    color: COLORS.BUNTING,
+  },
+  cipherLettersText: {
+    marginTop: -3,
+    fontSize: 10,
+    fontFamily: FONTS.SF_PRO_DISPLAY_REGULAR,
+    letterSpacing: 0.7,
+    lineHeight: 12,
   },
   biometricImage: {
     width: 75,

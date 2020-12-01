@@ -7,6 +7,7 @@ import _ from 'lodash';
 import {
   BIOMETRY_OPTIONS,
   CIPHERS_BY_ROWS,
+  CIPHER_LETTERS,
   PANEL_STATUS,
   PIN_LENGTH,
 } from './verify-panel.options';
@@ -39,6 +40,9 @@ const CipherRow: React.FunctionComponent<CipherRowProps> = ({
           style={cipherRowStyles.cipherContainer}
         >
           <Text style={cipherRowStyles.cipherText}>{cipher}</Text>
+          <Text style={cipherRowStyles.cipherLettersText}>
+            {CIPHER_LETTERS[cipher].join(' ')}
+          </Text>
         </TouchableOpacity>
       );
     },
@@ -280,6 +284,9 @@ export const VerifyPanel: React.FunctionComponent<VerifyPanelProps> = ({
         <DotsProgress
           filledDotsAmount={enteredPin.length}
           dotsAmount={PIN_LENGTH}
+          style={{
+            container: styles.panelHeaderAnimatedDotsContainer,
+          }}
         />
       </View>
       <FlatList

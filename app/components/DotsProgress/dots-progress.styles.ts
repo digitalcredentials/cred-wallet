@@ -14,14 +14,15 @@ export const styles = StyleSheet.create<DotsProgressStyles>({
     justifyContent: 'center',
   },
   dotContainer: {
-    width: 10,
-    height: 10,
-    marginHorizontal: 5,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: COLORS.BLACK,
+    width: 13,
+    height: 13,
+    marginHorizontal: 14,
+    borderRadius: 7,
+    borderWidth: 0.5,
+    borderColor: COLORS.BUNTING,
   },
   activeDotContainer: {
-    backgroundColor: COLORS.BLACK,
+    borderColor: COLORS.CRUSTA,
+    backgroundColor: COLORS.CRUSTA,
   },
 });

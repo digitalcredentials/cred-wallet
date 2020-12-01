@@ -12,4 +12,6 @@ export const COLORS = {
   BAY_OF_MANY: '#29398E',
   SILVER: '#C5C5C5',
   ALABASTER: '#F8F8F8',
+  BUNTING: '#1D114B',
+  CRUSTA: '#FF893B',
 };
