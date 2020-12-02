@@ -4,7 +4,7 @@
         android:drawable="@color/catalyst_logbox_background"/>
     <item>
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_launcher"/>
+            android:gravity="fill"
+            android:src="@drawable/ic_launcher" />
     </item>
 </layer-list>
