@@ -5,4 +5,5 @@ export const IMAGES = {
   MAN: require('./images/man.png'),
   GRADUATION: require('./images/graduation.png'),
   CLOSE: require('./images/close.png'),
+  PLACE_FOR_QR: require('./images/place-for-qr.png'),
 };

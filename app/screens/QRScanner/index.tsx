@@ -1,13 +1,15 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
 import { QRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
 import { generateExampleDid, parseCertificateDeeplink } from '../../utils';
 import { useAddCertificateCallback } from '../../redux/certificates';
+import { IMAGES } from '../../assets';
+import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 
 export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
   navigation,
@@ -30,7 +32,7 @@ export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
   );
 
   return (
-    <SafeAreaView style={styles.root}>
+    <View style={styles.root}>
       <QRCodeScanner
         onRead={onSuccess}
         // vibrate?: boolean;
@@ -43,8 +45,8 @@ export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
         // containerStyle?: StyleProp<ViewStyle>;
         cameraStyle={styles.cameraContainer}
         markerStyle={styles.cameraMarkerContiner}
-        // topViewStyle?: StyleProp<ViewStyle>;
-        // bottomViewStyle?: StyleProp<ViewStyle>;
+        topViewStyle={styles.zeroContainer}
+        bottomViewStyle={styles.zeroContainer}
         // topContent?: JSX.Element | string;
         // bottomContent?: JSX.Element | string;
         // notAuthorizedView?: JSX.Element;
@@ -53,22 +55,33 @@ export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
         // buttonPositive?: string;
         // checkAndroid6Permissions?: boolean;
 
-        // cameraProps?: RNCameraProps;
-        // inside // flashMode={RNCamera.Constants.FlashMode.torch}
-        topContent={
-          <TouchableOpacity
-            onPress={goBack}
-            style={styles.goBackZoneContainer}
-          />
-        }
-        bottomContent={
-          <TouchableOpacity onPress={goBack} style={styles.goBackZoneContainer}>
-            <Text style={styles.descriptionText}>
-              place the camera on the QR code
-            </Text>
-          </TouchableOpacity>
-        }
+        // cameraProps={{
+        //   flashMode: RNCamera.Constants.FlashMode.torch}
+        // }}
+        // topContent={
+        //   <TouchableOpacity
+        //     onPress={goBack}
+        //     style={styles.goBackZoneContainer}
+        //   />
+        // }
+        // bottomContent={
+        //   <TouchableOpacity onPress={goBack} style={styles.goBackZoneContainer}>
+        //     <Text style={styles.descriptionText}>
+        //       place the camera on the QR code
+        //     </Text>
+        //   </TouchableOpacity>
+        // }
       />
-    </SafeAreaView>
+      <TouchableOpacity
+        onPress={goBack}
+        style={styles.closeButtonContainer}
+        hitSlop={EXTENDED_HIT_SLOP}
+      >
+        <Image source={IMAGES.CLOSE} />
+      </TouchableOpacity>
+      <View style={styles.mainAbsoluteContainer}>
+        <Image source={IMAGES.PLACE_FOR_QR} />
+      </View>
+    </View>
   );
 };
