@@ -17,7 +17,7 @@ import { styles } from './home.styles';
 import { IMAGES } from '../../assets';
 import { CredentialsList } from '../../components/CredentialsList';
 import { useDispatch } from 'react-redux';
-import { useSearchCertificatesCallback } from '../../redux/search';
+import { useSearchCredentialsCallback } from '../../redux/search';
 import { COLORS } from '../../utils/colors';
 
 const ANIMATION_DURATION = 250;
@@ -26,7 +26,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();
-  const onSearch = useSearchCertificatesCallback(dispatch);
+  const onSearch = useSearchCredentialsCallback(dispatch);
 
   /* ------ State ------ */
   const extendedListOpacity = useRef(new Animated.Value(1));

@@ -3,17 +3,19 @@ import { useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { AppDispatch, RootState } from '..';
-import { ICertificate } from '../../utils/types';
+import { IFoundCredential } from '../../utils/types';
 import { searchActionTypes } from './actions';
 
 // Selector hooks
-export const useFoundCertificates = () =>
-  useSelector((state: RootState): ICertificate[] => state.search.certificates);
+export const useFoundCredentials = () =>
+  useSelector(
+    (state: RootState): IFoundCredential[] => state.search.credentials,
+  );
 
 // Callback hooks
-export const useSearchCertificatesCallback = (dispatch: AppDispatch) =>
+export const useSearchCredentialsCallback = (dispatch: AppDispatch) =>
   useCallback(
     (value: string) =>
-      dispatch({ type: searchActionTypes.SEARCH_CERTIFICATE, value }),
+      dispatch({ type: searchActionTypes.SEARCH_CREDENTIALS, value }),
     [dispatch],
   );

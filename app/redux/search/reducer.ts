@@ -1,36 +1,36 @@
 import { createReducer } from 'reduxsauce';
 import _ from 'lodash';
 
-import { ICertificate } from '../../utils/types';
+import { IFoundCredential } from '../../utils/types';
 import {
   SearchAction,
-  SearchCertificateSuccessAction,
+  SearchCredentialsSuccessAction,
   searchActionTypes,
 } from './actions';
 
 export interface SearchState {
-  certificates: ICertificate[];
+  credentials: IFoundCredential[];
 }
 
 const INITIAL_STATE: SearchState = {
-  certificates: [],
+  credentials: [],
 };
 
 type Handler<A> = (state: SearchState, action: A) => SearchState;
 
-const searchCertificateSuccess: Handler<SearchCertificateSuccessAction> = (
+const searchCredentialsSuccess: Handler<SearchCredentialsSuccessAction> = (
   state,
-  { certificates },
+  { credentials },
 ) => {
   return {
     ...state,
-    certificates,
+    credentials,
   };
 };
 
 export const searchReducer = createReducer<SearchState, SearchAction>(
   INITIAL_STATE,
   {
-    [searchActionTypes.SEARCH_CERTIFICATE_SUCCESS]: searchCertificateSuccess,
+    [searchActionTypes.SEARCH_CREDENTIALS_SUCCESS]: searchCredentialsSuccess,
   },
 );

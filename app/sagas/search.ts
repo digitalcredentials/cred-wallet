@@ -2,19 +2,19 @@ import { put, select } from 'redux-saga/effects';
 import _ from 'lodash';
 
 import {
-  SearchCertificateAction,
-  SearchCertificateSuccessAction,
+  SearchCredentialAction,
+  SearchCredentialsSuccessAction,
   searchActionCreators,
 } from '../redux/search';
 import { RootState } from '../redux';
-import { ICertificate } from '../utils/types';
+import { ICertificate, IFoundCredential } from '../utils/types';
 
-export function* searchCertificate({ value }: SearchCertificateAction) {
-  let foundCertificates: ICertificate[] = [];
+export function* searchCertificate({ value }: SearchCredentialAction) {
+  let foundCredentials: IFoundCredential[] = [];
 
   if (value) {
-    foundCertificates = yield select((state: RootState) => {
-      const foundCertificates: ICertificate[] = [];
+    foundCredentials = yield select((state: RootState) => {
+      const resultCredentials: IFoundCredential[] = [];
 
       _.forEach(state.certificates.data, (credential) => {
         // Ignore value cases
@@ -24,24 +24,33 @@ export function* searchCertificate({ value }: SearchCertificateAction) {
         const isIssuerSearchField =
           credential.issuer.name.search(regexp) !== -1;
 
+        let filteredCertificates: ICertificate[] = [];
         if (isIssuerSearchField) {
-          foundCertificates.push(...credential.certificates);
+          filteredCertificates = [...credential.certificates];
         } else {
-          // Trying to find matches inside certificates
-          const filteredCertificates = _.filter(
+          filteredCertificates = _.filter(
             credential.certificates,
             (cert) => cert.credentialSubject.name.search(regexp) !== -1,
           );
-
-          foundCertificates.push(...filteredCertificates);
         }
+
+        resultCredentials.push(
+          ..._.map<ICertificate, IFoundCredential>(
+            filteredCertificates,
+            (certificate, index) => ({
+              id: `${credential.issuer.id}-${index}`,
+              certificate,
+              issuer: credential.issuer,
+            }),
+          ),
+        );
       });
 
-      return foundCertificates;
+      return resultCredentials;
     });
   }
 
-  yield put<SearchCertificateSuccessAction>(
-    searchActionCreators.searchCertificateSuccess(foundCertificates),
+  yield put<SearchCredentialsSuccessAction>(
+    searchActionCreators.searchCredentialsSuccess(foundCredentials),
   );
 }

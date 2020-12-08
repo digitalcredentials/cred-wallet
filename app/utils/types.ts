@@ -55,6 +55,11 @@ export interface IWithID {
   id: string;
 }
 
+export interface IFoundCredential extends IWithID {
+  certificate: ICertificate;
+  issuer: IIssuer;
+}
+
 export interface ICertificateDeeplinkWithDID
   extends ICertificateDeeplink,
     ISubjectDID {}

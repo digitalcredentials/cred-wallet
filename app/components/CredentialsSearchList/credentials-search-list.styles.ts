@@ -1,4 +1,4 @@
-import { ViewStyle, StyleSheet, TextStyle } from 'react-native';
+import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
@@ -8,6 +8,14 @@ interface IssuersListStyles {
   noResultsIconContainer: TextStyle;
   noResultsTitle: TextStyle;
   noResultsSubtitle: TextStyle;
+  foundCredentialContainer: ViewStyle;
+  foundCredentialFirstContainer: ViewStyle;
+  foundCredentialImage: ImageStyle;
+  foundCredentialSubjectName: TextStyle;
+  foundCredentialSubjectNameFirst: TextStyle;
+  foundCredentialIssuerName: TextStyle;
+  foundCredentialIssuerNameFirst: TextStyle;
+  foundCredentialSeparator: ViewStyle;
 }
 
 export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
@@ -34,5 +42,44 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
     color: COLORS.SILVER,
     fontSize: 11,
     lineHeight: 14,
+  },
+  foundCredentialContainer: {
+    borderRadius: 20,
+    marginVertical: 15,
+    paddingVertical: 7,
+    paddingHorizontal: 19,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  foundCredentialFirstContainer: {
+    backgroundColor: COLORS.FRENCH_LILAC,
+  },
+  foundCredentialImage: {
+    width: 26,
+    height: 26,
+    marginRight: 10,
+  },
+  foundCredentialSubjectName: {
+    fontFamily: FONTS.POPPINS_REGULAR,
+    fontSize: 14,
+    lineHeight: 21,
+    marginRight: 5,
+  },
+  foundCredentialSubjectNameFirst: {
+    color: COLORS.WHITE,
+  },
+  foundCredentialIssuerName: {
+    color: COLORS.SILVER_CHALICE,
+    fontFamily: FONTS.POPPINS_300,
+    fontSize: 11,
+    lineHeight: 16.5,
+  },
+  foundCredentialIssuerNameFirst: {
+    color: COLORS.WHITE,
+  },
+  foundCredentialSeparator: {
+    width: '100%',
+    height: 1,
+    backgroundColor: COLORS.GALLERY,
   },
 });

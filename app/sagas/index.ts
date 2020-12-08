@@ -4,7 +4,7 @@ import {
   AddCertificateAction,
   certificatesActionTypes,
 } from '../redux/certificates';
-import { searchActionTypes, SearchCertificateAction } from '../redux/search';
+import { searchActionTypes, SearchCredentialAction } from '../redux/search';
 
 import { getUser } from './user';
 import { addCertificate } from './certificates';
@@ -26,8 +26,8 @@ export default function* rootSaga() {
     ),
 
     // Search
-    takeLatest<SearchCertificateAction>(
-      searchActionTypes.SEARCH_CERTIFICATE,
+    takeLatest<SearchCredentialAction>(
+      searchActionTypes.SEARCH_CREDENTIALS,
       searchCertificate,
     ),
   ]);

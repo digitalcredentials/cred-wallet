@@ -1,37 +1,39 @@
 import { createActions } from 'reduxsauce';
-import { ICertificate } from '../../utils/types';
+import { IFoundCredential } from '../../utils/types';
 
 interface SearchActionTypes {
-  SEARCH_CERTIFICATE: 'SEARCH_CERTIFICATE';
-  SEARCH_CERTIFICATE_SUCCESS: 'SEARCH_CERTIFICATE_SUCCESS';
+  SEARCH_CREDENTIALS: 'SEARCH_CREDENTIALS';
+  SEARCH_CREDENTIALS_SUCCESS: 'SEARCH_CREDENTIALS_SUCCESS';
 }
 
-export interface SearchCertificateAction {
-  type: SearchActionTypes['SEARCH_CERTIFICATE'];
+export interface SearchCredentialAction {
+  type: SearchActionTypes['SEARCH_CREDENTIALS'];
   value: string;
 }
 
-export interface SearchCertificateSuccessAction {
-  type: SearchActionTypes['SEARCH_CERTIFICATE_SUCCESS'];
-  certificates: ICertificate[];
+export interface SearchCredentialsSuccessAction {
+  type: SearchActionTypes['SEARCH_CREDENTIALS_SUCCESS'];
+  credentials: IFoundCredential[];
 }
 
 interface SearchActionCreators {
-  searchCertificate(value: string): SearchCertificateAction;
-  searchCertificateSuccess(
-    certificates: ICertificate[],
-  ): SearchCertificateSuccessAction;
+  searchCredentials(value: string): SearchCredentialAction;
+  searchCredentialsSuccess(
+    credentials: IFoundCredential[],
+  ): SearchCredentialsSuccessAction;
 }
 
-export type SearchAction = SearchCertificateAction;
+export type SearchAction =
+  | SearchCredentialAction
+  | SearchCredentialsSuccessAction;
 
 const { Types, Creators } = createActions<
   SearchActionTypes,
   SearchActionCreators
 >(
   {
-    searchCertificate: ['value'],
-    searchCertificateSuccess: ['certificates'],
+    searchCredentials: ['value'],
+    searchCredentialsSuccess: ['credentials'],
   },
   {
     prefix: 'SEARCH/',

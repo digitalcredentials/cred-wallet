@@ -1,28 +1,62 @@
 import React, { useCallback } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, Image, View } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import { styles } from './credentials-search-list.styles';
 import { CredentialsSearchListProps } from './credentials-search-list.props';
-import { useCredentials } from '../../redux/certificates';
+import { useFoundCredentials } from '../../redux/search';
 import { useKeyExtractor } from '../../utils/hooks';
-import { ICredentials } from '../../utils/types';
+import { ICredentials, IFoundCredential } from '../../utils/types';
 import { COLORS } from '../../utils/colors';
 import { Text } from '../Text';
+import { IMAGES } from '../../assets';
 
-export const CredentialsSearchList: React.FunctionComponent<CredentialsSearchListProps> = () => {
-  const credentials = useCredentials();
+export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () => {
+  const foundCredentials = useFoundCredentials();
 
   const renderItem = useCallback(
-    ({ item }: { item: ICredentials }) => <View />,
+    ({ item, index }: { item: IFoundCredential; index: number }) => {
+      const isFirst = index === 0;
+      const isNotLast = index < foundCredentials.length - 1;
+
+      return (
+        <>
+          <View
+            style={[
+              styles.foundCredentialContainer,
+              isFirst ? styles.foundCredentialFirstContainer : null,
+            ]}
+          >
+            <Image source={IMAGES.MAN} style={styles.foundCredentialImage} />
+            <Text
+              style={[
+                styles.foundCredentialSubjectName,
+                isFirst ? styles.foundCredentialSubjectNameFirst : null,
+              ]}
+            >
+              {item.certificate.credentialSubject.name}
+            </Text>
+            <Text
+              style={[
+                styles.foundCredentialIssuerName,
+                isFirst ? styles.foundCredentialIssuerNameFirst : null,
+              ]}
+            >
+              {item.issuer.name}
+            </Text>
+          </View>
+          {isNotLast ? <View style={styles.foundCredentialSeparator} /> : null}
+        </>
+      );
+    },
     [],
   );
 
-  const keyExtractor = useKeyExtractor<ICredentials>('credential-search');
+  const keyExtractor = useKeyExtractor<IFoundCredential>('credential-search');
 
-  return credentials.length ? (
+  return foundCredentials.length ? (
     <FlatList
-      data={credentials}
+      data={foundCredentials}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
