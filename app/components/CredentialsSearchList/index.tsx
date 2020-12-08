@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
-import { FlatList, Image, View } from 'react-native';
+import { FlatList, Image, View, TouchableOpacity } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import { styles } from './credentials-search-list.styles';
 import { CredentialsSearchListProps } from './credentials-search-list.props';
 import { useFoundCredentials } from '../../redux/search';
 import { useKeyExtractor } from '../../utils/hooks';
-import { ICredentials, IFoundCredential } from '../../utils/types';
+import { IFoundCredential } from '../../utils/types';
 import { COLORS } from '../../utils/colors';
 import { Text } from '../Text';
 import { IMAGES } from '../../assets';
@@ -21,7 +21,8 @@ export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () =>
 
       return (
         <>
-          <View
+          <TouchableOpacity
+            onPress={() => {}}
             style={[
               styles.foundCredentialContainer,
               isFirst ? styles.foundCredentialFirstContainer : null,
@@ -44,12 +45,12 @@ export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () =>
             >
               {item.issuer.name}
             </Text>
-          </View>
+          </TouchableOpacity>
           {isNotLast ? <View style={styles.foundCredentialSeparator} /> : null}
         </>
       );
     },
-    [],
+    [foundCredentials],
   );
 
   const keyExtractor = useKeyExtractor<IFoundCredential>('credential-search');
