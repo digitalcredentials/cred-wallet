@@ -14,11 +14,15 @@ export const CredentialsList: React.FunctionComponent<CredentialsListProps> = ({
   const renderItem = useCallback(
     ({ item }: { item: ICredentials }) => (
       <View style={styles.issuerContainer}>
-        <Image style={styles.issuerImage} source={IMAGES.GRADUATION} />
-        <Text style={styles.issuerTitle}>{item.issuer.name}</Text>
-        <Text style={styles.issuerCertificates}>
-          {item.certificates.length} certificates
-        </Text>
+        <View style={styles.rowContainer}>
+          <Text style={styles.issuerTitle}>{item.issuer.name}</Text>
+          <Image style={styles.issuerImage} source={IMAGES.GRADUATION_ORANGE} />
+        </View>
+        <View style={styles.issuerCertificatesContainer}>
+          <Text style={styles.issuerCertificates}>
+            {item.certificates.length} certificates
+          </Text>
+        </View>
       </View>
     ),
     [],
@@ -28,7 +32,6 @@ export const CredentialsList: React.FunctionComponent<CredentialsListProps> = ({
 
   return (
     <FlatList
-      numColumns={2}
       data={credentials}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
