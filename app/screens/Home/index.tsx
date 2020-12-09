@@ -8,13 +8,11 @@ import {
 } from 'react-native';
 import * as ed25519 from '@transmute/did-key-ed25519';
 import { generateSecureRandom } from 'react-native-securerandom';
-
 import _ from 'lodash';
 
-import { CredentialsSearchList, SearchBar, Text } from '../../components';
+import { CredentialsSearchList, SearchBar } from '../../components';
 import { HomeScreenProps } from './home.props';
 import { styles } from './home.styles';
-import { IMAGES } from '../../assets';
 import { CredentialsList } from '../../components/CredentialsList';
 import { useDispatch } from 'react-redux';
 import { useSearchCredentialsCallback } from '../../redux/search';
@@ -100,12 +98,6 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
         onBlur={onSearchBlur}
       />
       {renderCurrentList()}
-      <TouchableOpacity
-        style={styles.addCertificateButtonContainer}
-        onPress={() => navigation.navigate('QRScanner')}
-      >
-        <Text style={styles.addCertificateButtonText}>+</Text>
-      </TouchableOpacity>
     </View>
   );
 };

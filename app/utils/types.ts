@@ -1,3 +1,6 @@
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { MainTabParams } from '../navigation/main-tab-navigator';
+
 export type VerifyPanelStatus =
   | 'check-biometric-verify'
   | 'check-pin-keychain'
@@ -59,6 +62,10 @@ export interface IFoundCredential extends IWithID {
   certificate: ICertificate;
   issuer: IIssuer;
 }
+
+export type TabNavigatorOptions = {
+  [key in keyof MainTabParams]?: BottomTabNavigationOptions;
+};
 
 export interface ICertificateDeeplinkWithDID
   extends ICertificateDeeplink,
