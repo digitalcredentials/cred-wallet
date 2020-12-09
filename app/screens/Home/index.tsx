@@ -1,13 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  StatusBar,
-} from 'react-native';
-import * as ed25519 from '@transmute/did-key-ed25519';
-import { generateSecureRandom } from 'react-native-securerandom';
+import { View, Animated, Easing, StatusBar } from 'react-native';
 import _ from 'lodash';
 
 import { CredentialsSearchList, SearchBar } from '../../components';
@@ -31,19 +23,6 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [isExtendedList, setIsExtendedList] = useState<boolean>(true);
-
-  useEffect(() => {
-    const asyncTest = async () => {
-      const randomBytes = await generateSecureRandom(32);
-      const keyPair = await ed25519.Ed25519KeyPair.generate({
-        secureRandom: () => randomBytes,
-      });
-
-      console.tron.log(keyPair);
-    };
-
-    asyncTest();
-  });
 
   useEffect(() => {
     onSearch(searchValue);

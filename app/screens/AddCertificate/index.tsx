@@ -43,6 +43,12 @@ export const AddCertificateScreen: React.FunctionComponent<AddCertificateScreenP
 
             <View style={styles.certificateInfoFieldsContainer}>
               <View style={styles.certificateInfoFieldContainer}>
+                <Text style={styles.certificateInfoFieldName}>DID:</Text>
+                <Text style={styles.certificateInfoFieldValue}>
+                  {certificate.credentialSubject.id}
+                </Text>
+              </View>
+              <View style={styles.certificateInfoFieldContainer}>
                 <Text style={styles.certificateInfoFieldName}>ID:</Text>
                 <Text style={styles.certificateInfoFieldValue}>
                   {certificate.id}

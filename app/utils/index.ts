@@ -1,6 +1,7 @@
-import queryString from 'query-string';
-import randomString from 'random-string';
 import { Platform } from 'react-native';
+import queryString from 'query-string';
+import * as ed25519 from '@transmute/did-key-ed25519';
+import { generateSecureRandom } from 'react-native-securerandom';
 
 import { Credential } from '../services/api/api.types';
 import { ICertificate, ICertificateDeeplink, IIssuer } from './types';
@@ -26,14 +27,15 @@ export function parseCertificateDeeplink(
   };
 }
 
-export function generateExampleDid() {
-  const EXAMPLE_DID_PREFIX = 'did:example:';
-  return `${EXAMPLE_DID_PREFIX}${randomString()}`;
-}
+export async function generateDid(): Promise<string> {
+  const BYTES_LENGTH = 32;
 
-export function generateDid() {
-  const DID_PREFIX = 'did:';
-  return `${DID_PREFIX}${randomString()}`;
+  const randomBytes = await generateSecureRandom(BYTES_LENGTH);
+  const keyPair = await ed25519.Ed25519KeyPair.generate({
+    secureRandom: () => randomBytes,
+  });
+
+  return keyPair.controller;
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {

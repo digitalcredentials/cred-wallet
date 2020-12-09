@@ -33,6 +33,7 @@ export const styles = StyleSheet.create<AddCertificateScreenStyles>({
     justifyContent: 'center',
   },
   requestContainer: {
+    width: '90%',
     margin: 16,
     padding: 16,
     borderRadius: 10,
@@ -78,6 +79,8 @@ export const styles = StyleSheet.create<AddCertificateScreenStyles>({
   },
   certificateInfoFieldContainer: {
     flexDirection: 'row',
+    marginVertical: 2,
+    width: '78%',
   },
   certificateInfoFieldName: {
     // TODO: fontFamily
@@ -104,7 +107,7 @@ export const styles = StyleSheet.create<AddCertificateScreenStyles>({
   },
   certificateInfoUsernameRow: {
     marginTop: 16,
-    width: '100%',
+    // width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
   },

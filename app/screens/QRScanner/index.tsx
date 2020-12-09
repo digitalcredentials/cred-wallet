@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { QRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
-import { generateExampleDid, parseCertificateDeeplink } from '../../utils';
+import { generateDid, parseCertificateDeeplink } from '../../utils';
 import { useAddCertificateCallback } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
 import { EXTENDED_HIT_SLOP } from '../../utils/constants';
@@ -20,15 +20,15 @@ export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
 
   const onSuccess = useCallback(
-    (result) => {
+    async (result) => {
       const certificateDeeplink = parseCertificateDeeplink(result.data);
       addCertificate({
-        did: generateExampleDid(),
+        did: await generateDid(),
         ...certificateDeeplink,
       });
       goBack();
     },
-    [addCertificate, parseCertificateDeeplink, generateExampleDid, goBack],
+    [addCertificate, parseCertificateDeeplink, generateDid, goBack],
   );
 
   return (
