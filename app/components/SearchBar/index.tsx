@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TextInput } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
@@ -8,7 +8,6 @@ import { SearchBarProps } from './search-bar.props';
 import { styles } from './search-bar.styles';
 import { DefaultTextInput } from '../DefaultTextInput';
 import { COLORS } from '../../utils/colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 
 export const SearchBar: React.FunctionComponent<SearchBarProps> = ({

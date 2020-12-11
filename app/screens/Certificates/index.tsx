@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
+import { Header } from '../../components';
 import { CertificateCarousel } from '../../components/CertificateCarousel';
 
 import { useCredentialsById } from '../../redux/certificates';
@@ -15,6 +16,8 @@ export const CertificatesScreen: React.FC<CertificatesScreenProps> = ({
 
   return (
     <View style={styles.container}>
+      <Header backButtonTitle="Home" title="Certificates" />
+
       <CertificateCarousel
         certificates={currentCredentials?.certificates || []}
       />
