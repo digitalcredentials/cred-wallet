@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FlatList, View, Image, Text } from 'react-native';
+import { FlatList, View, Image, Text, TouchableOpacity } from 'react-native';
 
 import { styles } from './credentials-list.styles';
 import { CredentialsListProps } from './credentials-list.props';
@@ -8,12 +8,17 @@ import { useKeyExtractor } from '../../utils/hooks';
 import { ICredentials } from '../../utils/types';
 import { useCredentials } from '../../redux/certificates';
 
-export const CredentialsList: React.FunctionComponent<CredentialsListProps> = ({}) => {
+export const CredentialsList: React.FunctionComponent<CredentialsListProps> = ({
+  onCredentialsPress,
+}) => {
   const credentials = useCredentials();
 
   const renderItem = useCallback(
     ({ item }: { item: ICredentials }) => (
-      <View style={styles.issuerContainer}>
+      <TouchableOpacity
+        onPress={() => onCredentialsPress(item)}
+        style={styles.issuerContainer}
+      >
         <View style={styles.rowContainer}>
           <Text style={styles.issuerTitle}>{item.issuer.name}</Text>
           <Image style={styles.issuerImage} source={IMAGES.GRADUATION_ORANGE} />
@@ -23,7 +28,7 @@ export const CredentialsList: React.FunctionComponent<CredentialsListProps> = ({
             {item.certificates.length} certificates
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     ),
     [],
   );

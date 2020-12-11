@@ -9,6 +9,7 @@ import { CredentialsList } from '../../components/CredentialsList';
 import { useDispatch } from 'react-redux';
 import { useSearchCredentialsCallback } from '../../redux/search';
 import { COLORS } from '../../utils/colors';
+import { ICredentials } from '../../utils/types';
 
 const ANIMATION_DURATION = 250;
 
@@ -42,6 +43,15 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
     [extendedListOpacity],
   );
 
+  const onCredentialsPress = useCallback(
+    (pressedCredentials: ICredentials) => {
+      navigation.navigate('Certificates', {
+        credentialsId: pressedCredentials.id,
+      });
+    },
+    [navigation],
+  );
+
   const onSearchFocus = useCallback(() => {
     startExtendedListAnimation(0, () => setIsExtendedList(false));
   }, [setIsExtendedList, startExtendedListAnimation]);
@@ -56,7 +66,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
       <Animated.View
         style={[styles.flexContainer, { opacity: extendedListOpacity.current }]}
       >
-        <CredentialsList />
+        <CredentialsList onCredentialsPress={onCredentialsPress} />
       </Animated.View>
     ),
     [extendedListOpacity.current],

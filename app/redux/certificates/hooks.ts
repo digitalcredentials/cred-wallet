@@ -17,6 +17,14 @@ export const useCredentials = () =>
     Object.values(state.certificates.data),
   );
 
+export const useCredentialsById = (credentialsId: string) =>
+  useSelector((state: RootState): ICredentials | undefined =>
+    _.find(
+      Object.values(state.certificates.data),
+      (cred) => cred.id === credentialsId,
+    ),
+  );
+
 // Callback hooks
 export const useAddCertificateCallback = (dispatch: AppDispatch) =>
   useCallback(
