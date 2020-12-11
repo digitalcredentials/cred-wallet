@@ -1,5 +1,6 @@
-import { ICertificate } from '../../utils/types';
+import { ICertificate, IIssuer } from '../../utils/types';
 
 export interface CertificateCarouselProps {
   certificates: ICertificate[];
+  issuer: IIssuer;
 }

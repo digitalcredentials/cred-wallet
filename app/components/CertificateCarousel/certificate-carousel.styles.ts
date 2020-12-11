@@ -3,6 +3,7 @@ import { COLORS } from '../../utils/colors';
 
 interface CertificateCarouselStyles {
   container: ViewStyle;
+  carouselContainer: Object;
   dot: Object;
   dotContainer: Object;
   inactiveDot: Object;
@@ -11,6 +12,11 @@ interface CertificateCarouselStyles {
 export const styles = StyleSheet.create<CertificateCarouselStyles>({
   container: {
     paddingTop: 32,
+    paddingBottom: 64,
+    flex: 1,
+  },
+  carouselContainer: {
+    justifyContent: 'center',
   },
   dot: {
     backgroundColor: COLORS.CRUSTA,

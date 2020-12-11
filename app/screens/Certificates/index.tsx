@@ -20,6 +20,7 @@ export const CertificatesScreen: React.FC<CertificatesScreenProps> = ({
 
       <CertificateCarousel
         certificates={currentCredentials?.certificates || []}
+        issuer={currentCredentials?.issuer!}
       />
     </View>
   );

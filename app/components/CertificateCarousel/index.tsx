@@ -1,7 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { COLORS } from '../../utils/colors';
 
 import { ICertificate } from '../../utils/types';
 import { CertificateCarouselItem } from '../CertificateCarouselItem';
@@ -15,13 +14,14 @@ const INACTIVE_SLIDE_SCALE = 0.85;
 
 export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
   certificates,
+  issuer,
 }) => {
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const carouselRef = useRef(null);
 
   const renderItem = useCallback(
     ({ item }: { item: ICertificate }) => (
-      <CertificateCarouselItem certificate={item} />
+      <CertificateCarouselItem certificate={item} issuer={issuer} />
     ),
     [],
   );
@@ -38,7 +38,7 @@ export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
         inactiveSlideScale={INACTIVE_SLIDE_SCALE}
         swipeThreshold={SWIPE_THRESHOLD}
         onSnapToItem={setActiveDotIndex}
-        slideStyle={{ justifyContent: 'center' }}
+        style={styles.carouselContainer}
       />
       <Pagination
         dotsLength={certificates.length}
