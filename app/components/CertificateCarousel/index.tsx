@@ -9,6 +9,7 @@ import { styles } from './certificate-carousel.styles';
 
 const ITEM_WIDTH = Dimensions.get('window').width * 0.8;
 const SLIDER_WIDTH = Dimensions.get('window').width;
+const SWIPE_THRESHOLD = SLIDER_WIDTH / 5;
 const INACTIVE_SLIDE_SCALE = 0.7;
 
 export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
@@ -34,8 +35,8 @@ export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         inactiveSlideScale={INACTIVE_SLIDE_SCALE}
+        swipeThreshold={SWIPE_THRESHOLD}
         onSnapToItem={setActiveDotIndex}
-        swipeThreshold={SLIDER_WIDTH / 5}
       />
       <Pagination
         dotsLength={certificates.length}
