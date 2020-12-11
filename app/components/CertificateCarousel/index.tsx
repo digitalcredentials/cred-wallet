@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { COLORS } from '../../utils/colors';
 
 import { ICertificate } from '../../utils/types';
 import { CertificateCarouselItem } from '../CertificateCarouselItem';
@@ -41,6 +42,10 @@ export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
       <Pagination
         dotsLength={certificates.length}
         activeDotIndex={activeDotIndex}
+        dotStyle={styles.dot}
+        inactiveDotOpacity={1}
+        dotContainerStyle={styles.dotContainer}
+        inactiveDotStyle={styles.inactiveDot}
       />
     </View>
   );
