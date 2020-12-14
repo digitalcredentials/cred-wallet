@@ -13,9 +13,7 @@ import { ICredentials } from '../../utils/types';
 
 const ANIMATION_DURATION = 250;
 
-export const HomeScreen: React.FunctionComponent<HomeScreenProps> = ({
-  navigation,
-}) => {
+export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const onSearch = useSearchCredentialsCallback(dispatch);
 

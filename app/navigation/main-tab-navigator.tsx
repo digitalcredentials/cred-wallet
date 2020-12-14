@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeStackNavigator, SettingsStackNavigator } from './stacks';
-import { TabBarPlusButton } from '../components';
 import { tabOptions, ScreenStub } from './options';
 
 export type MainTabParams = {
