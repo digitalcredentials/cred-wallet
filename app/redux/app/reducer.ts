@@ -4,14 +4,17 @@ import _ from 'lodash';
 import {
   AppAction,
   appActionTypes,
+  SetFirstVerificationAction,
   SetVerificationProcessAction,
 } from './actions';
 
 export interface AppState {
+  isFirstVerification: boolean;
   isVerificationProcess: boolean;
 }
 
 const INITIAL_STATE: AppState = {
+  isFirstVerification: true,
   isVerificationProcess: false,
 };
 
@@ -25,6 +28,15 @@ const setVerificationProcess: Handler<SetVerificationProcessAction> = (
   isVerificationProcess,
 });
 
+const setFirstVerification: Handler<SetFirstVerificationAction> = (
+  state,
+  { isFirstVerification },
+) => ({
+  ...state,
+  isFirstVerification,
+});
+
 export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
   [appActionTypes.SET_VERIFICATION_PROCESS]: setVerificationProcess,
+  [appActionTypes.SET_FIRST_VERIFICATION]: setFirstVerification,
 });

@@ -15,20 +15,20 @@ export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();
-  const addCertificate = useAddCertificateCallback(dispatch);
+  const onAddCertificate = useAddCertificateCallback(dispatch);
 
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
 
   const onSuccess = useCallback(
     async (result) => {
       const certificateDeeplink = parseCertificateDeeplink(result.data);
-      addCertificate({
+      onAddCertificate({
         did: await generateDid(),
         ...certificateDeeplink,
       });
       goBack();
     },
-    [addCertificate, parseCertificateDeeplink, generateDid, goBack],
+    [parseCertificateDeeplink, generateDid, goBack],
   );
 
   return (

@@ -49,7 +49,7 @@ if (reactotron) {
   enhancers.push(reactotron?.createEnhancer!());
 }
 
-// purgeStoredState(persistConfig);
+purgeStoredState(persistConfig);
 
 export const store = createStore(persistedReducer, compose(...enhancers));
 

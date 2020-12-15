@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View, Animated, Easing, StatusBar } from 'react-native';
+import { View, Animated, Easing, StatusBar, Linking } from 'react-native';
 import _ from 'lodash';
 
 import { CredentialsSearchList, SearchBar } from '../../components';
@@ -10,25 +10,75 @@ import { useDispatch } from 'react-redux';
 import { useSearchCredentialsCallback } from '../../redux/search';
 import { COLORS } from '../../utils/colors';
 import { ICredentials } from '../../utils/types';
+import {
+  useAddCertificateCallback,
+  useDeeplinkUrl,
+  useSetDeeplinkUrlCallback,
+} from '../../redux/certificates';
+import { useMount } from '../../utils/hooks';
+import { generateDid, parseCertificateDeeplink } from '../../utils';
+import { useIsVerificationProcess } from '../../redux/app';
 
 const ANIMATION_DURATION = 250;
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
+  const isVerificationProcess = useIsVerificationProcess();
+  const deeplinkUrl = useDeeplinkUrl();
   const onSearch = useSearchCredentialsCallback(dispatch);
+  const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
+  const onAddCertificate = useAddCertificateCallback(dispatch);
 
   /* ------ State ------ */
   const extendedListOpacity = useRef(new Animated.Value(1));
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [isExtendedList, setIsExtendedList] = useState<boolean>(true);
+  const prevIsVerificationProcess = useRef(true);
+
+  useMount(() => {
+    // Handle late deeplink urls
+    Linking.addEventListener('url', (data) => {
+      console.tron.log('HOME DEEPLINK LISTENER:', data.url);
+      onSetDeeplinkUrl(data.url);
+    });
+    return () => Linking.removeAllListeners('url');
+  });
+
+  // Dispatch addCertificate action only when isVerificationProcess === false
+  useEffect(() => {
+    if (
+      deeplinkUrl &&
+      prevIsVerificationProcess.current &&
+      !isVerificationProcess
+    ) {
+      console.tron.log(
+        '====== MAIN FLOW! SIGN & DISPATCH SERTIFICATE! =====',
+        deeplinkUrl,
+        prevIsVerificationProcess.current,
+        isVerificationProcess,
+      );
+      const parseUrlAndDispatch = async () => {
+        const parsedCertificateDeeplink = parseCertificateDeeplink(deeplinkUrl);
+        onAddCertificate({
+          did: await generateDid(),
+          ...parsedCertificateDeeplink,
+        });
+
+        onSetDeeplinkUrl(null);
+      };
+
+      parseUrlAndDispatch();
+    }
+
+    prevIsVerificationProcess.current = isVerificationProcess;
+  }, [deeplinkUrl, isVerificationProcess]);
 
   useEffect(() => {
     onSearch(searchValue);
   }, [searchValue]);
 
   /* ------ Callbacks ------ */
-
   const startExtendedListAnimation = useCallback(
     (toValue: number, callback: () => void = _.noop) => {
       Animated.timing(extendedListOpacity.current, {
