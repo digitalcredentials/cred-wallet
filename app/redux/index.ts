@@ -20,8 +20,10 @@ import rootSaga from '../sagas';
 import { userReducer } from './user';
 import { certificatesReducer } from './certificates';
 import { searchReducer } from './search';
+import { appReducer } from './app';
 
 export const rootReducer = combineReducers({
+  app: appReducer,
   user: userReducer,
   certificates: certificatesReducer,
   search: searchReducer,
@@ -30,7 +32,7 @@ export const rootReducer = combineReducers({
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['search'],
+  blacklist: ['search', 'app'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

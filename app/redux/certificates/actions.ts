@@ -39,7 +39,7 @@ interface CertificatesActionCreators {
   addCertificateSuccess(certificate: ICertificate): AddCertificateSuccessAction;
   addCertificateFailure(error: string): AddCertificateFailureAction;
 
-  setDeeplinkUrl(deeplinkUrl: string): SetDeeplinkUrlAction;
+  setDeeplinkUrl(deeplinkUrl: string | null): SetDeeplinkUrlAction;
 }
 
 export type CertificatesAction =
