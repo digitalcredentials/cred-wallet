@@ -25,6 +25,11 @@ export const useCredentialsById = (credentialsId: string) =>
     ),
   );
 
+export const useDeeplinkUrl = () =>
+  useSelector(
+    (state: RootState): string | null => state.certificates.deeplinkUrl,
+  );
+
 // Callback hooks
 export const useAddCertificateCallback = (dispatch: AppDispatch) =>
   useCallback(
@@ -40,6 +45,16 @@ export const useAddCertificateSuccessCallback = (dispatch: AppDispatch) =>
         type: certificatesActionTypes.ADD_CERTIFICATE_SUCCESS,
         certificate,
         issuer,
+      }),
+    [],
+  );
+
+export const useSetDeeplinkUrlCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    (deeplinkUrl: string | null) =>
+      dispatch({
+        type: certificatesActionTypes.SET_DEEPLINK_URL,
+        deeplinkUrl,
       }),
     [],
   );

@@ -9,18 +9,21 @@ import {
   AddCertificateAction,
   AddCertificateSuccessAction,
   AddCertificateFailureAction,
+  SetDeeplinkUrlAction,
 } from './actions';
 
 export interface CertificatesState {
   data: {
     [issuerId: string]: ICredentials;
   };
+  deeplinkUrl: string | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const INITIAL_STATE: CertificatesState = {
   data: {},
+  deeplinkUrl: null,
   error: null,
   isLoading: false,
 };
@@ -69,6 +72,14 @@ const addCertificateFailure: Handler<AddCertificateFailureAction> = (
   error,
 });
 
+const setDeeplinkUrl: Handler<SetDeeplinkUrlAction> = (
+  state,
+  { deeplinkUrl },
+) => ({
+  ...state,
+  deeplinkUrl,
+});
+
 export const certificatesReducer = createReducer<
   CertificatesState,
   CertificatesAction
@@ -76,4 +87,6 @@ export const certificatesReducer = createReducer<
   [certificatesActionTypes.ADD_CERTIFICATE]: addCertificate,
   [certificatesActionTypes.ADD_CERTIFICATE_SUCCESS]: addCertificateSuccess,
   [certificatesActionTypes.ADD_CERTIFICATE_FAILURE]: addCertificateFailure,
+
+  [certificatesActionTypes.SET_DEEPLINK_URL]: setDeeplinkUrl,
 });
