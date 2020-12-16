@@ -11,6 +11,9 @@ export const useIsVerificationProcess = () =>
 export const useIsFirstVerification = () =>
   useSelector((state: RootState) => state.app.isFirstVerification);
 
+export const useDeeplinkUrl = () =>
+  useSelector((state: RootState): string | null => state.app.deeplinkUrl);
+
 // Callback hooks
 export const useSetVerificationProcessCallback = (dispatch: AppDispatch) =>
   useCallback(
@@ -30,4 +33,14 @@ export const useSetFirstVerificationCallback = (dispatch: AppDispatch) =>
         isFirstVerification,
       }),
     [dispatch],
+  );
+
+export const useSetDeeplinkUrlCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    (deeplinkUrl: string | null) =>
+      dispatch({
+        type: appActionTypes.SET_DEEPLINK_URL,
+        deeplinkUrl,
+      }),
+    [],
   );

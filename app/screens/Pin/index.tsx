@@ -11,10 +11,10 @@ import { isAndroid, isIOS } from '../../utils';
 import { useMount } from '../../utils/hooks';
 import {
   useIsFirstVerification,
+  useSetDeeplinkUrlCallback,
   useSetFirstVerificationCallback,
   useSetVerificationProcessCallback,
 } from '../../redux/app';
-import { useSetDeeplinkUrlCallback } from '../../redux/certificates';
 
 export const PinScreen: React.FC<PinScreenProps> = ({ navigation, route }) => {
   const dispatch = useDispatch();

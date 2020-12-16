@@ -10,14 +10,14 @@ import { useDispatch } from 'react-redux';
 import { useSearchCredentialsCallback } from '../../redux/search';
 import { COLORS } from '../../utils/colors';
 import { ICredentials } from '../../utils/types';
-import {
-  useAddCertificateCallback,
-  useDeeplinkUrl,
-  useSetDeeplinkUrlCallback,
-} from '../../redux/certificates';
+import { useAddCertificateCallback } from '../../redux/certificates';
 import { useMount } from '../../utils/hooks';
 import { generateDid, parseCertificateDeeplink } from '../../utils';
-import { useIsVerificationProcess } from '../../redux/app';
+import {
+  useDeeplinkUrl,
+  useIsVerificationProcess,
+  useSetDeeplinkUrlCallback,
+} from '../../redux/app';
 
 const ANIMATION_DURATION = 250;
 
