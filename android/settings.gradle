@@ -1,6 +1,4 @@
 rootProject.name = 'CredWallet'
-include ':react-native-virgil-crypto'
-project(':react-native-virgil-crypto').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-virgil-crypto/android')
 include ':react-native-securerandom'
 project(':react-native-securerandom').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-securerandom/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
