@@ -10,12 +10,6 @@ export const isAndroid = Platform.OS === 'android';
 
 export const isIOS = Platform.OS === 'ios';
 
-//TODO: remove sum function
-// created for jest first test only
-export function sum(a: number, b: number): number {
-  return a + b;
-}
-
 export function parseCertificateDeeplink(
   deeplinkUrl: string,
 ): ICertificateDeeplink {
@@ -37,6 +31,8 @@ export async function generateDid(): Promise<string> {
 
   return keyPair.controller;
 }
+
+
 
 export function getCredentialCertificate(credential: Credential): ICertificate {
   const proof = {};
