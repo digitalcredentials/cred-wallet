@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import { Header } from '../../components';
-import { CertificateCarousel } from '../../components/CertificateCarousel';
 
+import { Header, CertificateCarousel } from '../../components';
 import { useCredentialsById } from '../../redux/certificates';
 import { CertificatesScreenProps } from './certificates.props';
 import { styles } from './certificates.styles';

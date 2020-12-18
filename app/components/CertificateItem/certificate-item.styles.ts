@@ -2,7 +2,7 @@ import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
-interface CertificateCarouselItemStyles {
+interface CertificateItemStyles {
   container: ViewStyle;
   titleContainer: ViewStyle;
   titleImage: ImageStyle;
@@ -14,7 +14,7 @@ interface CertificateCarouselItemStyles {
   separatorContainer: ViewStyle;
 }
 
-export const styles = StyleSheet.create<CertificateCarouselItemStyles>({
+export const styles = StyleSheet.create<CertificateItemStyles>({
   container: {
     width: '100%',
     flex: 1,

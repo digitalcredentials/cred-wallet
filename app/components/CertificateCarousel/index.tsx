@@ -3,7 +3,7 @@ import { Dimensions, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import { ICertificate } from '../../utils/types';
-import { CertificateCarouselItem } from '../CertificateCarouselItem';
+import { CertificateItem } from '../CertificateItem';
 import { CertificateCarouselProps } from './certificate-carousel.props';
 import { styles } from './certificate-carousel.styles';
 
@@ -21,7 +21,7 @@ export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
 
   const renderItem = useCallback(
     ({ item }: { item: ICertificate }) => (
-      <CertificateCarouselItem certificate={item} issuer={issuer} />
+      <CertificateItem certificate={item} issuer={issuer} />
     ),
     [],
   );

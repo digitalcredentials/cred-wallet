@@ -1,4 +1,6 @@
 export * from './BackgroundTouchableArea';
+export * from './CertificateCarousel';
+export * from './CertificateItem';
 export * from './CredentialsList';
 export * from './CredentialsSearchList';
 export * from './DefaultTextInput';

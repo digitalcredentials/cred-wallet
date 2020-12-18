@@ -3,10 +3,10 @@ import { View, Image, Text } from 'react-native';
 import moment from 'moment';
 
 import { IMAGES } from '../../assets';
-import { CertificateCarouselItemProps } from './certificate-carousel-item.props';
-import { styles } from './certificate-carousel-item.styles';
+import { CertificateItemProps } from './certificate-item.props';
+import { styles } from './certificate-item.styles';
 
-export const CertificateCarouselItem: React.FC<CertificateCarouselItemProps> = ({
+export const CertificateItem: React.FC<CertificateItemProps> = ({
   certificate,
   issuer,
 }) => (
