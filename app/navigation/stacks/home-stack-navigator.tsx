@@ -1,12 +1,17 @@
 import React from 'react';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
-import { CertificatesScreen, HomeScreen } from '../../screens';
-import { WITHOUT_HEADER_OPTIONS } from '../options';
+import {
+  CertificatesScreen,
+  CertificateViewScreen,
+  HomeScreen,
+} from '../../screens';
+import { TRANSPARENT_MODAL_OPTIONS, WITHOUT_HEADER_OPTIONS } from '../options';
 
 export type HomeStackParams = {
   Home: undefined;
   Certificates: { credentialsId: string };
+  CertificateView: { certificateId: string; issuerId: string };
 };
 
 const Stack = createNativeStackNavigator<HomeStackParams>();
@@ -15,5 +20,10 @@ export const HomeStackNavigator = () => (
   <Stack.Navigator screenOptions={WITHOUT_HEADER_OPTIONS}>
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Certificates" component={CertificatesScreen} />
+    <Stack.Screen
+      name="CertificateView"
+      component={CertificateViewScreen}
+      options={TRANSPARENT_MODAL_OPTIONS}
+    />
   </Stack.Navigator>
 );

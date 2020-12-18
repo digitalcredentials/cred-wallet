@@ -7,6 +7,7 @@ export const IMAGES = {
   GRADUATION_ORANGE: require('./images/graduation-orange.png'),
   CLOSE: require('./images/close.png'),
   PLACE_FOR_QR: require('./images/place-for-qr.png'),
+  MORE: require('./images/more.png'),
 
   // Tabs
   HOME_ACTIVE: require('./images/home-active.png'),

@@ -25,6 +25,27 @@ export const useCredentialsById = (credentialsId: string) =>
     ),
   );
 
+export const useCertificateWithIssuer = (
+  certificateId: string,
+  issuerId: string,
+) =>
+  useSelector((state: RootState): {
+    certificate: ICertificate;
+    issuer: IIssuer;
+  } => {
+    const creds: ICredentials = _.find(
+      Object.values(state.certificates.data),
+      (cred) => cred.issuer.id === issuerId,
+    )!;
+
+    const certificate: ICertificate = _.find(
+      creds.certificates,
+      (cert) => cert.id === certificateId,
+    )!;
+
+    return { issuer: creds.issuer, certificate };
+  });
+
 // Callback hooks
 export const useAddCertificateCallback = (dispatch: AppDispatch) =>
   useCallback(

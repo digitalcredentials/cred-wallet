@@ -1,9 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useRef, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-import { ICertificate } from '../../utils/types';
+import { ICertificate, IIssuer } from '../../utils/types';
 import { CertificateItem } from '../CertificateItem';
+import { CertificateItemPresets } from '../CertificateItem/certificate-item.props';
 import { CertificateCarouselProps } from './certificate-carousel.props';
 import { styles } from './certificate-carousel.styles';
 
@@ -16,12 +18,29 @@ export const CertificateCarousel: React.FC<CertificateCarouselProps> = ({
   certificates,
   issuer,
 }) => {
+  const navigation = useNavigation();
+
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const carouselRef = useRef(null);
 
+  const onCertificateMorePress = useCallback(
+    (certificate: ICertificate, issuer: IIssuer) => {
+      navigation.navigate('CertificateView', {
+        certificateId: certificate.id,
+        issuerId: issuer.id,
+      });
+    },
+    [navigation],
+  );
+
   const renderItem = useCallback(
     ({ item }: { item: ICertificate }) => (
-      <CertificateItem certificate={item} issuer={issuer} />
+      <CertificateItem
+        certificate={item}
+        issuer={issuer}
+        preset={CertificateItemPresets.Carousel}
+        onPress={onCertificateMorePress}
+      />
     ),
     [],
   );

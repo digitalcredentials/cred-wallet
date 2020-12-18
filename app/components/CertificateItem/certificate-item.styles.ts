@@ -1,6 +1,7 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
+import { CertificateItemPresets } from './certificate-item.props';
 
 interface CertificateItemStyles {
   container: ViewStyle;
@@ -12,9 +13,12 @@ interface CertificateItemStyles {
   valueTitle: TextStyle;
   value: TextStyle;
   separatorContainer: ViewStyle;
+  moreButtonContainer: ViewStyle;
+  moreButtonImage: ImageStyle;
+  modalLine: ViewStyle;
 }
 
-export const styles = StyleSheet.create<CertificateItemStyles>({
+const baseStyles: CertificateItemStyles = {
   container: {
     width: '100%',
     flex: 1,
@@ -65,4 +69,41 @@ export const styles = StyleSheet.create<CertificateItemStyles>({
     width: '100%',
     backgroundColor: COLORS.LAVENDER_PURPLE,
   },
+  moreButtonContainer: {},
+  moreButtonImage: {},
+  modalLine: {},
+};
+
+const carouselStyles = StyleSheet.create<CertificateItemStyles>({
+  ...baseStyles,
+  moreButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
+  moreButtonImage: {
+    width: 30,
+    height: 30,
+  },
 });
+
+const modalStyles = StyleSheet.create<CertificateItemStyles>({
+  ...baseStyles,
+  modalLine: {
+    height: 3,
+    borderRadius: 1.5,
+    width: 40,
+    alignSelf: 'center',
+    backgroundColor: COLORS.LAVENDER_PURPLE,
+    marginBottom: 19,
+    marginTop: -6,
+  },
+});
+
+export const presetStyles: Record<
+  CertificateItemPresets,
+  CertificateItemStyles
+> = {
+  [CertificateItemPresets.Carousel]: carouselStyles,
+  [CertificateItemPresets.Modal]: modalStyles,
+};
