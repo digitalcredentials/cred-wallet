@@ -8,6 +8,7 @@ export const IMAGES = {
   CLOSE: require('./images/close.png'),
   PLACE_FOR_QR: require('./images/place-for-qr.png'),
   MORE: require('./images/more.png'),
+  TIMER: require('./images/timer.png'),
 
   // Tabs
   HOME_ACTIVE: require('./images/home-active.png'),
