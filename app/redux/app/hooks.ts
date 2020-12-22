@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { AppDispatch, RootState } from '..';
+import { LoadingType } from '../../utils/types';
 import { appActionTypes } from './actions';
 
 // Selector hooks
@@ -13,6 +14,12 @@ export const useIsFirstVerification = () =>
 
 export const useDeeplinkUrl = () =>
   useSelector((state: RootState): string | null => state.app.deeplinkUrl);
+
+export const useLoading = () =>
+  useSelector((state: RootState) => state.app.loading);
+
+export const useErrors = () =>
+  useSelector((state: RootState) => state.app.errors);
 
 // Callback hooks
 export const useSetVerificationProcessCallback = (dispatch: AppDispatch) =>

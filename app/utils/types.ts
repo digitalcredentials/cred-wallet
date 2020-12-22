@@ -70,3 +70,11 @@ export type TabNavigatorOptions = {
 export interface ICertificateDeeplinkWithDID
   extends ICertificateDeeplink,
     ISubjectDID {}
+
+export enum LoadingType {
+  isAddCertificate = 'isAddCertificate',
+}
+
+export enum ErrorType {
+  addCertificate = 'addCertificate',
+}
