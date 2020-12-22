@@ -16,7 +16,6 @@ export const styles = StyleSheet.create<ErrorAlertStyles>({
     zIndex: 20,
   },
   errorContainer: {
-    paddingVertical: 6,
     overflow: 'hidden',
     width: '100%',
     backgroundColor: COLORS.PIPPIN,

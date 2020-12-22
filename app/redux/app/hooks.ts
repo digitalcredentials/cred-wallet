@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { AppDispatch, RootState } from '..';
-import { LoadingType } from '../../utils/types';
 import { appActionTypes } from './actions';
 
 // Selector hooks
@@ -52,6 +51,15 @@ export const useSetDeeplinkUrlCallback = (dispatch: AppDispatch) =>
       dispatch({
         type: appActionTypes.SET_DEEPLINK_URL,
         deeplinkUrl,
+      }),
+    [],
+  );
+
+export const useResetErrorsCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    () =>
+      dispatch({
+        type: appActionTypes.RESET_ERRORS,
       }),
     [],
   );

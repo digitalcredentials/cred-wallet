@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {
   AppAction,
   appActionTypes,
+  ResetErrorsAction,
   SetDeeplinkUrlAction,
   SetFirstVerificationAction,
   SetVerificationProcessAction,
@@ -62,6 +63,11 @@ const setDeeplinkUrl: Handler<SetDeeplinkUrlAction> = (
   deeplinkUrl,
 });
 
+const resetErrors: Handler<ResetErrorsAction> = (state) => ({
+  ...state,
+  errors: _.cloneDeep(INITIAL_STATE.errors),
+});
+
 /* ------ AUTOMATIC ANOTHER SAGAS HANDLERS ------ */
 const getLoadingHandler = <T>(
   loadingType: LoadingType,
@@ -87,6 +93,8 @@ export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
   [appActionTypes.SET_VERIFICATION_PROCESS]: setVerificationProcess,
   [appActionTypes.SET_FIRST_VERIFICATION]: setFirstVerification,
   [appActionTypes.SET_DEEPLINK_URL]: setDeeplinkUrl,
+
+  [appActionTypes.RESET_ERRORS]: resetErrors,
 
   [certificatesActionTypes.ADD_CERTIFICATE]: getLoadingHandler<
     AddCertificateAction
