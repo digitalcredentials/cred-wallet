@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
 import { IMAGES } from '../../assets';
-import { useAddCertificateSuccessCallback } from '../../redux/certificates';
+import { useSaveCertificateCallback } from '../../redux/certificates';
 import { AddCertificateScreenProps } from './add-certificate.props';
 import { styles } from './add-certificate.styles';
 
@@ -13,7 +13,7 @@ export const AddCertificateScreen: React.FunctionComponent<AddCertificateScreenP
   route,
 }) => {
   const dispatch = useDispatch();
-  const saveCertificate = useAddCertificateSuccessCallback(dispatch);
+  const saveCertificate = useSaveCertificateCallback(dispatch);
 
   const certificate = useMemo(() => route.params.certificate, [route.params]);
   const issuer = useMemo(() => route.params.issuer, [route.params]);

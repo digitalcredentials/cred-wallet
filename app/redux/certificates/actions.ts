@@ -9,6 +9,8 @@ interface CertificatesActionTypes {
   ADD_CERTIFICATE: 'ADD_CERTIFICATE';
   ADD_CERTIFICATE_SUCCESS: 'ADD_CERTIFICATE_SUCCESS';
   ADD_CERTIFICATE_FAILURE: 'ADD_CERTIFICATE_FAILURE';
+
+  SAVE_CERTIFICATE: 'SAVE_CERTIFICATE';
 }
 
 export interface AddCertificateAction {
@@ -18,8 +20,6 @@ export interface AddCertificateAction {
 
 export interface AddCertificateSuccessAction {
   type: CertificatesActionTypes['ADD_CERTIFICATE_SUCCESS'];
-  certificate: ICertificate;
-  issuer: IIssuer;
 }
 
 export interface AddCertificateFailureAction {
@@ -27,16 +27,28 @@ export interface AddCertificateFailureAction {
   error: string;
 }
 
+export interface SaveCertificateAction {
+  type: CertificatesActionTypes['SAVE_CERTIFICATE'];
+  certificate: ICertificate;
+  issuer: IIssuer;
+}
+
 interface CertificatesActionCreators {
   addCertificate(): AddCertificateAction;
-  addCertificateSuccess(certificate: ICertificate): AddCertificateSuccessAction;
+  addCertificateSuccess(): AddCertificateSuccessAction;
   addCertificateFailure(error: string): AddCertificateFailureAction;
+
+  saveCertificate(
+    certificate: ICertificate,
+    issuer: IIssuer,
+  ): SaveCertificateAction;
 }
 
 export type CertificatesAction =
   | AddCertificateAction
   | AddCertificateSuccessAction
-  | AddCertificateFailureAction;
+  | AddCertificateFailureAction
+  | SaveCertificateAction;
 
 const { Types, Creators } = createActions<
   CertificatesActionTypes,
@@ -44,8 +56,10 @@ const { Types, Creators } = createActions<
 >(
   {
     addCertificate: null,
-    addCertificateSuccess: ['certificate', 'issuer'],
+    addCertificateSuccess: null,
     addCertificateFailure: ['error'],
+
+    saveCertificate: ['certificate', 'issuer'],
   },
   {
     prefix: 'CERTIFICATES/',

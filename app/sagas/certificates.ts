@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import {
   AddCertificateAction,
   AddCertificateFailureAction,
+  AddCertificateSuccessAction,
   certificatesActionCreators,
 } from '../redux/certificates';
 import { apiInstance } from '../services/api';
@@ -24,13 +25,18 @@ export function* addCertificate({ data }: AddCertificateAction) {
   if (response.ok) {
     const certificate = yield call(getCredentialCertificate, response.data!);
     const issuer = yield call(getCredentialIssuer, response.data!);
+    yield put<AddCertificateSuccessAction>(
+      certificatesActionCreators.addCertificateSuccess(),
+    );
     yield call(StaticNavigator.navigateTo, 'AddCertificate', {
       certificate,
       issuer,
     });
   } else {
     yield put<AddCertificateFailureAction>(
-      certificatesActionCreators.addCertificateFailure('Some went wrong'),
+      certificatesActionCreators.addCertificateFailure(
+        'Some problems with QRcode/deeplink. Try again.',
+      ),
     );
   }
 }

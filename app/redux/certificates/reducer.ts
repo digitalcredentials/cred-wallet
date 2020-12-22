@@ -5,7 +5,7 @@ import { ICredentials } from '../../utils/types';
 import {
   CertificatesAction,
   certificatesActionTypes,
-  AddCertificateSuccessAction,
+  SaveCertificateAction,
 } from './actions';
 
 export interface CertificatesState {
@@ -20,7 +20,7 @@ const INITIAL_STATE: CertificatesState = {
 
 type Handler<A> = (state: CertificatesState, action: A) => CertificatesState;
 
-const addCertificateSuccess: Handler<AddCertificateSuccessAction> = (
+const saveCertificate: Handler<SaveCertificateAction> = (
   state,
   { certificate, issuer },
 ) => {
@@ -35,8 +35,6 @@ const addCertificateSuccess: Handler<AddCertificateSuccessAction> = (
 
   return {
     ...state,
-    isLoading: false,
-    error: null,
     data: {
       ...state.data,
       [issuer.id]: {
@@ -52,5 +50,5 @@ export const certificatesReducer = createReducer<
   CertificatesState,
   CertificatesAction
 >(INITIAL_STATE, {
-  [certificatesActionTypes.ADD_CERTIFICATE_SUCCESS]: addCertificateSuccess,
+  [certificatesActionTypes.SAVE_CERTIFICATE]: saveCertificate,
 });

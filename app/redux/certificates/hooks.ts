@@ -54,11 +54,11 @@ export const useAddCertificateCallback = (dispatch: AppDispatch) =>
     [dispatch],
   );
 
-export const useAddCertificateSuccessCallback = (dispatch: AppDispatch) =>
+export const useSaveCertificateCallback = (dispatch: AppDispatch) =>
   useCallback(
     (certificate: ICertificate, issuer: IIssuer) =>
       dispatch({
-        type: certificatesActionTypes.ADD_CERTIFICATE_SUCCESS,
+        type: certificatesActionTypes.SAVE_CERTIFICATE,
         certificate,
         issuer,
       }),
