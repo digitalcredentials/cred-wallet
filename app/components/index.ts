@@ -5,6 +5,7 @@ export * from './CredentialsList';
 export * from './CredentialsSearchList';
 export * from './DefaultTextInput';
 export * from './DotsProgress';
+export * from './ErrorAlert';
 export * from './Header';
 export * from './Loader';
 export * from './Scene';

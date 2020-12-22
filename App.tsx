@@ -9,7 +9,7 @@ import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 
 import RootNavigator from './app/navigation/root-navigator';
-import { Loader } from './app/components';
+import { ErrorAlert, Loader } from './app/components';
 import { store } from './app/redux';
 
 import './shim';
@@ -22,6 +22,7 @@ const App: React.FC = () => {
       <Provider store={store}>
         <RootNavigator />
         <Loader />
+        <ErrorAlert />
       </Provider>
     </SafeAreaProvider>
   );
