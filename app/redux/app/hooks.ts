@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import { AppDispatch, RootState } from '..';
 import { LoadingType } from '../../utils/types';
@@ -15,8 +16,11 @@ export const useIsFirstVerification = () =>
 export const useDeeplinkUrl = () =>
   useSelector((state: RootState): string | null => state.app.deeplinkUrl);
 
-export const useLoading = () =>
+export const useLoadingState = () =>
   useSelector((state: RootState) => state.app.loading);
+
+export const useIsLoading = () =>
+  useSelector((state: RootState) => _.some(Object.values(state.app.loading)));
 
 export const useErrors = () =>
   useSelector((state: RootState) => state.app.errors);

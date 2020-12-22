@@ -18,12 +18,14 @@ export const styles = StyleSheet.create<LoaderStyles>({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 10,
+    backgroundColor: COLORS.GRAY_TRANSPARENT_BACKGROUND,
   },
   loaderContainer: {
     padding: 30,
     backgroundColor: `${COLORS.WHITE}BB`,
     borderRadius: 20,
-    width: '95%',
+    width: '90%',
     alignItems: 'center',
   },
   timerImage: {

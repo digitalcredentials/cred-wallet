@@ -6,6 +6,7 @@ export * from './CredentialsSearchList';
 export * from './DefaultTextInput';
 export * from './DotsProgress';
 export * from './Header';
+export * from './Loader';
 export * from './Scene';
 export * from './SearchBar';
 export * from './TabBarPlusButton';

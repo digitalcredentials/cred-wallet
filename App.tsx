@@ -7,7 +7,9 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
+
 import RootNavigator from './app/navigation/root-navigator';
+import { Loader } from './app/components';
 import { store } from './app/redux';
 
 import './shim';
@@ -19,6 +21,7 @@ const App: React.FC = () => {
     <SafeAreaProvider>
       <Provider store={store}>
         <RootNavigator />
+        <Loader />
       </Provider>
     </SafeAreaProvider>
   );
