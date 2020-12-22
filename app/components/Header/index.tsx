@@ -9,7 +9,7 @@ import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../../utils/colors';
 
-export const Header: React.FunctionComponent<HeaderProps> = ({
+export const Header: React.FC<HeaderProps> = ({
   title,
   backButtonTitle,
   style: propStyle = {},

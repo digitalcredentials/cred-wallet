@@ -8,7 +8,7 @@ import { useSaveCertificateCallback } from '../../redux/certificates';
 import { AddCertificateScreenProps } from './add-certificate.props';
 import { styles } from './add-certificate.styles';
 
-export const AddCertificateScreen: React.FunctionComponent<AddCertificateScreenProps> = ({
+export const AddCertificateScreen: React.FC<AddCertificateScreenProps> = ({
   navigation,
   route,
 }) => {

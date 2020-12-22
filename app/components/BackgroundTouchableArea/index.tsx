@@ -6,7 +6,7 @@ import { BackgroundTouchableAreaProps } from './background-touchable-area.props'
 
 const DEFAULT_Z_INDEX = -10;
 
-export const BackgroundTouchableArea: React.FunctionComponent<BackgroundTouchableAreaProps> = ({
+export const BackgroundTouchableArea: React.FC<BackgroundTouchableAreaProps> = ({
   onPress,
   zIndex = DEFAULT_Z_INDEX,
   containerStyle = {},

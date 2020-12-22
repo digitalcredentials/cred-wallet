@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ import { useAddCertificateCallback } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
 import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 
-export const QRScannerScreen: FunctionComponent<QRScannerScreenProps> = ({
+export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();

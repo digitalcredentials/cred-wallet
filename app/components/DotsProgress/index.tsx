@@ -6,7 +6,7 @@ import { DotsProgressProps, DotProps } from './dots-progress.props';
 import { styles } from './dots-progress.styles';
 
 //TODO: animation
-const DotView: React.FunctionComponent<DotProps> = ({ isFilled }) => {
+const DotView: React.FC<DotProps> = ({ isFilled }) => {
   // const animatedView = useRef(new Animated.Value(0));
 
   return (
@@ -16,7 +16,7 @@ const DotView: React.FunctionComponent<DotProps> = ({ isFilled }) => {
   );
 };
 
-export const DotsProgress: React.FunctionComponent<DotsProgressProps> = ({
+export const DotsProgress: React.FC<DotsProgressProps> = ({
   dotsAmount,
   filledDotsAmount,
   style: propStyle = {},

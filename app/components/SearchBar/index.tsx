@@ -10,7 +10,7 @@ import { DefaultTextInput } from '../DefaultTextInput';
 import { COLORS } from '../../utils/colors';
 import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 
-export const SearchBar: React.FunctionComponent<SearchBarProps> = ({
+export const SearchBar: React.FC<SearchBarProps> = ({
   onFocus: onFocusProp,
   onBlur: onBlurProp,
   style: propStyle,

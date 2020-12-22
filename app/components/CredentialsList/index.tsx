@@ -8,7 +8,7 @@ import { useKeyExtractor } from '../../utils/hooks';
 import { ICredentials } from '../../utils/types';
 import { useCredentials } from '../../redux/certificates';
 
-export const CredentialsList: React.FunctionComponent<CredentialsListProps> = ({
+export const CredentialsList: React.FC<CredentialsListProps> = ({
   onCredentialsPress,
 }) => {
   const credentials = useCredentials();

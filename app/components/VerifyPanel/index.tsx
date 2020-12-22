@@ -20,7 +20,7 @@ import { IMAGES } from '../../assets';
 
 // Keystore.resetPin();
 
-const CipherRow: React.FunctionComponent<CipherRowProps> = ({
+const CipherRow: React.FC<CipherRowProps> = ({
   ciphers,
   biometricType,
   isDisabled,
@@ -107,7 +107,7 @@ const CipherRow: React.FunctionComponent<CipherRowProps> = ({
   );
 };
 
-export const VerifyPanel: React.FunctionComponent<VerifyPanelProps> = ({
+export const VerifyPanel: React.FC<VerifyPanelProps> = ({
   onVerifySuccess,
 }) => {
   /* ------ State ------ */
