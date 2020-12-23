@@ -48,8 +48,10 @@ export const ErrorAlert: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    stopErrorAnimation();
-    startErrorAnimation();
+    if (errorType && error) {
+      stopErrorAnimation();
+      startErrorAnimation();
+    }
   }, [errorType, error]);
 
   return error ? (

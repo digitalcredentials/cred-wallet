@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import { AppDispatch, RootState } from '..';
 import { appActionTypes } from './actions';
+import { ErrorType } from '../../utils/types';
 
 // Selector hooks
 export const useIsVerificationProcess = () =>
@@ -51,6 +52,17 @@ export const useSetDeeplinkUrlCallback = (dispatch: AppDispatch) =>
       dispatch({
         type: appActionTypes.SET_DEEPLINK_URL,
         deeplinkUrl,
+      }),
+    [],
+  );
+
+export const useSetErrorCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    (errorType: ErrorType, error: string | null) =>
+      dispatch({
+        type: appActionTypes.SET_ERROR,
+        errorType,
+        error,
       }),
     [],
   );

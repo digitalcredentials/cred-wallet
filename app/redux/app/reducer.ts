@@ -6,6 +6,7 @@ import {
   appActionTypes,
   ResetErrorsAction,
   SetDeeplinkUrlAction,
+  SetErrorAction,
   SetFirstVerificationAction,
   SetVerificationProcessAction,
 } from './actions';
@@ -34,6 +35,7 @@ const INITIAL_STATE: AppState = {
   },
   errors: {
     addCertificate: null,
+    wrongPin: null,
   },
 };
 
@@ -61,6 +63,14 @@ const setDeeplinkUrl: Handler<SetDeeplinkUrlAction> = (
 ) => ({
   ...state,
   deeplinkUrl,
+});
+
+const setError: Handler<SetErrorAction> = (state, { errorType, error }) => ({
+  ...state,
+  errors: {
+    ...state.errors,
+    [errorType]: error,
+  },
 });
 
 const resetErrors: Handler<ResetErrorsAction> = (state) => ({
@@ -94,6 +104,7 @@ export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
   [appActionTypes.SET_FIRST_VERIFICATION]: setFirstVerification,
   [appActionTypes.SET_DEEPLINK_URL]: setDeeplinkUrl,
 
+  [appActionTypes.SET_ERROR]: setError,
   [appActionTypes.RESET_ERRORS]: resetErrors,
 
   [certificatesActionTypes.ADD_CERTIFICATE]: getLoadingHandler<

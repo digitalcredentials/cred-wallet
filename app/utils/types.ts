@@ -77,4 +77,5 @@ export enum LoadingType {
 
 export enum ErrorType {
   addCertificate = 'addCertificate',
+  wrongPin = 'wrongPin',
 }

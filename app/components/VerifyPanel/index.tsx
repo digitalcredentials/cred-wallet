@@ -14,9 +14,11 @@ import {
 import { CipherRowProps, VerifyPanelProps } from './verify-panel.props';
 import { styles, cipherRowStyles } from './verify-panel.styles';
 import { DotsProgress } from '../DotsProgress';
-import { VerifyPanelStatus } from '../../utils/types';
+import { ErrorType, VerifyPanelStatus } from '../../utils/types';
 import { Keystore } from '../../services/keychain';
 import { IMAGES } from '../../assets';
+import { useDispatch } from 'react-redux';
+import { useSetErrorCallback } from '../../redux/app';
 
 // Keystore.resetPin();
 
@@ -112,6 +114,9 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
 }) => {
   /* ------ State ------ */
 
+  const dispatch = useDispatch();
+  const onSetError = useSetErrorCallback(dispatch);
+
   const [biometricType, setBiometricType] = useState<string | null>(null);
   const [panelStatus, setPanelStatus] = useState<VerifyPanelStatus>(
     PANEL_STATUS.CHECK_PIN_KEYCHAIN,
@@ -170,6 +175,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
     if (keychainPin === enteredPin) {
       setPanelStatus(PANEL_STATUS.VERIFIED);
     } else {
+      onSetError(ErrorType.wrongPin, 'Wrong password');
       setEnteredPin('');
       setPanelStatus(PANEL_STATUS.PIN_ENTER);
     }
@@ -178,7 +184,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
   const launchBiometricVerify = useCallback(() => {
     TouchID.authenticate('To access your accounts', BIOMETRY_OPTIONS)
       .then(() => setPanelStatus(PANEL_STATUS.VERIFIED))
-      .catch((error: any) => {
+      .catch(() => {
         setPanelStatus(PANEL_STATUS.PIN_ENTER);
       });
   }, [setPanelStatus]);
