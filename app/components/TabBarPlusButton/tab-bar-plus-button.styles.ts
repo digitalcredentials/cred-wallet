@@ -15,8 +15,8 @@ export const styles = StyleSheet.create<TabBarPlusButtonStyles>({
   },
   iconContainer: {
     padding: 10,
-    borderRadius: 5,
-    backgroundColor: `${COLORS.LAVENDER_PURPLE}33`,
+    borderRadius: 10,
+    backgroundColor: COLORS.BAY_OF_MANY,
   },
   icon: {
     width: 20,
