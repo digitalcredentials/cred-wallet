@@ -5,3 +5,4 @@ export * from './CertificateView';
 export * from './Home';
 export * from './Pin';
 export * from './QRScanner';
+export * from './Settings';

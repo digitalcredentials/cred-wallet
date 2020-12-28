@@ -11,7 +11,7 @@ import { COLORS } from '../../utils/colors';
 
 export const Header: React.FC<HeaderProps> = ({
   title,
-  backButtonTitle,
+  backButtonTitle = null,
   style: propStyle = {},
 }) => {
   const navigation = useNavigation();
@@ -26,22 +26,26 @@ export const Header: React.FC<HeaderProps> = ({
       edges={['top']}
     >
       <View style={[styles.titleRowContainer, propStyle.titleRowContainer]}>
-        <TouchableOpacity
-          onPress={onBackButtonPress}
-          style={styles.row}
-          hitSlop={EXTENDED_HIT_SLOP}
-        >
-          <View style={[styles.backButtonIcon, propStyle.backButtonIcon]}>
-            <IoniconsIcon
-              name="chevron-back"
-              size={37}
-              color={COLORS.FRENCH_LILAC}
-            />
-          </View>
-          <Text style={[styles.backButtonTitle, propStyle.backButtonTitle]}>
-            {backButtonTitle}
-          </Text>
-        </TouchableOpacity>
+        {backButtonTitle ? (
+          <TouchableOpacity
+            onPress={onBackButtonPress}
+            style={styles.row}
+            hitSlop={EXTENDED_HIT_SLOP}
+          >
+            <View style={[styles.backButtonIcon, propStyle.backButtonIcon]}>
+              <IoniconsIcon
+                name="chevron-back"
+                size={37}
+                color={COLORS.FRENCH_LILAC}
+              />
+            </View>
+            <Text style={[styles.backButtonTitle, propStyle.backButtonTitle]}>
+              {backButtonTitle}
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.emptyContainer} />
+        )}
 
         <View
           style={[styles.titleContainer, propStyle.titleContainer]}

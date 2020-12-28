@@ -1,10 +1,11 @@
-import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
 interface HeaderStyles {
   container: ViewStyle;
   row: ViewStyle;
+  emptyContainer: ViewStyle;
   titleRowContainer: ViewStyle;
   backButtonIcon: ViewStyle;
   backButtonTitle: TextStyle;
@@ -21,6 +22,10 @@ export const styles = StyleSheet.create<HeaderStyles>({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  emptyContainer: {
+    margin: 16,
+    height: 8,
   },
   titleRowContainer: {
     padding: 16,
