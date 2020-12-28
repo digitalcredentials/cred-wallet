@@ -39,7 +39,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   useMount(() => {
     // Handle late deeplink urls
     Linking.addEventListener('url', (data) => {
-      console.tron.log('HOME DEEPLINK LISTENER:', data.url);
       onSetDeeplinkUrl(data.url);
     });
     return () => Linking.removeAllListeners('url');
@@ -52,12 +51,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       prevIsVerificationProcess.current &&
       !isVerificationProcess
     ) {
-      console.tron.log(
-        '====== MAIN FLOW! SIGN & DISPATCH SERTIFICATE! =====',
-        deeplinkUrl,
-        prevIsVerificationProcess.current,
-        isVerificationProcess,
-      );
       const parseUrlAndDispatch = async () => {
         const parsedCertificateDeeplink = parseCertificateDeeplink(deeplinkUrl);
         onAddCertificate({
@@ -76,7 +69,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     onSearch(searchValue);
-  }, [searchValue]);
+  }, [searchValue, isExtendedList]);
 
   /* ------ Callbacks ------ */
   const startExtendedListAnimation = useCallback(

@@ -12,43 +12,42 @@ import { ICertificate, IFoundCredential } from '../utils/types';
 export function* searchCertificate({ value }: SearchCredentialAction) {
   let foundCredentials: IFoundCredential[] = [];
 
-  if (value) {
-    foundCredentials = yield select((state: RootState) => {
-      const resultCredentials: IFoundCredential[] = [];
+  foundCredentials = yield select((state: RootState) => {
+    const resultCredentials: IFoundCredential[] = [];
 
-      _.forEach(state.certificates.data, (credential) => {
-        // Ignore value cases
-        const regexp = new RegExp(value, 'i');
+    const isAllResults = !value.length;
 
-        // Check issuer fields
-        const isIssuerSearchField =
-          credential.issuer.name.search(regexp) !== -1;
+    _.forEach(state.certificates.data, (credential) => {
+      // Ignore value cases
+      const regexp = new RegExp(value, 'i');
 
-        let filteredCertificates: ICertificate[] = [];
-        if (isIssuerSearchField) {
-          filteredCertificates = [...credential.certificates];
-        } else {
-          filteredCertificates = _.filter(
-            credential.certificates,
-            (cert) => cert.credentialSubject.name.search(regexp) !== -1,
-          );
-        }
+      // Check issuer fields
+      const isIssuerSearchField = credential.issuer.name.search(regexp) !== -1;
 
-        resultCredentials.push(
-          ..._.map<ICertificate, IFoundCredential>(
-            filteredCertificates,
-            (certificate, index) => ({
-              id: `${credential.issuer.id}-${index}`,
-              certificate,
-              issuer: credential.issuer,
-            }),
-          ),
+      let filteredCertificates: ICertificate[] = [];
+      if (isIssuerSearchField || isAllResults) {
+        filteredCertificates = [...credential.certificates];
+      } else {
+        filteredCertificates = _.filter(
+          credential.certificates,
+          (cert) => cert.credentialSubject.name.search(regexp) !== -1,
         );
-      });
+      }
 
-      return resultCredentials;
+      resultCredentials.push(
+        ..._.map<ICertificate, IFoundCredential>(
+          filteredCertificates,
+          (certificate, index) => ({
+            id: `${credential.issuer.id}-${index}`,
+            certificate,
+            issuer: credential.issuer,
+          }),
+        ),
+      );
     });
-  }
+
+    return resultCredentials;
+  });
 
   yield put<SearchCredentialsSuccessAction>(
     searchActionCreators.searchCredentialsSuccess(foundCredentials),
