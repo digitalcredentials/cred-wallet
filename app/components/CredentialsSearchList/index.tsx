@@ -10,9 +10,22 @@ import { IFoundCredential } from '../../utils/types';
 import { COLORS } from '../../utils/colors';
 import { Text } from '../Text';
 import { IMAGES } from '../../assets';
+import { useNavigation } from '@react-navigation/native';
 
 export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () => {
+  const navigation = useNavigation();
+
   const foundCredentials = useFoundCredentials();
+
+  const onPress = useCallback(
+    (item: IFoundCredential) => {
+      navigation.navigate('CertificateSearchView', {
+        issuerId: item.issuer.id,
+        certificateId: item.certificate.id,
+      });
+    },
+    [navigation],
+  );
 
   const renderItem = useCallback(
     ({ item, index }: { item: IFoundCredential; index: number }) => {
@@ -22,7 +35,7 @@ export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () =>
       return (
         <>
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => onPress(item)}
             style={[
               styles.foundCredentialContainer,
               isFirst ? styles.foundCredentialFirstContainer : null,
@@ -50,7 +63,7 @@ export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () =>
         </>
       );
     },
-    [foundCredentials],
+    [foundCredentials, onPress],
   );
 
   const keyExtractor = useKeyExtractor<IFoundCredential>('credential-search');
@@ -61,6 +74,7 @@ export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () =>
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
       style={styles.container}
     />
   ) : (

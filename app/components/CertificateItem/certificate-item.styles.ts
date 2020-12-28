@@ -106,4 +106,5 @@ export const presetStyles: Record<
 > = {
   [CertificateItemPresets.Carousel]: carouselStyles,
   [CertificateItemPresets.Modal]: modalStyles,
+  [CertificateItemPresets.Fullscreen]: baseStyles,
 };
