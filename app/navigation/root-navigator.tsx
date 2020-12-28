@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import { PinScreen, QRScannerScreen, AddCertificateScreen } from '../screens';
 import { MainTabNavigator } from './main-tab-navigator';
 import {
+  MODAL_OPTIONS,
   TRANSPARENT_MODAL_WITH_FADE_ANIM_OPTIONS,
   WITHOUT_HEADER_OPTIONS,
 } from './options';
@@ -31,7 +32,7 @@ const RootNavigator = () => (
       <Stack.Screen
         name="QRScanner"
         component={QRScannerScreen}
-        options={TRANSPARENT_MODAL_WITH_FADE_ANIM_OPTIONS}
+        options={MODAL_OPTIONS}
       />
       <Stack.Screen
         name="AddCertificate"

@@ -14,7 +14,7 @@ interface QRScannerScreenStyles {
 export const styles = StyleSheet.create<QRScannerScreenStyles>({
   root: {
     flex: 1,
-    backgroundColor: COLORS.GRAY_TRANSPARENT_BACKGROUND,
+    backgroundColor: COLORS.BLACK,
     alignItems: 'center',
     justifyContent: 'center',
   },

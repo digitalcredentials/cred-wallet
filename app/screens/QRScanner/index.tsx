@@ -71,13 +71,6 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
         //   </TouchableOpacity>
         // }
       />
-      <TouchableOpacity
-        onPress={goBack}
-        style={styles.closeButtonContainer}
-        hitSlop={EXTENDED_HIT_SLOP}
-      >
-        <Image source={IMAGES.CLOSE} />
-      </TouchableOpacity>
       <View style={styles.mainAbsoluteContainer}>
         <Image source={IMAGES.PLACE_FOR_QR} />
       </View>

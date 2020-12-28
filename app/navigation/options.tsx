@@ -21,6 +21,11 @@ export const TRANSPARENT_MODAL_OPTIONS: NativeStackNavigationOptions = {
   stackPresentation: 'transparentModal',
 };
 
+export const MODAL_OPTIONS: NativeStackNavigationOptions = {
+  stackAnimation: 'default',
+  stackPresentation: 'modal',
+};
+
 export const ScreenStub: React.FC = () => <View />;
 
 export const tabBarOptions: BottomTabBarOptions = {
