@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View, Animated, Easing, StatusBar, Linking } from 'react-native';
+import {
+  View,
+  Animated,
+  Easing,
+  StatusBar,
+  Linking,
+  KeyboardAvoidingView,
+} from 'react-native';
 import _ from 'lodash';
 
 import { CredentialsSearchList, SearchBar } from '../../components';
@@ -120,14 +127,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.root}>
-      <StatusBar backgroundColor={COLORS.BUNTING} barStyle="light-content" />
-      <SearchBar
-        value={searchValue}
-        onChangeText={setSearchValue}
-        onFocus={onSearchFocus}
-        onBlur={onSearchBlur}
-      />
-      {renderCurrentList()}
+      <KeyboardAvoidingView behavior="padding" style={styles.flexContainer}>
+        <StatusBar backgroundColor={COLORS.BUNTING} barStyle="light-content" />
+        <SearchBar
+          value={searchValue}
+          onChangeText={setSearchValue}
+          onFocus={onSearchFocus}
+          onBlur={onSearchBlur}
+        />
+        {renderCurrentList()}
+      </KeyboardAvoidingView>
     </View>
   );
 };
