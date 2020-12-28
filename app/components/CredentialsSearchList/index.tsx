@@ -29,33 +29,19 @@ export const CredentialsSearchList: React.FC<CredentialsSearchListProps> = () =>
 
   const renderItem = useCallback(
     ({ item, index }: { item: IFoundCredential; index: number }) => {
-      const isFirst = index === 0;
       const isNotLast = index < foundCredentials.length - 1;
 
       return (
         <>
           <TouchableOpacity
             onPress={() => onPress(item)}
-            style={[
-              styles.foundCredentialContainer,
-              isFirst ? styles.foundCredentialFirstContainer : null,
-            ]}
+            style={styles.foundCredentialContainer}
           >
             <Image source={IMAGES.MAN} style={styles.foundCredentialImage} />
-            <Text
-              style={[
-                styles.foundCredentialSubjectName,
-                isFirst ? styles.foundCredentialSubjectNameFirst : null,
-              ]}
-            >
+            <Text style={styles.foundCredentialSubjectName}>
               {item.certificate.credentialSubject.name}
             </Text>
-            <Text
-              style={[
-                styles.foundCredentialIssuerName,
-                isFirst ? styles.foundCredentialIssuerNameFirst : null,
-              ]}
-            >
+            <Text style={styles.foundCredentialIssuerName}>
               {item.issuer.name}
             </Text>
           </TouchableOpacity>

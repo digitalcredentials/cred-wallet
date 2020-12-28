@@ -9,12 +9,9 @@ interface IssuersListStyles {
   noResultsTitle: TextStyle;
   noResultsSubtitle: TextStyle;
   foundCredentialContainer: ViewStyle;
-  foundCredentialFirstContainer: ViewStyle;
   foundCredentialImage: ImageStyle;
   foundCredentialSubjectName: TextStyle;
-  foundCredentialSubjectNameFirst: TextStyle;
   foundCredentialIssuerName: TextStyle;
-  foundCredentialIssuerNameFirst: TextStyle;
   foundCredentialSeparator: ViewStyle;
 }
 
@@ -51,9 +48,6 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  foundCredentialFirstContainer: {
-    backgroundColor: COLORS.FRENCH_LILAC,
-  },
   foundCredentialImage: {
     width: 26,
     height: 26,
@@ -65,17 +59,11 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
     lineHeight: 21,
     marginRight: 5,
   },
-  foundCredentialSubjectNameFirst: {
-    color: COLORS.WHITE,
-  },
   foundCredentialIssuerName: {
     color: COLORS.SILVER_CHALICE,
     fontFamily: FONTS.POPPINS_300,
     fontSize: 11,
     lineHeight: 16.5,
-  },
-  foundCredentialIssuerNameFirst: {
-    color: COLORS.WHITE,
   },
   foundCredentialSeparator: {
     width: '100%',
