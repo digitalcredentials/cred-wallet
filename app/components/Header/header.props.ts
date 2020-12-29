@@ -2,7 +2,7 @@ import { TextStyle, ViewStyle } from 'react-native';
 
 export interface HeaderProps {
   title: string;
-  backButtonTitle?: string | null;
+  backButtonTitle: string;
   style?: {
     container?: ViewStyle;
     titleRowContainer?: ViewStyle;

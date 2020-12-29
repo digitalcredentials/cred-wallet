@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
-import { HeaderProps } from './header.props';
-import { styles } from './header.styles';
-import { EXTENDED_HIT_SLOP } from '../../utils/constants';
-import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../../utils/colors';
+import { SettingsHeaderProps } from './settings-header.props';
+import { styles } from './settings-header.styles';
+import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 
-export const Header: React.FC<HeaderProps> = ({
+export const SettingsHeader: React.FC<SettingsHeaderProps> = ({
   title,
-  backButtonTitle,
+  isBackButton = false,
   style: propStyle = {},
 }) => {
   const navigation = useNavigation();
@@ -25,10 +25,9 @@ export const Header: React.FC<HeaderProps> = ({
       style={[styles.container, propStyle.container]}
       edges={['top']}
     >
-      <View style={[styles.titleRowContainer, propStyle.titleRowContainer]}>
+      {isBackButton && (
         <TouchableOpacity
           onPress={onBackButtonPress}
-          style={styles.row}
           hitSlop={EXTENDED_HIT_SLOP}
         >
           <View style={[styles.backButtonIcon, propStyle.backButtonIcon]}>
@@ -38,18 +37,10 @@ export const Header: React.FC<HeaderProps> = ({
               color={COLORS.FRENCH_LILAC}
             />
           </View>
-          <Text style={[styles.backButtonTitle, propStyle.backButtonTitle]}>
-            {backButtonTitle}
-          </Text>
         </TouchableOpacity>
+      )}
 
-        <View
-          style={[styles.titleContainer, propStyle.titleContainer]}
-          pointerEvents="none"
-        >
-          <Text style={[styles.title, propStyle.title]}>{title}</Text>
-        </View>
-      </View>
+      <Text style={[styles.title, propStyle.title]}>{title}</Text>
     </SafeAreaView>
   );
 };

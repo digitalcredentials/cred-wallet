@@ -10,6 +10,7 @@ export * from './Header';
 export * from './Loader';
 export * from './Scene';
 export * from './SearchBar';
+export * from './SettingsHeader';
 export * from './TabBarPlusButton';
 export * from './Text';
 export * from './VerifyPanel';
