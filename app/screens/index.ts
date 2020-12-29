@@ -1,4 +1,5 @@
 export * from './AddCertificate';
+export * from './Backups';
 export * from './Certificates';
 export * from './CertificateSearchView';
 export * from './CertificateView';
