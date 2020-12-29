@@ -13,6 +13,7 @@ export const IMAGES = {
   CHEVRON_RIGHT_WHITE: require('./images/chevron-right-white.png'),
   GRADUATION_WHITE: require('./images/graduation-white.png'),
   BACKUP: require('./images/backup.png'),
+  CLOUD: require('./images/cloud.png'),
 
   // Tabs
   HOME_ACTIVE: require('./images/home-active.png'),

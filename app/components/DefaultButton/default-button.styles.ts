@@ -13,6 +13,7 @@ export const styles = StyleSheet.create<DefaultButtonStyles>({
     borderRadius: 100,
     paddingHorizontal: 40,
     paddingVertical: 9,
+    alignSelf: 'center',
   },
   text: {
     fontFamily: FONTS.POPPINS_500,
