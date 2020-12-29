@@ -3,6 +3,7 @@ export * from './CertificateCarousel';
 export * from './CertificateItem';
 export * from './CredentialsList';
 export * from './CredentialsSearchList';
+export * from './DefaultButton';
 export * from './DefaultTextInput';
 export * from './DotsProgress';
 export * from './ErrorAlert';
