@@ -7,9 +7,10 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 import RootNavigator from './app/navigation/root-navigator';
-import { ErrorAlert, Loader } from './app/components';
+import { ErrorAlertHandler, Loader } from './app/components';
 import { store } from './app/redux';
 
 import './shim';
@@ -18,13 +19,15 @@ enableScreens();
 
 const App: React.FC = () => {
   return (
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <RootNavigator />
-        <Loader />
-        <ErrorAlert />
-      </Provider>
-    </SafeAreaProvider>
+    <RootSiblingParent>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <RootNavigator />
+          <Loader />
+          <ErrorAlertHandler />
+        </Provider>
+      </SafeAreaProvider>
+    </RootSiblingParent>
   );
 };
 

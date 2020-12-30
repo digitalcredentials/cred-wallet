@@ -4,7 +4,7 @@ import { Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from '@react-native-community/blur';
 
-import { ErrorAlert, VerifyPanel } from '../../components';
+import { ErrorAlertHandler, VerifyPanel } from '../../components';
 import { PinScreenProps } from './pin.props';
 import { styles } from './pin.styles';
 import { isAndroid, isIOS } from '../../utils';
@@ -64,7 +64,7 @@ export const PinScreen: React.FC<PinScreenProps> = ({ navigation, route }) => {
         >
           <VerifyPanel onVerifySuccess={onVerifySuccess} />
         </SafeAreaView>
-        <ErrorAlert />
+        <ErrorAlertHandler />
       </>
     ),
     [isAndroid, onVerifySuccess],
