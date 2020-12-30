@@ -7,6 +7,8 @@ import _ from 'lodash';
 import { useErrors, useResetErrorsCallback } from '../../redux/app';
 import { COLORS } from '../../utils/colors';
 
+const MIN_GAP: number = 6;
+
 const TOAST_CONFIG = {
   duration: Toast.durations.LONG,
   backgroundColor: COLORS.PIPPIN,
@@ -31,7 +33,7 @@ export const ErrorAlertHandler: React.FC = () => {
 
   useEffect(() => {
     if (errorType && error) {
-      Toast.show(error, { position: insets.top, ...TOAST_CONFIG });
+      Toast.show(error, { position: insets.top + MIN_GAP, ...TOAST_CONFIG });
       onResetErrors();
     }
   }, [errorType, error]);
