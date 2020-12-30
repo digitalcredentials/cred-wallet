@@ -79,3 +79,8 @@ export enum ErrorType {
   addCertificate = 'addCertificate',
   wrongPin = 'wrongPin',
 }
+
+export enum FocusStatus {
+  Focus,
+  Blur,
+}

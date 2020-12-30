@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { useDispatch } from 'react-redux';
 
@@ -9,6 +10,7 @@ import { generateDid, parseCertificateDeeplink } from '../../utils';
 import { useAddCertificateCallback } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
 import { EXTENDED_HIT_SLOP } from '../../utils/constants';
+import { FocusStatus } from '../../utils/types';
 
 export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   navigation,
@@ -16,7 +18,21 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   const dispatch = useDispatch();
   const onAddCertificate = useAddCertificateCallback(dispatch);
 
+  const [focusStatus, setFocusStatus] = useState<FocusStatus>(
+    FocusStatus.Focus,
+  );
+
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setFocusStatus(FocusStatus.Focus);
+
+      return () => {
+        setFocusStatus(FocusStatus.Blur);
+      };
+    }, [focusStatus, setFocusStatus]),
+  );
 
   const onSuccess = useCallback(
     async (result) => {
@@ -32,45 +48,17 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
 
   return (
     <View style={styles.root}>
-      <QRCodeScanner
-        onRead={onSuccess}
-        // vibrate?: boolean;
-        // reactivate?: boolean;
-        // reactivateTimeout?: number;
-        fadeIn
-        showMarker
-        // cameraType?: 'front' | 'back';
-        // customMarker?: JSX.Element;
-        // containerStyle?: StyleProp<ViewStyle>;
-        cameraStyle={styles.cameraContainer}
-        markerStyle={styles.cameraMarkerContiner}
-        topViewStyle={styles.zeroContainer}
-        bottomViewStyle={styles.zeroContainer}
-        // topContent?: JSX.Element | string;
-        // bottomContent?: JSX.Element | string;
-        // notAuthorizedView?: JSX.Element;
-        // permissionDialogTitle?: string;
-        // permissionDialogMessage?: string;
-        // buttonPositive?: string;
-        // checkAndroid6Permissions?: boolean;
-
-        // cameraProps={{
-        //   flashMode: RNCamera.Constants.FlashMode.torch}
-        // }}
-        // topContent={
-        //   <TouchableOpacity
-        //     onPress={goBack}
-        //     style={styles.goBackZoneContainer}
-        //   />
-        // }
-        // bottomContent={
-        //   <TouchableOpacity onPress={goBack} style={styles.goBackZoneContainer}>
-        //     <Text style={styles.descriptionText}>
-        //       place the camera on the QR code
-        //     </Text>
-        //   </TouchableOpacity>
-        // }
-      />
+      {focusStatus === FocusStatus.Focus && (
+        <QRCodeScanner
+          onRead={onSuccess}
+          fadeIn
+          showMarker
+          cameraStyle={styles.cameraContainer}
+          markerStyle={styles.cameraMarkerContiner}
+          topViewStyle={styles.zeroContainer}
+          bottomViewStyle={styles.zeroContainer}
+        />
+      )}
       <View style={styles.mainAbsoluteContainer}>
         <Image source={IMAGES.PLACE_FOR_QR} />
       </View>
