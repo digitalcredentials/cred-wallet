@@ -1,12 +1,17 @@
 import React, { useCallback } from 'react';
 import { View, Text, Image } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { IMAGES } from '../../assets';
 import { DefaultButton, SettingsHeader } from '../../components';
+import { useCreateBackupCallback } from '../../redux/certificates';
 import { BackupsScreenProps } from './backups.props';
 import { styles } from './backups.styles';
 
 export const BackupsScreen: React.FC<BackupsScreenProps> = () => {
+  const dispatch = useDispatch();
+  const onCreateBackup = useCreateBackupCallback(dispatch);
+
   const onCreateBackupPress = useCallback(() => {}, []);
 
   return (

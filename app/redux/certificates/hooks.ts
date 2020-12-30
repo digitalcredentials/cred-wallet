@@ -64,3 +64,13 @@ export const useSaveCertificateCallback = (dispatch: AppDispatch) =>
       }),
     [],
   );
+
+export const useCreateBackupCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    (key: string) =>
+      dispatch({
+        type: certificatesActionTypes.CREATE_BACKUP,
+        key,
+      }),
+    [],
+  );

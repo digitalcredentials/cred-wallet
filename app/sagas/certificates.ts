@@ -1,13 +1,15 @@
 import { call, put } from 'redux-saga/effects';
+import { ApiResponse } from 'apisauce';
+
 import {
   AddCertificateAction,
   AddCertificateFailureAction,
   AddCertificateSuccessAction,
   certificatesActionCreators,
+  CreateBackupAction,
 } from '../redux/certificates';
 import { apiInstance } from '../services/api';
 import CONFIG from '../config/env';
-import { ApiResponse } from 'apisauce';
 import { Credential } from '../services/api/api.types';
 import { StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
@@ -39,4 +41,13 @@ export function* addCertificate({ data }: AddCertificateAction) {
       ),
     );
   }
+}
+
+export function* createBackup({ key }) {
+  // TODO: write backup selectors
+  // TODO: get backups
+  // TODO: stringify backups
+  // TODO: setup AES encrypt/decrypt
+  // TODO: create file with ecrypted data
+  // const response: ApiResponse<any, any> = yield call(apiInstance.);
 }
