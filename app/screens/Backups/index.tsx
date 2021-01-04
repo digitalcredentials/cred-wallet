@@ -12,7 +12,10 @@ export const BackupsScreen: React.FC<BackupsScreenProps> = () => {
   const dispatch = useDispatch();
   const onCreateBackup = useCreateBackupCallback(dispatch);
 
-  const onCreateBackupPress = useCallback(() => {}, []);
+  const onCreateBackupPress = useCallback(() => {
+    // TODO remove hardcode
+    onCreateBackup('1234');
+  }, [onCreateBackup]);
 
   return (
     <View style={styles.container}>

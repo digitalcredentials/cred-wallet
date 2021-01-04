@@ -84,3 +84,11 @@ export enum FocusStatus {
   Focus,
   Blur,
 }
+
+export interface CredentialsByIssuer {
+  [issuerId: string]: ICredentials;
+}
+
+export enum ShareType {
+  Telegraph = 'ph.telegra.Telegraph.Share',
+}

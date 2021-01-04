@@ -14,6 +14,10 @@ interface CertificatesActionTypes {
   CREATE_BACKUP_SUCCESS: 'CREATE_BACKUP_SUCCESS';
   CREATE_BACKUP_FAILURE: 'CREATE_BACKUP_FAILURE';
 
+  LOAD_BACKUP: 'LOAD_BACKUP';
+  LOAD_BACKUP_SUCCESS: 'LOAD_BACKUP_SUCCESS';
+  LOAD_BACKUP_FAILURE: 'LOAD_BACKUP_FAILURE';
+
   SAVE_CERTIFICATE: 'SAVE_CERTIFICATE';
 }
 
@@ -45,6 +49,21 @@ export interface CreateBackupFailureAction {
   error: string;
 }
 
+export interface LoadBackupAction {
+  type: CertificatesActionTypes['LOAD_BACKUP'];
+  cipher: string;
+  key: string;
+}
+
+export interface LoadBackupSuccessAction {
+  type: CertificatesActionTypes['LOAD_BACKUP_SUCCESS'];
+}
+
+export interface LoadBackupFailureAction {
+  type: CertificatesActionTypes['LOAD_BACKUP_FAILURE'];
+  error: string;
+}
+
 export interface SaveCertificateAction {
   type: CertificatesActionTypes['SAVE_CERTIFICATE'];
   certificate: ICertificate;
@@ -60,6 +79,10 @@ interface CertificatesActionCreators {
   createBackupSuccess(): CreateBackupSuccessAction;
   createBackupFailure(error: string): CreateBackupFailureAction;
 
+  loadBackup(cipher: string, key: string): LoadBackupAction;
+  loadBackupSuccess(): LoadBackupSuccessAction;
+  loadBackupFailure(error: string): LoadBackupFailureAction;
+
   saveCertificate(
     certificate: ICertificate,
     issuer: IIssuer,
@@ -73,6 +96,9 @@ export type CertificatesAction =
   | CreateBackupAction
   | CreateBackupSuccessAction
   | CreateBackupFailureAction
+  | LoadBackupAction
+  | LoadBackupSuccessAction
+  | LoadBackupFailureAction
   | SaveCertificateAction;
 
 const { Types, Creators } = createActions<
@@ -87,6 +113,10 @@ const { Types, Creators } = createActions<
     createBackup: ['key'],
     createBackupSuccess: null,
     createBackupFailure: ['error'],
+
+    loadBackup: ['cipher', 'key'],
+    loadBackupSuccess: null,
+    loadBackupFailure: ['error'],
 
     saveCertificate: ['certificate', 'issuer'],
   },

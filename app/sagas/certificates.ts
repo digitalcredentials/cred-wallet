@@ -1,12 +1,19 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { ApiResponse } from 'apisauce';
+import moment from 'moment';
 
 import {
   AddCertificateAction,
   AddCertificateFailureAction,
   AddCertificateSuccessAction,
   certificatesActionCreators,
+  CertificateSelectors,
   CreateBackupAction,
+  CreateBackupFailureAction,
+  CreateBackupSuccessAction,
+  LoadBackupAction,
+  LoadBackupFailureAction,
+  LoadBackupSuccessAction,
 } from '../redux/certificates';
 import { apiInstance } from '../services/api';
 import CONFIG from '../config/env';
@@ -14,6 +21,8 @@ import { Credential } from '../services/api/api.types';
 import { StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
 import EncryptionManager from '../services/encryption-manager';
+import { CredentialsByIssuer } from '../utils/types';
+import { FileManager } from '../services/file-manager';
 
 export function* addCertificate({ data }: AddCertificateAction) {
   const response: ApiResponse<Credential, Credential> = yield call(
@@ -45,9 +54,54 @@ export function* addCertificate({ data }: AddCertificateAction) {
 }
 
 export function* createBackup({ key }: CreateBackupAction) {
-  // TODO: get certificates from redux
-  // TODO: stringify certificates -> create backup string
-  // EncryptionManager.encryptAES(message, key);
-  // EncryptionManager.decryptAES(cipher, key);
+  try {
+    const certificates: CredentialsByIssuer = yield select(
+      CertificateSelectors.selectCertificates,
+    );
+    const certificatesString: string = JSON.stringify(certificates);
+    const encryptedCertificatesString: string = yield EncryptionManager.encryptAES(
+      certificatesString,
+      key,
+    );
+
+    const filename = `backup-${moment().format()}.dcc`;
+    const filepath = yield call(
+      FileManager.createFile,
+      filename,
+      encryptedCertificatesString,
+    );
+
+    if (!filepath) throw new Error("Backup wasn't created. Please, try again");
+
+    const shareResponse = yield FileManager.shareFile(filepath, filename);
+    console.tron?.log('shareResponse', shareResponse);
+    yield put<CreateBackupSuccessAction>(
+      certificatesActionCreators.createBackupSuccess(),
+    );
+  } catch (error) {
+    yield put<CreateBackupFailureAction>(
+      certificatesActionCreators.createBackupFailure(error),
+    );
+  }
+
   // TODO: create file with ecrypted data
+  // TODO: save backup file in cloud storage
+}
+
+export function* loadBackup({ cipher, key }: LoadBackupAction) {
+  try {
+    const decryptedBackup = yield EncryptionManager.decryptAES(cipher, key);
+
+    const parsedBackup: CredentialsByIssuer = JSON.parse(decryptedBackup);
+
+    yield put<LoadBackupSuccessAction>(
+      certificatesActionCreators.loadBackupSuccess(parsedBackup),
+    );
+  } catch (error) {
+    yield put<LoadBackupFailureAction>(
+      certificatesActionCreators.loadBackupFailure(error),
+    );
+  }
+
+  // TODO save to redux
 }

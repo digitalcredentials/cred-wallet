@@ -1,7 +1,7 @@
 import { createReducer } from 'reduxsauce';
 import _ from 'lodash';
 
-import { ICredentials } from '../../utils/types';
+import { CredentialsByIssuer } from '../../utils/types';
 import {
   CertificatesAction,
   certificatesActionTypes,
@@ -10,9 +10,7 @@ import {
 } from './actions';
 
 export interface CertificatesState {
-  data: {
-    [issuerId: string]: ICredentials;
-  };
+  data: CredentialsByIssuer;
   backups: [];
 }
 
