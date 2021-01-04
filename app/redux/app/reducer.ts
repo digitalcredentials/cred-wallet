@@ -16,6 +16,10 @@ import {
   AddCertificateFailureAction,
   AddCertificateSuccessAction,
   certificatesActionTypes,
+  CreateBackupAction,
+  CreateBackupFailureAction,
+  CreateBackupSuccessAction,
+  LoadBackupAction,
 } from '../certificates';
 
 export interface AppState {
@@ -32,10 +36,14 @@ const INITIAL_STATE: AppState = {
   deeplinkUrl: null,
   loading: {
     isAddCertificate: false,
+    isCreateBackup: false,
+    isLoadBackup: false,
   },
   errors: {
     addCertificate: null,
     wrongPin: null,
+    createBackup: null,
+    loadBackup: null,
   },
 };
 
@@ -116,4 +124,26 @@ export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
   [certificatesActionTypes.ADD_CERTIFICATE_FAILURE]: getLoadingErrorHandler<
     AddCertificateFailureAction
   >(LoadingType.isAddCertificate, ErrorType.addCertificate),
+
+  [certificatesActionTypes.CREATE_BACKUP]: getLoadingHandler<
+    CreateBackupAction
+  >(LoadingType.isCreateBackup, true, ErrorType.createBackup),
+  [certificatesActionTypes.CREATE_BACKUP_SUCCESS]: getLoadingHandler<
+    CreateBackupSuccessAction
+  >(LoadingType.isCreateBackup, false, ErrorType.createBackup),
+  [certificatesActionTypes.CREATE_BACKUP_FAILURE]: getLoadingErrorHandler<
+    CreateBackupFailureAction
+  >(LoadingType.isCreateBackup, ErrorType.createBackup),
+
+  [certificatesActionTypes.LOAD_BACKUP]: getLoadingHandler<LoadBackupAction>(
+    LoadingType.isLoadBackup,
+    true,
+    ErrorType.loadBackup,
+  ),
+  [certificatesActionTypes.LOAD_BACKUP_SUCCESS]: getLoadingHandler<
+    CreateBackupSuccessAction
+  >(LoadingType.isLoadBackup, false, ErrorType.loadBackup),
+  [certificatesActionTypes.LOAD_BACKUP_FAILURE]: getLoadingErrorHandler<
+    CreateBackupFailureAction
+  >(LoadingType.isLoadBackup, ErrorType.loadBackup),
 });

@@ -73,11 +73,15 @@ export interface ICertificateDeeplinkWithDID
 
 export enum LoadingType {
   isAddCertificate = 'isAddCertificate',
+  isCreateBackup = 'isCreateBackup',
+  isLoadBackup = 'isLoadBackup',
 }
 
 export enum ErrorType {
   addCertificate = 'addCertificate',
   wrongPin = 'wrongPin',
+  createBackup = 'createBackup',
+  loadBackup = 'loadBackup',
 }
 
 export enum FocusStatus {
@@ -89,6 +93,13 @@ export interface CredentialsByIssuer {
   [issuerId: string]: ICredentials;
 }
 
-export enum ShareType {
+export enum ShareActivityType {
   Telegraph = 'ph.telegra.Telegraph.Share',
+  GoogleDrive = 'com.google.Drive.ShareExtension',
+}
+
+export interface IBackupInfo {
+  date: string;
+  activityType?: string;
+  action: 'sharedAction';
 }

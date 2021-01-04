@@ -1,5 +1,6 @@
 import { createActions } from 'reduxsauce';
 import {
+  IBackupInfo,
   ICertificate,
   ICertificateDeeplinkWithDID,
   IIssuer,
@@ -42,6 +43,7 @@ export interface CreateBackupAction {
 
 export interface CreateBackupSuccessAction {
   type: CertificatesActionTypes['CREATE_BACKUP_SUCCESS'];
+  backupInfo: IBackupInfo;
 }
 
 export interface CreateBackupFailureAction {
@@ -76,7 +78,7 @@ interface CertificatesActionCreators {
   addCertificateFailure(error: string): AddCertificateFailureAction;
 
   createBackup(key: string): CreateBackupAction;
-  createBackupSuccess(): CreateBackupSuccessAction;
+  createBackupSuccess(backupInfo: IBackupInfo): CreateBackupSuccessAction;
   createBackupFailure(error: string): CreateBackupFailureAction;
 
   loadBackup(cipher: string, key: string): LoadBackupAction;
@@ -111,7 +113,7 @@ const { Types, Creators } = createActions<
     addCertificateFailure: ['error'],
 
     createBackup: ['key'],
-    createBackupSuccess: null,
+    createBackupSuccess: ['backupInfo'],
     createBackupFailure: ['error'],
 
     loadBackup: ['cipher', 'key'],

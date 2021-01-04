@@ -1,5 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import { ApiResponse } from 'apisauce';
+import { ShareAction } from 'react-native';
 import moment from 'moment';
 
 import {
@@ -73,19 +74,25 @@ export function* createBackup({ key }: CreateBackupAction) {
 
     if (!filepath) throw new Error("Backup wasn't created. Please, try again");
 
-    const shareResponse = yield FileManager.shareFile(filepath, filename);
-    console.tron?.log('shareResponse', shareResponse);
-    yield put<CreateBackupSuccessAction>(
-      certificatesActionCreators.createBackupSuccess(),
+    const shareResponse: ShareAction = yield call(
+      FileManager.shareFile,
+      filepath,
+      filename,
     );
+
+    if (shareResponse.action === 'sharedAction') {
+      yield put<CreateBackupSuccessAction>(
+        certificatesActionCreators.createBackupSuccess({
+          ...shareResponse,
+          date: moment().format(),
+        }),
+      );
+    }
   } catch (error) {
     yield put<CreateBackupFailureAction>(
       certificatesActionCreators.createBackupFailure(error),
     );
   }
-
-  // TODO: create file with ecrypted data
-  // TODO: save backup file in cloud storage
 }
 
 export function* loadBackup({ cipher, key }: LoadBackupAction) {

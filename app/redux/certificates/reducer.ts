@@ -1,7 +1,7 @@
 import { createReducer } from 'reduxsauce';
 import _ from 'lodash';
 
-import { CredentialsByIssuer } from '../../utils/types';
+import { CredentialsByIssuer, IBackupInfo } from '../../utils/types';
 import {
   CertificatesAction,
   certificatesActionTypes,
@@ -11,7 +11,7 @@ import {
 
 export interface CertificatesState {
   data: CredentialsByIssuer;
-  backups: [];
+  backups: IBackupInfo[];
 }
 
 const INITIAL_STATE: CertificatesState = {
@@ -47,9 +47,14 @@ const saveCertificate: Handler<SaveCertificateAction> = (
   };
 };
 
-const createBackupSuccess: Handler<CreateBackupSuccessAction> = (state, {}) => {
-  // TODO
-  return state;
+const createBackupSuccess: Handler<CreateBackupSuccessAction> = (
+  state,
+  { backupInfo },
+) => {
+  return {
+    ...state,
+    backups: [...state.backups, { ...backupInfo }],
+  };
 };
 
 export const certificatesReducer = createReducer<

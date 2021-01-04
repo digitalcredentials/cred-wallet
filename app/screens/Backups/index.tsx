@@ -1,16 +1,19 @@
 import React, { useCallback } from 'react';
 import { View, Text, Image } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 import { IMAGES } from '../../assets';
 import { DefaultButton, SettingsHeader } from '../../components';
-import { useCreateBackupCallback } from '../../redux/certificates';
+import { useBackups, useCreateBackupCallback } from '../../redux/certificates';
 import { BackupsScreenProps } from './backups.props';
 import { styles } from './backups.styles';
 
 export const BackupsScreen: React.FC<BackupsScreenProps> = () => {
   const dispatch = useDispatch();
   const onCreateBackup = useCreateBackupCallback(dispatch);
+  const backups = useBackups();
 
   const onCreateBackupPress = useCallback(() => {
     // TODO remove hardcode
@@ -30,7 +33,12 @@ export const BackupsScreen: React.FC<BackupsScreenProps> = () => {
 
         <Text style={styles.sectionTitle}>My backups</Text>
 
-        <View style={styles.flexContainer} />
+        <FlatList
+          data={backups}
+          renderItem={({ item }) => (
+            <Text>{moment(item.date).format('YYYY/MM/DD HH:mm')}</Text>
+          )}
+        />
 
         <DefaultButton title="Create Backup" onPress={onCreateBackupPress} />
       </View>

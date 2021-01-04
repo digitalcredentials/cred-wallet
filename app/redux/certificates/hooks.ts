@@ -46,6 +46,9 @@ export const useCertificateWithIssuer = (
     return { issuer: creds.issuer, certificate };
   });
 
+export const useBackups = () =>
+  useSelector((state: RootState) => state.certificates.backups);
+
 // Callback hooks
 export const useAddCertificateCallback = (dispatch: AppDispatch) =>
   useCallback(
