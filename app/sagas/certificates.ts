@@ -13,6 +13,7 @@ import CONFIG from '../config/env';
 import { Credential } from '../services/api/api.types';
 import { StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
+import EncryptionManager from '../services/encryption-manager';
 
 export function* addCertificate({ data }: AddCertificateAction) {
   const response: ApiResponse<Credential, Credential> = yield call(
@@ -43,11 +44,10 @@ export function* addCertificate({ data }: AddCertificateAction) {
   }
 }
 
-export function* createBackup({ key }) {
-  // TODO: write backup selectors
-  // TODO: get backups
-  // TODO: stringify backups
-  // TODO: setup AES encrypt/decrypt
+export function* createBackup({ key }: CreateBackupAction) {
+  // TODO: get certificates from redux
+  // TODO: stringify certificates -> create backup string
+  // EncryptionManager.encryptAES(message, key);
+  // EncryptionManager.decryptAES(cipher, key);
   // TODO: create file with ecrypted data
-  // const response: ApiResponse<any, any> = yield call(apiInstance.);
 }
