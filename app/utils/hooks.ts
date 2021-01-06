@@ -8,3 +8,12 @@ export const useKeyExtractor = <TItem extends IWithID>(prefix: string) =>
     (item: TItem, index: number) => `${prefix}-${item.id}-${index}`,
     [],
   );
+
+export const useSpecificKeyExtractor = <TItem>(
+  prefix: string,
+  field: keyof TItem,
+) =>
+  useCallback(
+    (item: TItem, index: number) => `${prefix}-${item[field]}-${index}`,
+    [],
+  );

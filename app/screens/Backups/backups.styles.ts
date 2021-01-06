@@ -9,7 +9,10 @@ interface BackupsScreenStyles {
   cloudImageContainer: ViewStyle;
   cloudImage: ImageStyle;
   flexContainer: ViewStyle;
-  backupItem: TextStyle;
+  backupsListContentContainer: ViewStyle;
+  backupItemContainer: ViewStyle;
+  backupItemText: TextStyle;
+  backupItemImage: ImageStyle;
 }
 
 export const styles = StyleSheet.create<BackupsScreenStyles>({
@@ -36,13 +39,27 @@ export const styles = StyleSheet.create<BackupsScreenStyles>({
   flexContainer: {
     flex: 1,
   },
-  backupItem: {
-    fontSize: 13,
-    lineHeight: 20,
+  backupsListContentContainer: {
+    paddingBottom: 16,
+  },
+  backupItemContainer: {
     paddingVertical: 5,
     marginBottom: 10,
-    color: COLORS.CRUSTA,
     borderBottomWidth: 1,
     borderBottomColor: `${COLORS.LAVENDER_PURPLE}99`,
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+  },
+  backupItemText: {
+    fontFamily: FONTS.POPPINS_REGULAR,
+    fontSize: 13,
+    lineHeight: 20,
+    color: COLORS.CRUSTA,
+  },
+  backupItemImage: {
+    height: 20,
+    width: 22,
+    marginRight: 8,
   },
 });

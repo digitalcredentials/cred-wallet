@@ -4,7 +4,14 @@ import * as ed25519 from '@transmute/did-key-ed25519';
 import { generateSecureRandom } from 'react-native-securerandom';
 
 import { Credential } from '../services/api/api.types';
-import { ICertificate, ICertificateDeeplink, IIssuer } from './types';
+import {
+  ICertificate,
+  ICertificateDeeplink,
+  IIssuer,
+  ShareActivityType,
+} from './types';
+import { ImageSource } from 'react-native-vector-icons/Icon';
+import { IMAGES } from '../assets';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -57,4 +64,15 @@ export function getCredentialCertificate(credential: Credential): ICertificate {
 
 export function getCredentialIssuer(credential: Credential): IIssuer {
   return credential.issuer;
+}
+
+export function getSocialShareImageSource(activityType: string): ImageSource {
+  switch (activityType) {
+    case ShareActivityType.GoogleDrive:
+      return IMAGES.GOOGLE_DRIVE;
+    case ShareActivityType.Skype:
+      return IMAGES.SKYPE;
+    default:
+      return null;
+  }
 }

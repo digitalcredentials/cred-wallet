@@ -21,4 +21,8 @@ export const IMAGES = {
   SETTINGS_ACTIVE: require('./images/settings-active.png'),
   SETTINGS_INACTIVE: require('./images/settings-inactive.png'),
   PLUS_ICON: require('./images/plus.png'),
+
+  // Socials
+  GOOGLE_DRIVE: require('./images/google-drive.png'),
+  SKYPE: require('./images/skype.png'),
 };
