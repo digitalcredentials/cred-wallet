@@ -1,4 +1,4 @@
-import { Share } from 'react-native';
+import { Share, ShareAction } from 'react-native';
 import FS from 'react-native-fs';
 
 export class FileManager {
@@ -8,12 +8,10 @@ export class FileManager {
     return FS.writeFile(filepath, message, 'utf8').then(() => filepath);
   }
 
-  static async shareFile(url: string, filename: string) {
-    const message: string = `Save ${filename} to:`;
-    return await Share.share({
-      url,
-      title: message,
-      message,
+  static async shareFile(url: string, filename: string): Promise<ShareAction> {
+    return Share.share({
+      url: `file://${url}`,
+      title: filename,
     });
   }
 }

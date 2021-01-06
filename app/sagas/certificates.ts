@@ -2,6 +2,7 @@ import { call, put, select } from 'redux-saga/effects';
 import { ApiResponse } from 'apisauce';
 import { ShareAction } from 'react-native';
 import moment from 'moment';
+import FS from 'react-native-fs';
 
 import {
   AddCertificateAction,
@@ -71,8 +72,6 @@ export function* createBackup({ key }: CreateBackupAction) {
       filename,
       encryptedCertificatesString,
     );
-
-    if (!filepath) throw new Error("Backup wasn't created. Please, try again");
 
     const shareResponse: ShareAction = yield call(
       FileManager.shareFile,
