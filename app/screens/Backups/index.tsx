@@ -36,7 +36,9 @@ export const BackupsScreen: React.FC<BackupsScreenProps> = () => {
         <FlatList
           data={backups}
           renderItem={({ item }) => (
-            <Text>{moment(item.date).format('YYYY/MM/DD HH:mm')}</Text>
+            <Text style={styles.backupItem}>
+              {moment(item.date).format('YYYY/MM/DD HH:mm')}
+            </Text>
           )}
         />
 

@@ -9,6 +9,7 @@ interface BackupsScreenStyles {
   cloudImageContainer: ViewStyle;
   cloudImage: ImageStyle;
   flexContainer: ViewStyle;
+  backupItem: TextStyle;
 }
 
 export const styles = StyleSheet.create<BackupsScreenStyles>({
@@ -34,5 +35,14 @@ export const styles = StyleSheet.create<BackupsScreenStyles>({
   },
   flexContainer: {
     flex: 1,
+  },
+  backupItem: {
+    fontSize: 13,
+    lineHeight: 20,
+    paddingVertical: 5,
+    marginBottom: 10,
+    color: COLORS.CRUSTA,
+    borderBottomWidth: 1,
+    borderBottomColor: `${COLORS.LAVENDER_PURPLE}99`,
   },
 });
