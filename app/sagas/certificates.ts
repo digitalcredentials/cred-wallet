@@ -79,6 +79,8 @@ export function* createBackup({ key }: CreateBackupAction) {
       filename,
     );
 
+    console.tron?.log('shareREsponse', shareResponse);
+
     if (shareResponse.action === 'sharedAction') {
       yield put<CreateBackupSuccessAction>(
         certificatesActionCreators.createBackupSuccess({

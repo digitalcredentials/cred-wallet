@@ -96,7 +96,7 @@ export interface CredentialsByIssuer {
 export enum ShareActivityType {
   Telegraph = 'ph.telegra.Telegraph.Share',
   GoogleDrive = 'com.google.Drive.ShareExtension',
-  Skype = 'TODO',
+  Skype = 'com.skype.skype.sharingextension',
 }
 
 export interface IBackupInfo {
