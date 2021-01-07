@@ -14,18 +14,16 @@ import { useKeyExtractor, useSpecificKeyExtractor } from '../../utils/hooks';
 import { IBackupInfo } from '../../utils/types';
 import { getSocialShareImageSource } from '../../utils';
 
-export const BackupsScreen: React.FC<BackupsScreenProps> = () => {
+export const BackupsScreen: React.FC<BackupsScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
-  const onCreateBackup = useCreateBackupCallback(dispatch);
   const backups = useBackups();
   const backupsByDate = useMemo(() => _.orderBy(backups, 'date', 'desc'), [
     backups,
   ]);
 
   const onCreateBackupPress = useCallback(() => {
-    // TODO remove hardcode
-    onCreateBackup('1234');
-  }, [onCreateBackup]);
+    navigation.navigate('CreateBackup');
+  }, [navigation]);
 
   const backupListKeyExtractor = useSpecificKeyExtractor<IBackupInfo>(
     'backup-item',

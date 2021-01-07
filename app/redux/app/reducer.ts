@@ -125,12 +125,6 @@ export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
     AddCertificateFailureAction
   >(LoadingType.isAddCertificate, ErrorType.addCertificate),
 
-  [certificatesActionTypes.CREATE_BACKUP]: getLoadingHandler<
-    CreateBackupAction
-  >(LoadingType.isCreateBackup, true, ErrorType.createBackup),
-  [certificatesActionTypes.CREATE_BACKUP_SUCCESS]: getLoadingHandler<
-    CreateBackupSuccessAction
-  >(LoadingType.isCreateBackup, false, ErrorType.createBackup),
   [certificatesActionTypes.CREATE_BACKUP_FAILURE]: getLoadingErrorHandler<
     CreateBackupFailureAction
   >(LoadingType.isCreateBackup, ErrorType.createBackup),
