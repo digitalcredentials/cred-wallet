@@ -66,7 +66,7 @@ export function* createBackup({ key }: CreateBackupAction) {
       key,
     );
 
-    const filename = `backup-${moment().format()}.dcc`;
+    const filename = `backup_${moment().format('YYYY_MM_DD__HH_mm')}.dcc`;
     const filepath = yield call(
       FileManager.createFile,
       filename,
@@ -78,8 +78,6 @@ export function* createBackup({ key }: CreateBackupAction) {
       filepath,
       filename,
     );
-
-    console.tron?.log('shareREsponse', shareResponse);
 
     if (shareResponse.action === 'sharedAction') {
       yield put<CreateBackupSuccessAction>(
