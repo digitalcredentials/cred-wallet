@@ -77,3 +77,14 @@ export const useCreateBackupCallback = (dispatch: AppDispatch) =>
       }),
     [],
   );
+
+export const useLoadBackupCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    (backupPath: string, key: string) =>
+      dispatch({
+        type: certificatesActionTypes.LOAD_BACKUP,
+        backupPath,
+        key,
+      }),
+    [],
+  );

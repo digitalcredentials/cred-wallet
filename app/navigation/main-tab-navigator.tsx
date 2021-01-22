@@ -12,7 +12,7 @@ export type MainTabParams = {
 const Tab = createBottomTabNavigator<MainTabParams>();
 
 export const MainTabNavigator = () => (
-  <Tab.Navigator>
+  <Tab.Navigator lazy={false}>
     <Tab.Screen
       name="Home"
       component={HomeStackNavigator}

@@ -6,6 +6,7 @@ import {
   CertificatesAction,
   certificatesActionTypes,
   CreateBackupSuccessAction,
+  LoadBackupSuccessAction,
   SaveCertificateAction,
 } from './actions';
 
@@ -57,10 +58,21 @@ const createBackupSuccess: Handler<CreateBackupSuccessAction> = (
   };
 };
 
+const loadBackupSuccess: Handler<LoadBackupSuccessAction> = (
+  state,
+  { credsByIssuer },
+) => {
+  return {
+    ...state,
+    data: credsByIssuer,
+  };
+};
+
 export const certificatesReducer = createReducer<
   CertificatesState,
   CertificatesAction
 >(INITIAL_STATE, {
   [certificatesActionTypes.SAVE_CERTIFICATE]: saveCertificate,
   [certificatesActionTypes.CREATE_BACKUP_SUCCESS]: createBackupSuccess,
+  [certificatesActionTypes.LOAD_BACKUP_SUCCESS]: loadBackupSuccess,
 });

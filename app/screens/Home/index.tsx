@@ -19,7 +19,11 @@ import { COLORS } from '../../utils/colors';
 import { ICredentials } from '../../utils/types';
 import { useAddCertificateCallback } from '../../redux/certificates';
 import { useMount } from '../../utils/hooks';
-import { generateDid, parseCertificateDeeplink } from '../../utils';
+import {
+  generateDid,
+  isBackupUrl,
+  parseCertificateDeeplink,
+} from '../../utils';
 import {
   useDeeplinkUrl,
   useIsVerificationProcess,
@@ -46,7 +50,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   useMount(() => {
     // Handle late deeplink urls
     Linking.addEventListener('url', (data) => {
-      onSetDeeplinkUrl(data.url);
+      const isBackupOpened = isBackupUrl(data.url);
+      if (isBackupOpened) {
+        navigation.navigate('CreateBackup', {
+          isLoadBackup: true,
+          backupPath: data.url,
+        });
+      } else {
+        onSetDeeplinkUrl(data.url);
+      }
     });
     return () => Linking.removeAllListeners('url');
   });

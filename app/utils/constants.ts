@@ -8,3 +8,5 @@ export const EXTENDED_HIT_SLOP: Insets = {
   left: 10,
   right: 10,
 };
+
+export const BACKUP_EXTENSION = 'dcc';

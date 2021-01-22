@@ -33,6 +33,41 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Digital Credential Wallet Backup</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>edu.mit.wallet.dcc</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string>Digital Credential Wallet Backup Format</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+					<string>public.text</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>edu.mit.wallet.dcc</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>dcc</string>
+				<key>public.mime-type</key>
+				<string>text/xml</string>
+			</dict>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>

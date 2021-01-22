@@ -19,4 +19,8 @@ export class FileManager {
       title: filename,
     });
   }
+
+  static async readFile(filepath: string): Promise<string> {
+    return FS.readFile(filepath);
+  }
 }

@@ -12,6 +12,7 @@ import {
 } from './types';
 import { ImageSource } from 'react-native-vector-icons/Icon';
 import { IMAGES } from '../assets';
+import { BACKUP_EXTENSION } from './constants';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -75,4 +76,10 @@ export function getSocialShareImageSource(activityType: string): ImageSource {
     default:
       return null;
   }
+}
+
+export function isBackupUrl(url: string) {
+  const splittedUrl = url.split('.');
+  const fileExtension = splittedUrl[splittedUrl.length - 1];
+  return fileExtension === BACKUP_EXTENSION;
 }

@@ -13,7 +13,7 @@ import {
 export type SettingsStackParams = {
   Settings: undefined;
   Backups: undefined;
-  CreateBackup: undefined;
+  CreateBackup: { isLoadBackup: boolean; backupPath?: string };
 };
 
 const Stack = createNativeStackNavigator<SettingsStackParams>();

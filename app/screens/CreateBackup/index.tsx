@@ -6,6 +6,7 @@ import moment from 'moment';
 import { IMAGES } from '../../assets';
 import {
   useCreateBackupCallback,
+  useLoadBackupCallback,
   useSaveCertificateCallback,
 } from '../../redux/certificates';
 import { CreateBackupScreenProps } from './create-backup.props';
@@ -18,12 +19,21 @@ export const CreateBackupScreen: React.FC<CreateBackupScreenProps> = ({
 }) => {
   const dispatch = useDispatch();
   const onCreateBackup = useCreateBackupCallback(dispatch);
+  const onLoadBackup = useLoadBackupCallback(dispatch);
+
+  const params = useMemo(() => route.params, []);
 
   const [key, setKey] = useState<string>('');
 
-  const onCreatePress = useCallback(() => {
-    onCreateBackup(key);
-  }, [key]);
+  const onSubmitPress = useCallback(() => {
+    if (params.isLoadBackup) {
+      onLoadBackup(params.backupPath!, key);
+    } else {
+      onCreateBackup(key);
+    }
+
+    navigation.goBack();
+  }, [key, navigation]);
 
   const onCancelPress = useCallback(() => {
     navigation.goBack();
@@ -52,10 +62,12 @@ export const CreateBackupScreen: React.FC<CreateBackupScreenProps> = ({
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.okButtonContainer}
-            onPress={onCreatePress}
+            onPress={onSubmitPress}
             disabled={!key.length}
           >
-            <Text style={styles.okButtonText}>CREATE</Text>
+            <Text style={styles.okButtonText}>
+              {params.isLoadBackup ? 'LOAD' : 'CREATE'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -1,5 +1,6 @@
 import { createActions } from 'reduxsauce';
 import {
+  CredentialsByIssuer,
   IBackupInfo,
   ICertificate,
   ICertificateDeeplinkWithDID,
@@ -53,12 +54,13 @@ export interface CreateBackupFailureAction {
 
 export interface LoadBackupAction {
   type: CertificatesActionTypes['LOAD_BACKUP'];
-  cipher: string;
+  backupPath: string;
   key: string;
 }
 
 export interface LoadBackupSuccessAction {
   type: CertificatesActionTypes['LOAD_BACKUP_SUCCESS'];
+  credsByIssuer: CredentialsByIssuer;
 }
 
 export interface LoadBackupFailureAction {
@@ -81,8 +83,10 @@ interface CertificatesActionCreators {
   createBackupSuccess(backupInfo: IBackupInfo): CreateBackupSuccessAction;
   createBackupFailure(error: string): CreateBackupFailureAction;
 
-  loadBackup(cipher: string, key: string): LoadBackupAction;
-  loadBackupSuccess(): LoadBackupSuccessAction;
+  loadBackup(backupPath: string, key: string): LoadBackupAction;
+  loadBackupSuccess(
+    credsByIssuer: CredentialsByIssuer,
+  ): LoadBackupSuccessAction;
   loadBackupFailure(error: string): LoadBackupFailureAction;
 
   saveCertificate(
@@ -116,8 +120,8 @@ const { Types, Creators } = createActions<
     createBackupSuccess: ['backupInfo'],
     createBackupFailure: ['error'],
 
-    loadBackup: ['cipher', 'key'],
-    loadBackupSuccess: null,
+    loadBackup: ['backupPath', 'key'],
+    loadBackupSuccess: ['credsByIssuer'],
     loadBackupFailure: ['error'],
 
     saveCertificate: ['certificate', 'issuer'],

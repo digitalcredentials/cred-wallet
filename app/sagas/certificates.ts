@@ -94,8 +94,10 @@ export function* createBackup({ key }: CreateBackupAction) {
   }
 }
 
-export function* loadBackup({ cipher, key }: LoadBackupAction) {
+export function* loadBackup({ backupPath, key }: LoadBackupAction) {
   try {
+    const cipher = yield call(FileManager.readFile, backupPath);
+
     const decryptedBackup = yield EncryptionManager.decryptAES(cipher, key);
 
     const parsedBackup: CredentialsByIssuer = JSON.parse(decryptedBackup);

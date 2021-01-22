@@ -4,11 +4,12 @@ import {
   AddCertificateAction,
   certificatesActionTypes,
   CreateBackupAction,
+  LoadBackupAction,
 } from '../redux/certificates';
 import { searchActionTypes, SearchCredentialAction } from '../redux/search';
 
 import { getUser } from './user';
-import { addCertificate, createBackup } from './certificates';
+import { addCertificate, createBackup, loadBackup } from './certificates';
 import { appStateListenerSaga } from './event-channel';
 import { searchCertificate } from './search';
 
@@ -28,6 +29,10 @@ export default function* rootSaga() {
     takeLatest<CreateBackupAction>(
       certificatesActionTypes.CREATE_BACKUP,
       createBackup,
+    ),
+    takeLatest<LoadBackupAction>(
+      certificatesActionTypes.LOAD_BACKUP,
+      loadBackup,
     ),
 
     // Search
