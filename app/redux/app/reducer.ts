@@ -5,6 +5,8 @@ import {
   AppAction,
   appActionTypes,
   ResetErrorsAction,
+  ResetNavRouteAction,
+  SaveNavRouteAction,
   SetDeeplinkUrlAction,
   SetErrorAction,
   SetFirstVerificationAction,
@@ -28,6 +30,10 @@ export interface AppState {
   deeplinkUrl: string | null;
   loading: Record<LoadingType, boolean>;
   errors: Record<ErrorType, string | null>;
+  navRoute: {
+    name: string;
+    params: any;
+  } | null;
 }
 
 const INITIAL_STATE: AppState = {
@@ -45,6 +51,7 @@ const INITIAL_STATE: AppState = {
     createBackup: null,
     loadBackup: null,
   },
+  navRoute: null,
 };
 
 type Handler<A> = (state: AppState, action: A) => AppState;
@@ -71,6 +78,22 @@ const setDeeplinkUrl: Handler<SetDeeplinkUrlAction> = (
 ) => ({
   ...state,
   deeplinkUrl,
+});
+
+const saveNavRoute: Handler<SaveNavRouteAction> = (
+  state,
+  { routeName, routeParams },
+) => ({
+  ...state,
+  navRoute: {
+    name: routeName,
+    params: routeParams,
+  },
+});
+
+const resetNavRoute: Handler<ResetNavRouteAction> = (state) => ({
+  ...state,
+  navRoute: null,
 });
 
 const setError: Handler<SetErrorAction> = (state, { errorType, error }) => ({
@@ -111,6 +134,9 @@ export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
   [appActionTypes.SET_VERIFICATION_PROCESS]: setVerificationProcess,
   [appActionTypes.SET_FIRST_VERIFICATION]: setFirstVerification,
   [appActionTypes.SET_DEEPLINK_URL]: setDeeplinkUrl,
+
+  [appActionTypes.SAVE_NAV_ROUTE]: saveNavRoute,
+  [appActionTypes.RESET_NAV_ROUTE]: resetNavRoute,
 
   [appActionTypes.SET_ERROR]: setError,
   [appActionTypes.RESET_ERRORS]: resetErrors,

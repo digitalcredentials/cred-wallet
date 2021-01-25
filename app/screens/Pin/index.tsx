@@ -11,14 +11,19 @@ import { isAndroid, isIOS } from '../../utils';
 import { useMount } from '../../utils/hooks';
 import {
   useIsFirstVerification,
+  useResetNavRouteCallback,
+  useSavedNavRoute,
   useSetDeeplinkUrlCallback,
   useSetFirstVerificationCallback,
   useSetVerificationProcessCallback,
 } from '../../redux/app';
 
 export const PinScreen: React.FC<PinScreenProps> = ({ navigation, route }) => {
-  const dispatch = useDispatch();
   const isFirstVerification = useIsFirstVerification();
+  const savedRoute = useSavedNavRoute();
+
+  const dispatch = useDispatch();
+  const onResetSavedRoute = useResetNavRouteCallback(dispatch);
   const onSetFirstVerification = useSetFirstVerificationCallback(dispatch);
   const onSetVerificationProcess = useSetVerificationProcessCallback(dispatch);
   const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
@@ -48,10 +53,14 @@ export const PinScreen: React.FC<PinScreenProps> = ({ navigation, route }) => {
     const isPushedParam = route.params?.isPushed;
     if (isPushedParam) {
       navigation.goBack();
+      if (savedRoute) {
+        navigation.navigate(savedRoute?.name, savedRoute?.params);
+        onResetSavedRoute();
+      }
     } else {
       navigation.replace('MainTabs');
     }
-  }, [navigation, route.params]);
+  }, [navigation, route.params, onResetSavedRoute]);
 
   const mainPageContent = useMemo(
     () => (

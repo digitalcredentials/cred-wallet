@@ -25,6 +25,9 @@ export const useIsLoading = () =>
 export const useErrors = () =>
   useSelector((state: RootState) => state.app.errors);
 
+export const useSavedNavRoute = () =>
+  useSelector((state: RootState) => state.app.navRoute);
+
 // Callback hooks
 export const useSetVerificationProcessCallback = (dispatch: AppDispatch) =>
   useCallback(
@@ -72,6 +75,26 @@ export const useResetErrorsCallback = (dispatch: AppDispatch) =>
     () =>
       dispatch({
         type: appActionTypes.RESET_ERRORS,
+      }),
+    [],
+  );
+
+export const useSaveNavRoute = (dispatch: AppDispatch) =>
+  useCallback(
+    (routeName: string, routeParams: any) =>
+      dispatch({
+        type: appActionTypes.SAVE_NAV_ROUTE,
+        routeName,
+        routeParams,
+      }),
+    [],
+  );
+
+export const useResetNavRouteCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    () =>
+      dispatch({
+        type: appActionTypes.RESET_NAV_ROUTE,
       }),
     [],
   );
