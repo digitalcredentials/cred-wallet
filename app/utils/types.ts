@@ -2,6 +2,7 @@ import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { MainTabParams } from '../navigation/main-tab-navigator';
 
 export type VerifyPanelStatus =
+  | 'check-first-launch'
   | 'check-biometric-verify'
   | 'check-pin-keychain'
   | 'pin-create'

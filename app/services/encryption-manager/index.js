@@ -7,7 +7,6 @@ export default class EncryptionManager {
 
   static decryptAES(cipher, key) {
     const bytes = AES.decrypt(cipher, key);
-    const result = bytes.toString(CryptoJS.enc.Utf8);
-    return result;
+    return bytes.toString(CryptoJS.enc.Utf8);
   }
 }

@@ -29,6 +29,7 @@ export const PIN_LENGTH = 4;
 
 // TODO: refactor to enum
 type VerifyPanelStatusKeys =
+  | 'CHECK_FIRST_LAUNCH'
   | 'CHECK_BIOMETRIC_VERIFY'
   | 'CHECK_PIN_KEYCHAIN'
   | 'PIN_CREATE'
@@ -39,6 +40,7 @@ type VerifyPanelStatusKeys =
   | 'BIOMETRIC_VERIFY'
   | 'VERIFIED';
 export const PANEL_STATUS: Record<VerifyPanelStatusKeys, VerifyPanelStatus> = {
+  CHECK_FIRST_LAUNCH: 'check-first-launch',
   CHECK_BIOMETRIC_VERIFY: 'check-biometric-verify',
   CHECK_PIN_KEYCHAIN: 'check-pin-keychain',
   PIN_CREATE: 'pin-create',

@@ -17,13 +17,15 @@ import reactotron from '../services/reactotron';
 import rootSaga from '../sagas';
 
 // Reducers
+import { appReducer } from './app';
+import { cacheReducer } from './cache';
 import { userReducer } from './user';
 import { certificatesReducer } from './certificates';
 import { searchReducer } from './search';
-import { appReducer } from './app';
 
 export const rootReducer = combineReducers({
   app: appReducer,
+  cache: cacheReducer,
   user: userReducer,
   certificates: certificatesReducer,
   search: searchReducer,
@@ -49,6 +51,7 @@ if (reactotron) {
   enhancers.push(reactotron?.createEnhancer!());
 }
 
+// NOTE: Uncomment next line when you need to purge cached state
 // purgeStoredState(persistConfig);
 
 export const store = createStore(persistedReducer, compose(...enhancers));

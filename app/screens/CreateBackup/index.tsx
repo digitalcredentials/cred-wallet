@@ -31,9 +31,7 @@ export const CreateBackupScreen: React.FC<CreateBackupScreenProps> = ({
     } else {
       onCreateBackup(key);
     }
-
-    navigation.goBack();
-  }, [key, navigation]);
+  }, [key]);
 
   const onCancelPress = useCallback(() => {
     navigation.goBack();

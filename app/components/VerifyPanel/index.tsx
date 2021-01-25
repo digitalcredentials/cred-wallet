@@ -19,6 +19,7 @@ import { Keystore } from '../../services/keychain';
 import { IMAGES } from '../../assets';
 import { useDispatch } from 'react-redux';
 import { useSetErrorCallback } from '../../redux/app';
+import { useIsFirstLaunch, useSetFirstLaunchCallback } from '../../redux/cache';
 
 // Keystore.resetPin();
 
@@ -113,13 +114,15 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
   onVerifySuccess,
 }) => {
   /* ------ State ------ */
-
   const dispatch = useDispatch();
   const onSetError = useSetErrorCallback(dispatch);
+  const onSetFirstLaunch = useSetFirstLaunchCallback(dispatch);
+
+  const isFirstLaunch = useIsFirstLaunch();
 
   const [biometricType, setBiometricType] = useState<string | null>(null);
   const [panelStatus, setPanelStatus] = useState<VerifyPanelStatus>(
-    PANEL_STATUS.CHECK_PIN_KEYCHAIN,
+    PANEL_STATUS.CHECK_FIRST_LAUNCH,
   );
   const [keychainPin, setKeychainPin] = useState<string | null>(null);
   const [enteredPin, setEnteredPin] = useState<string>('');
@@ -129,6 +132,18 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
   );
 
   /* ----- Flow parts ------ */
+  const checkFirstLaunch = useCallback(() => {
+    const handleFirstLaunch = async () => {
+      if (isFirstLaunch) {
+        onSetFirstLaunch(false);
+        return Keystore.resetPin();
+      }
+    };
+
+    handleFirstLaunch().then(() => {
+      setPanelStatus(PANEL_STATUS.CHECK_PIN_KEYCHAIN);
+    });
+  }, []);
 
   const checkBiometricVerify = useCallback(() => {
     TouchID.isSupported()
@@ -217,6 +232,9 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
   useEffect(() => {
     switch (panelStatus) {
       default:
+      case PANEL_STATUS.CHECK_FIRST_LAUNCH:
+        checkFirstLaunch();
+        break;
       case PANEL_STATUS.CHECK_PIN_KEYCHAIN:
         checkPinKeychain();
         break;

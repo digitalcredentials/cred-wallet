@@ -30,4 +30,10 @@ export class StaticNavigator {
       return navigationRef.current.getCurrentRoute();
     }
   }
+
+  static goBack() {
+    if (navigationRef?.current) {
+      navigationRef.current.goBack();
+    }
+  }
 }

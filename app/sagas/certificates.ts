@@ -20,7 +20,7 @@ import {
 import { apiInstance } from '../services/api';
 import CONFIG from '../config/env';
 import { Credential } from '../services/api/api.types';
-import { StaticNavigator } from '../services/navigator';
+import { navigationRef, StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
 import EncryptionManager from '../services/encryption-manager';
 import { CredentialsByIssuer } from '../utils/types';
@@ -92,6 +92,8 @@ export function* createBackup({ key }: CreateBackupAction) {
       certificatesActionCreators.createBackupFailure(error),
     );
   }
+
+  StaticNavigator.goBack();
 }
 
 export function* loadBackup({ backupPath, key }: LoadBackupAction) {
@@ -107,9 +109,11 @@ export function* loadBackup({ backupPath, key }: LoadBackupAction) {
     );
   } catch (error) {
     yield put<LoadBackupFailureAction>(
-      certificatesActionCreators.loadBackupFailure(error),
+      certificatesActionCreators.loadBackupFailure(
+        'Invalid key! Please, try again.',
+      ),
     );
   }
 
-  // TODO save to redux
+  StaticNavigator.goBack();
 }
