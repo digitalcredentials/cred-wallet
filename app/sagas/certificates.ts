@@ -20,7 +20,7 @@ import {
 import { apiInstance } from '../services/api';
 import CONFIG from '../config/env';
 import { Credential } from '../services/api/api.types';
-import { navigationRef, StaticNavigator } from '../services/navigator';
+import { StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
 import EncryptionManager from '../services/encryption-manager';
 import { CredentialsByIssuer } from '../utils/types';
