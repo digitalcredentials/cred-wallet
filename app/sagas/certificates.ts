@@ -27,29 +27,31 @@ import { CredentialsByIssuer } from '../utils/types';
 import { FileManager } from '../services/file-manager';
 
 export function* addCertificate({ data }: AddCertificateAction) {
-  const response: ApiResponse<Credential, Credential> = yield call(
-    apiInstance.addCertificate,
-    data.requestUrl.replace(CONFIG.API_URL, ''),
-    {
-      holder: data.did,
-      ...data,
-    },
-  );
-
-  if (response.ok) {
-    const certificate = yield call(getCredentialCertificate, response.data!);
-    const issuer = yield call(getCredentialIssuer, response.data!);
-    yield put<AddCertificateSuccessAction>(
-      certificatesActionCreators.addCertificateSuccess(),
+  try {
+    const response: ApiResponse<Credential, Credential> = yield call(
+      apiInstance.addCertificate,
+      data.requestUrl.replace(CONFIG.API_URL, ''),
+      {
+        holder: data.did,
+        ...data,
+      },
     );
-    yield call(StaticNavigator.navigateTo, 'AddCertificate', {
-      certificate,
-      issuer,
-    });
-  } else {
+
+    if (response.ok) {
+      const certificate = yield call(getCredentialCertificate, response.data!);
+      const issuer = yield call(getCredentialIssuer, response.data!);
+      yield put<AddCertificateSuccessAction>(
+        certificatesActionCreators.addCertificateSuccess(),
+      );
+      yield call(StaticNavigator.navigateTo, 'AddCertificate', {
+        certificate,
+        issuer,
+      });
+    }
+  } catch (err) {
     yield put<AddCertificateFailureAction>(
       certificatesActionCreators.addCertificateFailure(
-        'Some problems with QRcode/deeplink. Try again.',
+        'Some problems with File/QRcode/deeplink. Try again.',
       ),
     );
   }
