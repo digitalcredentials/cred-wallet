@@ -1,14 +1,14 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put, select, all, takeLatest } from 'redux-saga/effects';
 import { ApiResponse } from 'apisauce';
 import { ShareAction } from 'react-native';
 import moment from 'moment';
-import FS from 'react-native-fs';
 
 import {
   AddCertificateAction,
   AddCertificateFailureAction,
   AddCertificateSuccessAction,
   certificatesActionCreators,
+  certificatesActionTypes,
   CertificateSelectors,
   CreateBackupAction,
   CreateBackupFailureAction,
@@ -26,7 +26,7 @@ import EncryptionManager from '../services/encryption-manager';
 import { CredentialsByIssuer } from '../utils/types';
 import { FileManager } from '../services/file-manager';
 
-export function* addCertificate({ data }: AddCertificateAction) {
+function* addCertificate({ data }: AddCertificateAction) {
   try {
     const response: ApiResponse<Credential, Credential> = yield call(
       apiInstance.addCertificate,
@@ -57,7 +57,7 @@ export function* addCertificate({ data }: AddCertificateAction) {
   }
 }
 
-export function* createBackup({ key }: CreateBackupAction) {
+function* createBackup({ key }: CreateBackupAction) {
   try {
     const certificates: CredentialsByIssuer = yield select(
       CertificateSelectors.selectCertificates,
@@ -98,7 +98,7 @@ export function* createBackup({ key }: CreateBackupAction) {
   StaticNavigator.goBack();
 }
 
-export function* loadBackup({ backupPath, key }: LoadBackupAction) {
+function* loadBackup({ backupPath, key }: LoadBackupAction) {
   try {
     const cipher = yield call(FileManager.readFile, backupPath);
 
@@ -118,4 +118,21 @@ export function* loadBackup({ backupPath, key }: LoadBackupAction) {
   }
 
   StaticNavigator.goBack();
+}
+
+export function* certificatesSaga() {
+  yield all([
+    takeLatest<AddCertificateAction>(
+      certificatesActionTypes.ADD_CERTIFICATE,
+      addCertificate,
+    ),
+    takeLatest<CreateBackupAction>(
+      certificatesActionTypes.CREATE_BACKUP,
+      createBackup,
+    ),
+    takeLatest<LoadBackupAction>(
+      certificatesActionTypes.LOAD_BACKUP,
+      loadBackup,
+    ),
+  ]);
 }
