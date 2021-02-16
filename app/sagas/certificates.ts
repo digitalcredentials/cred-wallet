@@ -62,8 +62,9 @@ function* createBackup({ key }: CreateBackupAction) {
     const certificates: CredentialsByIssuer = yield select(
       CertificateSelectors.selectCertificates,
     );
-    const certificatesString: string = JSON.stringify(certificates);
-    const encryptedCertificatesString: string = yield EncryptionManager.encryptAES(
+    const certificatesString: string = yield call(JSON.stringify, certificates);
+    const encryptedCertificatesString: string = yield call(
+      EncryptionManager.encryptAES,
       certificatesString,
       key,
     );
@@ -81,6 +82,7 @@ function* createBackup({ key }: CreateBackupAction) {
       filename,
     );
 
+    yield call(StaticNavigator.goBack);
     if (shareResponse.action === 'sharedAction') {
       yield put<CreateBackupSuccessAction>(
         certificatesActionCreators.createBackupSuccess({
@@ -90,34 +92,44 @@ function* createBackup({ key }: CreateBackupAction) {
       );
     }
   } catch (error) {
+    yield call(StaticNavigator.goBack);
     yield put<CreateBackupFailureAction>(
       certificatesActionCreators.createBackupFailure(error),
     );
   }
+}
 
-  StaticNavigator.goBack();
+function* createBackupSuccess({ backupInfo }: CreateBackupSuccessAction) {
+  yield call(StaticNavigator.navigateTo, 'DoneBackup', { backupInfo });
 }
 
 function* loadBackup({ backupPath, key }: LoadBackupAction) {
   try {
     const cipher = yield call(FileManager.readFile, backupPath);
 
-    const decryptedBackup = yield EncryptionManager.decryptAES(cipher, key);
+    const decryptedBackup = yield call(
+      EncryptionManager.decryptAES,
+      cipher,
+      key,
+    );
 
-    const parsedBackup: CredentialsByIssuer = JSON.parse(decryptedBackup);
+    const parsedBackup: CredentialsByIssuer = yield call(
+      JSON.parse,
+      decryptedBackup,
+    );
 
+    yield call(StaticNavigator.goBack);
     yield put<LoadBackupSuccessAction>(
       certificatesActionCreators.loadBackupSuccess(parsedBackup),
     );
   } catch (error) {
+    yield call(StaticNavigator.goBack);
     yield put<LoadBackupFailureAction>(
       certificatesActionCreators.loadBackupFailure(
         'Invalid key! Please, try again.',
       ),
     );
   }
-
-  StaticNavigator.goBack();
 }
 
 export function* certificatesSaga() {
@@ -129,6 +141,10 @@ export function* certificatesSaga() {
     takeLatest<CreateBackupAction>(
       certificatesActionTypes.CREATE_BACKUP,
       createBackup,
+    ),
+    takeLatest<CreateBackupSuccessAction>(
+      certificatesActionTypes.CREATE_BACKUP_SUCCESS,
+      createBackupSuccess,
     ),
     takeLatest<LoadBackupAction>(
       certificatesActionTypes.LOAD_BACKUP,
