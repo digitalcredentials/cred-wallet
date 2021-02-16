@@ -20,4 +20,5 @@ export const COLORS = {
   SILVER_CHALICE: '#A5A5A5',
   THUNDERBIRD: '#D31616',
   PIPPIN: '#FFE5E5',
+  ORANGE_TRANSPARENT: 'rgba(255, 137, 59, 0.3)',
 };

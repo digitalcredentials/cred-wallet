@@ -3,6 +3,7 @@ import { ErrorType } from '../../utils/types';
 
 interface CacheActionTypes {
   SET_FIRST_LAUNCH: 'SET_FIRST_LAUNCH';
+  SET_IS_SHOWN_ONBOARDING: 'SET_IS_SHOWN_ONBOARDING';
 }
 
 export interface SetFirstLaunchAction {
@@ -10,11 +11,17 @@ export interface SetFirstLaunchAction {
   isFirstLaunch: boolean;
 }
 
-interface CacheActionCreators {
-  setFirstLaunch(isFirstLaunch: boolean): SetFirstLaunchAction;
+export interface SetIsShownOnboarding {
+  type: CacheActionTypes['SET_IS_SHOWN_ONBOARDING'];
+  isShownOnboarding: boolean;
 }
 
-export type CacheAction = SetFirstLaunchAction;
+interface CacheActionCreators {
+  setFirstLaunch(isFirstLaunch: boolean): SetFirstLaunchAction;
+  setIsShownOnboarding(isShownOnboarding: boolean): SetIsShownOnboarding;
+}
+
+export type CacheAction = SetFirstLaunchAction | SetIsShownOnboarding;
 
 const { Types, Creators } = createActions<
   CacheActionTypes,
@@ -22,6 +29,7 @@ const { Types, Creators } = createActions<
 >(
   {
     setFirstLaunch: ['isFirstLaunch'],
+    setIsShownOnboarding: ['isShownOnboarding'],
   },
   {
     prefix: 'CACHE/',

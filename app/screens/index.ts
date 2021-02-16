@@ -8,3 +8,5 @@ export * from './Home';
 export * from './Pin';
 export * from './QRScanner';
 export * from './Settings';
+export * from './Onboarding';
+export * from './Loading';

@@ -49,6 +49,7 @@
     "react-native-securerandom": "^1.0.0",
     "react-native-sensitive-info": "^6.0.0-alpha.8",
     "react-native-snap-carousel": "^3.9.1",
+    "react-native-swiper": "^1.6.0",
     "react-native-touch-id": "^4.4.1",
     "react-native-vector-icons": "^7.1.0",
     "react-redux": "^7.2.1",

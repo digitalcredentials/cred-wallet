@@ -2,7 +2,13 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
-import { PinScreen, QRScannerScreen, AddCertificateScreen } from '../screens';
+import {
+  PinScreen,
+  QRScannerScreen,
+  AddCertificateScreen,
+  OnboardingScreen,
+  LoadingScreen,
+} from '../screens';
 import { MainTabNavigator } from './main-tab-navigator';
 import {
   MODAL_OPTIONS,
@@ -13,6 +19,8 @@ import { navigationRef } from '../services/navigator';
 import { ICertificate, IIssuer } from '../utils/types';
 
 export type RootParams = {
+  Loading: undefined;
+  Onboarding: undefined;
   Pin: { isPushed: boolean };
   QRScanner: undefined;
   AddCertificate: { certificate: ICertificate; issuer: IIssuer };
@@ -24,6 +32,8 @@ const Stack = createNativeStackNavigator<RootParams>();
 const RootNavigator = () => (
   <NavigationContainer ref={navigationRef}>
     <Stack.Navigator screenOptions={WITHOUT_HEADER_OPTIONS}>
+      <Stack.Screen name="Loading" component={LoadingScreen} />
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen
         name="Pin"
         component={PinScreen}

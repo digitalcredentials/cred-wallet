@@ -105,3 +105,10 @@ export interface IBackupInfo {
   activityType?: string;
   action: 'sharedAction';
 }
+
+export interface ISwiperItem {
+  id: string;
+  image: any;
+  title: string;
+  description: string;
+}

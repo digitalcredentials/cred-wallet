@@ -14,6 +14,10 @@ export const IMAGES = {
   GRADUATION_WHITE: require('./images/graduation-white.png'),
   BACKUP: require('./images/backup.png'),
   CLOUD: require('./images/cloud.png'),
+  BUSINESS_AND_FINANCE: require('./images/business-and-finance.png'),
+  QR_CODE: require('./images/qr-code.png'),
+  FOLDER: require('./images/folder.png'),
+  CLOUD_STORAGE: require('./images/cloud-storage.png'),
 
   // Tabs
   HOME_ACTIVE: require('./images/home-active.png'),
