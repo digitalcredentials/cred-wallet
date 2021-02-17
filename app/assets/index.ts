@@ -9,6 +9,8 @@ export const IMAGES = {
   PLACE_FOR_QR: require('./images/place-for-qr.png'),
   MORE: require('./images/more.png'),
   TIMER: require('./images/timer.png'),
+  TIMER_POS_2: require('./images/timer-pos-2.png'),
+  TIMER_POS_3: require('./images/timer-pos-3.png'),
   CHEVRON_RIGHT_PURPLE: require('./images/chevron-right-purple.png'),
   CHEVRON_RIGHT_WHITE: require('./images/chevron-right-white.png'),
   GRADUATION_WHITE: require('./images/graduation-white.png'),
