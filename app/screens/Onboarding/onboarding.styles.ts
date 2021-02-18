@@ -8,7 +8,6 @@ interface OnboardingScreenStyles {
   swiperItemBodyContainer: any;
   swiperItemTitle: TextStyle;
   swiperItemDescription: TextStyle;
-  buttonSkipContainer: ViewStyle;
   buttonSkipText: TextStyle;
   paginationContainer: ViewStyle;
   paginationText: TextStyle;
@@ -45,18 +44,15 @@ export const styles = StyleSheet.create<OnboardingScreenStyles>({
     textAlign: 'center',
     margin: 20,
   },
-  buttonSkipContainer: {
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    height: 20,
-    marginBottom: 20,
-  },
+
   buttonSkipText: {
+    textAlign: 'center',
     fontFamily: FONTS.POPPINS_300,
     fontSize: 11,
     lineHeight: 14,
     color: COLORS.BUNTING,
     textDecorationLine: 'underline',
+    marginBottom: 40,
   },
   paginationContainer: {
     marginRight: 50,
