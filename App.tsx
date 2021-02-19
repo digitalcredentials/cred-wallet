@@ -8,13 +8,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import { RootSiblingParent } from 'react-native-root-siblings';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import RootNavigator from './app/navigation/root-navigator';
 import { ErrorAlertHandler, Loader } from './app/components';
 import { store, persistor } from './app/redux';
 
 import './shim';
-import { PersistGate } from 'redux-persist/integration/react';
 
 enableScreens();
 
