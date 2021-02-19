@@ -62,9 +62,40 @@ const loadBackupSuccess: Handler<LoadBackupSuccessAction> = (
   state,
   { credsByIssuer },
 ) => {
+  const newCredentialsByIssuer = { ...state.data };
+
+  // Merge new credsByIssuer to existing data
+  _.forEach(_.entries(credsByIssuer), ([issuerId, credential]) => {
+    if (!newCredentialsByIssuer[issuerId]) {
+      // Issuer doesn't exist
+      newCredentialsByIssuer[issuerId] = credential;
+    } else {
+      // Issuer exists
+      _.forEach(credsByIssuer[issuerId].certificates, (certificate) => {
+        // Try to find certificate by id
+        const certificateIndex = _.findIndex(
+          newCredentialsByIssuer[issuerId].certificates,
+          (item) => item.id === certificate.id,
+        );
+
+        if (certificateIndex === -1) {
+          // Certificate doesn't exist
+          // Add certificate
+          newCredentialsByIssuer[issuerId].certificates.push(certificate);
+        } else {
+          // Certificate exists
+          // Update certificate
+          newCredentialsByIssuer[issuerId].certificates[
+            certificateIndex
+          ] = certificate;
+        }
+      });
+    }
+  });
+
   return {
     ...state,
-    data: credsByIssuer,
+    data: newCredentialsByIssuer,
   };
 };
 
