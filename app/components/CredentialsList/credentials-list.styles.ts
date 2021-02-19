@@ -61,6 +61,7 @@ export const styles: IssuersListStyles = StyleSheet.create<IssuersListStyles>({
     fontFamily: FONTS.POPPINS_REGULAR,
     fontSize: 12,
     lineHeight: 14,
+    color: COLORS.BLACK,
   },
   issuerCertificatesSelected: {
     color: COLORS.WHITE,
