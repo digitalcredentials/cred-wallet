@@ -49,12 +49,10 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
       >
         {_.map(SWIPER_ITEMS, renderSwiperItem)}
       </Swiper>
-      <TouchableOpacity
-        style={styles.buttonSkipContainer}
-        onPress={onSkipPress}
-      >
-        <Text style={styles.buttonSkipText}>Skip</Text>
-      </TouchableOpacity>
+
+      <Text style={styles.buttonSkipText} onPress={onSkipPress}>
+        Skip
+      </Text>
     </SafeAreaView>
   );
 };
