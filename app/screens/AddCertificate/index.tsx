@@ -2,11 +2,13 @@ import React, { useCallback, useMemo } from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import _ from 'lodash';
 
 import { IMAGES } from '../../assets';
 import { useSaveCertificateCallback } from '../../redux/certificates';
 import { AddCertificateScreenProps } from './add-certificate.props';
 import { styles } from './add-certificate.styles';
+import { FIELDS } from './add-certificate.data';
 
 export const AddCertificateScreen: React.FC<AddCertificateScreenProps> = ({
   navigation,
@@ -32,62 +34,41 @@ export const AddCertificateScreen: React.FC<AddCertificateScreenProps> = ({
       <View style={styles.requestContainer}>
         <Text style={styles.requestTitle}>Do you want to add?</Text>
         <View style={styles.certificateInfoContainer}>
-          <Text style={styles.certificateInfoTitle}>
-            Certificate of completion of courses in {issuer.name}
-          </Text>
-
-          <View style={styles.certificateInfoPhotoArea}>
-            <View style={styles.certificateInfoPhotoContainer}>
-              <Image style={styles.certificateInfoPhoto} source={IMAGES.MAN} />
-            </View>
-
-            <View style={styles.certificateInfoFieldsContainer}>
-              <View style={styles.certificateInfoFieldContainer}>
-                <Text style={styles.certificateInfoFieldName}>DID:</Text>
-                <Text style={styles.certificateInfoFieldValue}>
-                  {certificate.credentialSubject.id}
-                </Text>
-              </View>
-              <View style={styles.certificateInfoFieldContainer}>
-                <Text style={styles.certificateInfoFieldName}>ID:</Text>
-                <Text style={styles.certificateInfoFieldValue}>
-                  {certificate.id}
-                </Text>
-              </View>
-              <View style={styles.certificateInfoFieldContainer}>
-                <Text style={styles.certificateInfoFieldName}>Date:</Text>
-                <Text style={styles.certificateInfoFieldValue}>
-                  {moment(certificate.issuanceDate).format('DD/MM/YYYY')}
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.certificateInfoSeparator} />
-
-          <View style={styles.certificateInfoUsernameRow}>
-            <Text style={styles.certificateInfoUsername}>
-              {certificate.credentialSubject?.name}
-            </Text>
-
+          <View style={styles.certificateInfoTitleContainer}>
             <Image
-              style={styles.certificateInfoSignIcon}
-              source={IMAGES.SIGNATURE}
+              style={styles.certificateInfoTitleImage}
+              source={IMAGES.MAN}
             />
+
+            <Text style={styles.certificateInfoTitle}>
+              Program - {certificate.credentialSubject?.name}
+            </Text>
           </View>
+
+          <Text style={styles.certificateInfoIssuer}>{issuer.name}</Text>
+
+          {_.map(FIELDS, ({ fieldName, getFieldValue }) => (
+            <View style={styles.certificateInfoFieldContainer}>
+              <Text style={styles.certificateInfoFieldName}>{fieldName}</Text>
+              <Text style={styles.certificateInfoFieldValue}>
+                {getFieldValue(certificate)}
+              </Text>
+            </View>
+          ))}
         </View>
+
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={styles.noButtonContainer}
             onPress={onNoPress}
           >
-            <Text style={styles.noButtonText}>NO</Text>
+            <Text style={styles.noButtonText}>No</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.yesButtonContainer}
             onPress={onYesPress}
           >
-            <Text style={styles.yesButtonText}>YES</Text>
+            <Text style={styles.yesButtonText}>Yes</Text>
           </TouchableOpacity>
         </View>
       </View>

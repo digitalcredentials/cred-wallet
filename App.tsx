@@ -8,10 +8,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import { RootSiblingParent } from 'react-native-root-siblings';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import RootNavigator from './app/navigation/root-navigator';
 import { ErrorAlertHandler, Loader } from './app/components';
-import { store } from './app/redux';
+import { store, persistor } from './app/redux';
 
 import './shim';
 
@@ -22,9 +23,11 @@ const App: React.FC = () => {
     <RootSiblingParent>
       <SafeAreaProvider>
         <Provider store={store}>
-          <RootNavigator />
-          <Loader />
-          <ErrorAlertHandler />
+          <PersistGate persistor={persistor} loading={null}>
+            <RootNavigator />
+            <Loader />
+            <ErrorAlertHandler />
+          </PersistGate>
         </Provider>
       </SafeAreaProvider>
     </RootSiblingParent>

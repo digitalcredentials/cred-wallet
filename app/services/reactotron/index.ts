@@ -13,7 +13,7 @@ const host = NativeModules.SourceCode.scriptURL.split('://')[1].split(':')[0];
 __DEV__ &&
   (function reactotronSetup() {
     reactotron = RNReactotron.configure({
-      host: '192.168.0.103',
+      host: '192.168.0.104',
       port: 9090,
     }).useReactNative().setAsyncStorageHandler!(AsyncStorage)
       .use(reactotronRedux())

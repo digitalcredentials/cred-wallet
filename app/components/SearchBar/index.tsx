@@ -24,6 +24,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }, [inputRef]);
 
   const onCancelPress = useCallback(() => {
+    inputRef.current?.clear();
     inputRef.current?.blur();
   }, [inputRef]);
 

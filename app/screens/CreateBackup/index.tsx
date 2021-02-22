@@ -1,13 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
 
-import { IMAGES } from '../../assets';
 import {
   useCreateBackupCallback,
   useLoadBackupCallback,
-  useSaveCertificateCallback,
 } from '../../redux/certificates';
 import { CreateBackupScreenProps } from './create-backup.props';
 import { styles } from './create-backup.styles';

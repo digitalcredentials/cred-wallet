@@ -1,15 +1,16 @@
-import { put, select } from 'redux-saga/effects';
+import { all, put, select, takeLatest } from 'redux-saga/effects';
 import _ from 'lodash';
 
 import {
   SearchCredentialAction,
   SearchCredentialsSuccessAction,
   searchActionCreators,
+  searchActionTypes,
 } from '../redux/search';
 import { RootState } from '../redux';
 import { ICertificate, IFoundCredential } from '../utils/types';
 
-export function* searchCertificate({ value }: SearchCredentialAction) {
+function* searchCertificate({ value }: SearchCredentialAction) {
   let foundCredentials: IFoundCredential[] = [];
 
   foundCredentials = yield select((state: RootState) => {
@@ -52,4 +53,13 @@ export function* searchCertificate({ value }: SearchCredentialAction) {
   yield put<SearchCredentialsSuccessAction>(
     searchActionCreators.searchCredentialsSuccess(foundCredentials),
   );
+}
+
+export function* searchSaga() {
+  yield all([
+    takeLatest<SearchCredentialAction>(
+      searchActionTypes.SEARCH_CREDENTIALS,
+      searchCertificate,
+    ),
+  ]);
 }

@@ -1,23 +1,19 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
+import { FONTS } from '../../utils/fonts';
 
 interface AddCertificateScreenStyles {
   container: ViewStyle;
   requestContainer: ViewStyle;
   requestTitle: TextStyle;
   certificateInfoContainer: ViewStyle;
-  certificateInfoTitle: TextStyle;
-  certificateInfoPhotoArea: ViewStyle;
-  certificateInfoPhotoContainer: ViewStyle;
-  certificateInfoPhoto: ImageStyle;
-  certificateInfoFieldsContainer: ViewStyle;
+  certificateInfoTitleContainer: ViewStyle;
+  certificateInfoTitleImage: ImageStyle;
+  certificateInfoTitle: ViewStyle;
+  certificateInfoIssuer: TextStyle;
   certificateInfoFieldContainer: ViewStyle;
   certificateInfoFieldName: TextStyle;
   certificateInfoFieldValue: TextStyle;
-  certificateInfoSeparator: ViewStyle;
-  certificateInfoUsernameRow: ViewStyle;
-  certificateInfoUsername: TextStyle;
-  certificateInfoSignIcon: ImageStyle;
   buttonsContainer: ViewStyle;
   noButtonContainer: ViewStyle;
   noButtonText: TextStyle;
@@ -37,85 +33,63 @@ export const styles = StyleSheet.create<AddCertificateScreenStyles>({
     margin: 16,
     padding: 16,
     borderRadius: 10,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.ALABASTER_LIGHT,
   },
   requestTitle: {
-    // TODO: fontFamily
+    fontFamily: FONTS.POPPINS_500,
     textAlign: 'center',
-    fontWeight: '500',
-    fontSize: 20,
-    lineHeight: 25,
+    fontSize: 24,
+    lineHeight: 29,
     marginBottom: 16,
+    color: COLORS.BUNTING,
   },
   certificateInfoContainer: {
     padding: 16,
     marginBottom: 24,
-    backgroundColor: COLORS.MISCHKA,
+    backgroundColor: COLORS.FRENCH_LILAC,
     borderRadius: 10,
+  },
+  certificateInfoTitleContainer: {
+    flexDirection: 'row',
+    width: '95%',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  certificateInfoTitleImage: {
+    borderRadius: 13,
+    width: 26,
+    height: 26,
+    marginRight: 14,
+    backgroundColor: COLORS.ALABASTER_LIGHT,
   },
   certificateInfoTitle: {
-    // TODO: fontFamily
+    fontFamily: FONTS.POPPINS_600,
+    fontSize: 17,
+    lineHeight: 25.5,
+    color: COLORS.BUNTING,
+  },
+  certificateInfoIssuer: {
+    fontFamily: FONTS.POPPINS_REGULAR,
     fontSize: 14,
-    lineHeight: 17.5,
-    fontWeight: '500',
+    lineHeight: 21,
     marginBottom: 16,
-  },
-  certificateInfoPhotoArea: {
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
-  certificateInfoPhotoContainer: {
-    width: 59,
-    height: 64,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-    backgroundColor: COLORS.WHITE,
-  },
-  certificateInfoPhoto: {},
-  certificateInfoFieldsContainer: {
-    justifyContent: 'center',
   },
   certificateInfoFieldContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
     marginVertical: 2,
-    width: '78%',
+    width: '100%',
   },
   certificateInfoFieldName: {
-    // TODO: fontFamily
-    fontWeight: '500',
-    fontSize: 11,
-    lineHeight: 13.75,
-    marginRight: 4,
+    fontFamily: FONTS.POPPINS_500,
+    fontSize: 14,
+    lineHeight: 21,
+    marginRight: 5,
   },
   certificateInfoFieldValue: {
-    // TODO: fontFamily
+    fontFamily: FONTS.POPPINS_300,
     fontSize: 11,
-    lineHeight: 13.75,
-  },
-  certificateInfoSeparator: {
-    width: '100%',
-    height: 1,
-    backgroundColor: COLORS.BLACK,
-  },
-  certificateInfoSignIcon: {
-    width: 32,
-    height: 32,
-    position: 'absolute',
-    right: 0,
-  },
-  certificateInfoUsernameRow: {
-    marginTop: 16,
-    // width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  certificateInfoUsername: {
-    // TODO: fontFamily
-    fontSize: 14,
-    lineHeight: 17,
-    fontWeight: '500',
   },
   buttonsContainer: {
     marginBottom: 8,
@@ -126,12 +100,12 @@ export const styles = StyleSheet.create<AddCertificateScreenStyles>({
     width: '47%',
     padding: 8,
     borderRadius: 100,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.ALABASTER_LIGHT,
     borderWidth: 1,
-    borderColor: COLORS.BAY_OF_MANY,
+    borderColor: COLORS.BUNTING,
   },
   noButtonText: {
-    // TODO: fontFamily
+    fontFamily: FONTS.POPPINS_500,
     fontSize: 18,
     lineHeight: 22,
     color: COLORS.BAY_OF_MANY,
@@ -141,12 +115,12 @@ export const styles = StyleSheet.create<AddCertificateScreenStyles>({
     width: '47%',
     padding: 8,
     borderRadius: 100,
-    backgroundColor: COLORS.BAY_OF_MANY,
+    backgroundColor: COLORS.BUNTING,
     borderWidth: 1,
-    borderColor: COLORS.BAY_OF_MANY,
+    borderColor: COLORS.BUNTING,
   },
   yesButtonText: {
-    // TODO: fontFamuly
+    fontFamily: FONTS.POPPINS_500,
     fontSize: 18,
     lineHeight: 22,
     color: COLORS.WHITE,

@@ -1,14 +1,14 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put, select, all, takeLatest } from 'redux-saga/effects';
 import { ApiResponse } from 'apisauce';
 import { ShareAction } from 'react-native';
 import moment from 'moment';
-import FS from 'react-native-fs';
 
 import {
   AddCertificateAction,
   AddCertificateFailureAction,
   AddCertificateSuccessAction,
   certificatesActionCreators,
+  certificatesActionTypes,
   CertificateSelectors,
   CreateBackupAction,
   CreateBackupFailureAction,
@@ -26,7 +26,7 @@ import EncryptionManager from '../services/encryption-manager';
 import { CredentialsByIssuer } from '../utils/types';
 import { FileManager } from '../services/file-manager';
 
-export function* addCertificate({ data }: AddCertificateAction) {
+function* addCertificate({ data }: AddCertificateAction) {
   try {
     const response: ApiResponse<Credential, Credential> = yield call(
       apiInstance.addCertificate,
@@ -57,13 +57,14 @@ export function* addCertificate({ data }: AddCertificateAction) {
   }
 }
 
-export function* createBackup({ key }: CreateBackupAction) {
+function* createBackup({ key }: CreateBackupAction) {
   try {
     const certificates: CredentialsByIssuer = yield select(
       CertificateSelectors.selectCertificates,
     );
-    const certificatesString: string = JSON.stringify(certificates);
-    const encryptedCertificatesString: string = yield EncryptionManager.encryptAES(
+    const certificatesString: string = yield call(JSON.stringify, certificates);
+    const encryptedCertificatesString: string = yield call(
+      EncryptionManager.encryptAES,
       certificatesString,
       key,
     );
@@ -81,6 +82,7 @@ export function* createBackup({ key }: CreateBackupAction) {
       filename,
     );
 
+    yield call(StaticNavigator.goBack);
     if (shareResponse.action === 'sharedAction') {
       yield put<CreateBackupSuccessAction>(
         certificatesActionCreators.createBackupSuccess({
@@ -90,32 +92,63 @@ export function* createBackup({ key }: CreateBackupAction) {
       );
     }
   } catch (error) {
+    yield call(StaticNavigator.goBack);
     yield put<CreateBackupFailureAction>(
       certificatesActionCreators.createBackupFailure(error),
     );
   }
-
-  StaticNavigator.goBack();
 }
 
-export function* loadBackup({ backupPath, key }: LoadBackupAction) {
+function* createBackupSuccess({ backupInfo }: CreateBackupSuccessAction) {
+  yield call(StaticNavigator.navigateTo, 'DoneBackup', { backupInfo });
+}
+
+function* loadBackup({ backupPath, key }: LoadBackupAction) {
   try {
     const cipher = yield call(FileManager.readFile, backupPath);
 
-    const decryptedBackup = yield EncryptionManager.decryptAES(cipher, key);
+    const decryptedBackup = yield call(
+      EncryptionManager.decryptAES,
+      cipher,
+      key,
+    );
 
-    const parsedBackup: CredentialsByIssuer = JSON.parse(decryptedBackup);
+    const parsedBackup: CredentialsByIssuer = yield call(
+      JSON.parse,
+      decryptedBackup,
+    );
 
+    yield call(StaticNavigator.goBack);
     yield put<LoadBackupSuccessAction>(
       certificatesActionCreators.loadBackupSuccess(parsedBackup),
     );
   } catch (error) {
+    yield call(StaticNavigator.goBack);
     yield put<LoadBackupFailureAction>(
       certificatesActionCreators.loadBackupFailure(
         'Invalid key! Please, try again.',
       ),
     );
   }
+}
 
-  StaticNavigator.goBack();
+export function* certificatesSaga() {
+  yield all([
+    takeLatest<AddCertificateAction>(
+      certificatesActionTypes.ADD_CERTIFICATE,
+      addCertificate,
+    ),
+    takeLatest<CreateBackupAction>(
+      certificatesActionTypes.CREATE_BACKUP,
+      createBackup,
+    ),
+    takeLatest<CreateBackupSuccessAction>(
+      certificatesActionTypes.CREATE_BACKUP_SUCCESS,
+      createBackupSuccess,
+    ),
+    takeLatest<LoadBackupAction>(
+      certificatesActionTypes.LOAD_BACKUP,
+      loadBackup,
+    ),
+  ]);
 }

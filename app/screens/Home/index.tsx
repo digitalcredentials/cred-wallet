@@ -71,11 +71,22 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       !isVerificationProcess
     ) {
       const parseUrlAndDispatch = async () => {
-        const parsedCertificateDeeplink = parseCertificateDeeplink(deeplinkUrl);
-        onAddCertificate({
-          did: await generateDid(),
-          ...parsedCertificateDeeplink,
-        });
+        const isBackupOpened = isBackupUrl(deeplinkUrl);
+
+        if (isBackupOpened) {
+          navigation.navigate('CreateBackup', {
+            isLoadBackup: true,
+            backupPath: deeplinkUrl,
+          });
+        } else {
+          const parsedCertificateDeeplink = parseCertificateDeeplink(
+            deeplinkUrl,
+          );
+          onAddCertificate({
+            did: await generateDid(),
+            ...parsedCertificateDeeplink,
+          });
+        }
 
         onSetDeeplinkUrl(null);
       };

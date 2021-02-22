@@ -58,7 +58,7 @@ export const store = createStore(persistedReducer, compose(...enhancers));
 
 sagaMiddleware.run(rootSaga);
 
-persistStore(store);
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 
