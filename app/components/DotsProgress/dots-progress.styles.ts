@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle, Animated } from 'react-native';
 import { COLORS } from '../../utils/colors';
 
 interface DotsProgressStyles {
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create<DotsProgressStyles>({
   dotContainer: {
     width: 13,
     height: 13,
-    marginHorizontal: 14,
+    marginHorizontal: 24,
     borderRadius: 7,
     borderWidth: 0.5,
     borderColor: COLORS.BUNTING,
@@ -25,4 +25,10 @@ export const styles = StyleSheet.create<DotsProgressStyles>({
     borderColor: COLORS.CRUSTA,
     backgroundColor: COLORS.CRUSTA,
   },
+});
+
+export const getShakeStyle = (
+  interpolatedValue: Animated.AnimatedInterpolation,
+) => ({
+  transform: [{ translateX: interpolatedValue }],
 });

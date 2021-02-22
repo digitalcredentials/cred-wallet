@@ -219,6 +219,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
             setPanelStatus(PANEL_STATUS.SAVE_PIN_KEYCHAIN);
             setIsEnterPinAvailable(false);
           } else {
+            onSetError(ErrorType.wrongPin, 'Wrong password');
             setEnteredPin('');
           }
           break;
