@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { CertificateViewScreenProps } from './certificate-view.props';
 import { styles } from './certificate-view.styles';
@@ -10,7 +11,6 @@ import {
 } from '../../redux/certificates';
 import { CertificateItemPresets } from '../../components/CertificateItem/certificate-item.props';
 import { ICertificate } from '../../utils/types';
-import { useDispatch } from 'react-redux';
 
 export const CertificateViewScreen: React.FC<CertificateViewScreenProps> = ({
   navigation,
