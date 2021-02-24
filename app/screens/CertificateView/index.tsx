@@ -4,8 +4,13 @@ import { TouchableOpacity, View } from 'react-native';
 import { CertificateViewScreenProps } from './certificate-view.props';
 import { styles } from './certificate-view.styles';
 import { CertificateItem } from '../../components';
-import { useCertificateWithIssuer } from '../../redux/certificates';
+import {
+  useCertificateWithIssuer,
+  useShareCertificateCallback,
+} from '../../redux/certificates';
 import { CertificateItemPresets } from '../../components/CertificateItem/certificate-item.props';
+import { ICertificate } from '../../utils/types';
+import { useDispatch } from 'react-redux';
 
 export const CertificateViewScreen: React.FC<CertificateViewScreenProps> = ({
   navigation,
@@ -21,6 +26,16 @@ export const CertificateViewScreen: React.FC<CertificateViewScreenProps> = ({
     issuerId,
   );
 
+  const dispatch = useDispatch();
+  const onShareCertificate = useShareCertificateCallback(dispatch);
+
+  const onSharePress = useCallback(
+    (certificate: ICertificate) => {
+      onShareCertificate(certificate);
+    },
+    [certificate],
+  );
+
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
 
   return (
@@ -34,6 +49,7 @@ export const CertificateViewScreen: React.FC<CertificateViewScreenProps> = ({
         <CertificateItem
           certificate={certificate}
           issuer={issuer}
+          onSharePress={onSharePress}
           preset={CertificateItemPresets.Modal}
         />
       </View>

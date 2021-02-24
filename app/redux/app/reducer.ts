@@ -22,6 +22,7 @@ import {
   CreateBackupFailureAction,
   CreateBackupSuccessAction,
   LoadBackupAction,
+  ShareCertificateFailureAction,
 } from '../certificates';
 
 export interface AppState {
@@ -44,12 +45,14 @@ const INITIAL_STATE: AppState = {
     isAddCertificate: false,
     isCreateBackup: false,
     isLoadBackup: false,
+    isShareCertificate: false,
   },
   errors: {
     addCertificate: null,
     wrongPin: null,
     createBackup: null,
     loadBackup: null,
+    shareCertificate: null,
   },
   navRoute: null,
 };
@@ -154,6 +157,10 @@ export const appReducer = createReducer<AppState, AppAction>(INITIAL_STATE, {
   [certificatesActionTypes.CREATE_BACKUP_FAILURE]: getLoadingErrorHandler<
     CreateBackupFailureAction
   >(LoadingType.isCreateBackup, ErrorType.createBackup),
+
+  [certificatesActionTypes.SHARE_CERTIFICATE_FAILURE]: getLoadingErrorHandler<
+    ShareCertificateFailureAction
+  >(LoadingType.isShareCertificate, ErrorType.shareCertificate),
 
   [certificatesActionTypes.LOAD_BACKUP]: getLoadingHandler<LoadBackupAction>(
     LoadingType.isLoadBackup,

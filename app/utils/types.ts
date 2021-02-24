@@ -76,6 +76,7 @@ export enum LoadingType {
   isAddCertificate = 'isAddCertificate',
   isCreateBackup = 'isCreateBackup',
   isLoadBackup = 'isLoadBackup',
+  isShareCertificate = 'isShareCertificate',
 }
 
 export enum ErrorType {
@@ -83,6 +84,7 @@ export enum ErrorType {
   wrongPin = 'wrongPin',
   createBackup = 'createBackup',
   loadBackup = 'loadBackup',
+  shareCertificate = 'shareCertificate',
 }
 
 export enum FocusStatus {

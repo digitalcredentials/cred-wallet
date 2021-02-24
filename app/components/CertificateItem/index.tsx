@@ -14,6 +14,7 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
   certificate,
   issuer,
   onPress = () => {},
+  onSharePress = () => {},
   preset,
 }) => {
   const styles = presetStyles[preset];
@@ -59,6 +60,15 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
           {moment(certificate.issuanceDate).format('YYYY-MM-DD')}
         </Text>
       </Text>
+
+      {preset === CertificateItemPresets.Modal && (
+        <TouchableOpacity
+          style={styles.buttonShareContainer}
+          onPress={() => onSharePress(certificate)}
+        >
+          <Text style={styles.buttonShare}>SHARE</Text>
+        </TouchableOpacity>
+      )}
 
       {preset === CertificateItemPresets.Carousel && (
         <TouchableOpacity

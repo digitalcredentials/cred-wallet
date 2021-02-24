@@ -16,6 +16,8 @@ interface CertificateItemStyles {
   moreButtonContainer: ViewStyle;
   moreButtonImage: ImageStyle;
   modalLine: ViewStyle;
+  buttonShareContainer: ViewStyle;
+  buttonShare: TextStyle;
 }
 
 const baseStyles: CertificateItemStyles = {
@@ -72,6 +74,8 @@ const baseStyles: CertificateItemStyles = {
   moreButtonContainer: {},
   moreButtonImage: {},
   modalLine: {},
+  buttonShareContainer: {},
+  buttonShare: {},
 };
 
 const carouselStyles = StyleSheet.create<CertificateItemStyles>({
@@ -97,6 +101,22 @@ const modalStyles = StyleSheet.create<CertificateItemStyles>({
     backgroundColor: COLORS.LAVENDER_PURPLE,
     marginBottom: 19,
     marginTop: -6,
+  },
+  buttonShareContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 140,
+    height: 30,
+    width: 100,
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: COLORS.BAY_OF_MANY,
+  },
+  buttonShare: {
+    fontFamily: FONTS.POPPINS_500,
+    fontSize: 14,
+    color: COLORS.BAY_OF_MANY,
   },
 });
 

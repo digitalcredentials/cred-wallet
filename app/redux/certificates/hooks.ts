@@ -88,3 +88,13 @@ export const useLoadBackupCallback = (dispatch: AppDispatch) =>
       }),
     [],
   );
+
+export const useShareCertificateCallback = (dispatch: AppDispatch) =>
+  useCallback(
+    (certificate: ICertificate) =>
+      dispatch({
+        type: certificatesActionTypes.SHARE_CERTIFICATE,
+        certificate,
+      }),
+    [],
+  );

@@ -21,6 +21,10 @@ interface CertificatesActionTypes {
   LOAD_BACKUP_FAILURE: 'LOAD_BACKUP_FAILURE';
 
   SAVE_CERTIFICATE: 'SAVE_CERTIFICATE';
+
+  SHARE_CERTIFICATE: 'SHARE_CERTIFICATE';
+  SHARE_CERTIFICATE_SUCCESS: 'SHARE_CERTIFICATE_SUCCESS';
+  SHARE_CERTIFICATE_FAILURE: 'SHARE_CERTIFICATE_FAILURE';
 }
 
 export interface AddCertificateAction {
@@ -74,6 +78,20 @@ export interface SaveCertificateAction {
   issuer: IIssuer;
 }
 
+export interface ShareCertificateAction {
+  type: CertificatesActionTypes['SHARE_CERTIFICATE'];
+  certificate: ICertificate;
+}
+
+export interface ShareCertificateSuccessAction {
+  type: CertificatesActionTypes['SHARE_CERTIFICATE_SUCCESS'];
+}
+
+export interface ShareCertificateFailureAction {
+  type: CertificatesActionTypes['SHARE_CERTIFICATE_FAILURE'];
+  error: string;
+}
+
 interface CertificatesActionCreators {
   addCertificate(): AddCertificateAction;
   addCertificateSuccess(): AddCertificateSuccessAction;
@@ -93,6 +111,10 @@ interface CertificatesActionCreators {
     certificate: ICertificate,
     issuer: IIssuer,
   ): SaveCertificateAction;
+
+  shareCertificate(certificate: ICertificate): ShareCertificateAction;
+  shareCertificateSuccess(): ShareCertificateSuccessAction;
+  shareCertificateFailure(error: string): ShareCertificateFailureAction;
 }
 
 export type CertificatesAction =
@@ -105,7 +127,10 @@ export type CertificatesAction =
   | LoadBackupAction
   | LoadBackupSuccessAction
   | LoadBackupFailureAction
-  | SaveCertificateAction;
+  | SaveCertificateAction
+  | ShareCertificateAction
+  | ShareCertificateSuccessAction
+  | ShareCertificateFailureAction;
 
 const { Types, Creators } = createActions<
   CertificatesActionTypes,
@@ -125,6 +150,10 @@ const { Types, Creators } = createActions<
     loadBackupFailure: ['error'],
 
     saveCertificate: ['certificate', 'issuer'],
+
+    shareCertificate: ['certificate'],
+    shareCertificateSuccess: null,
+    shareCertificateFailure: ['error'],
   },
   {
     prefix: 'CERTIFICATES/',

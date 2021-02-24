@@ -16,6 +16,9 @@ import {
   LoadBackupAction,
   LoadBackupFailureAction,
   LoadBackupSuccessAction,
+  ShareCertificateAction,
+  ShareCertificateFailureAction,
+  ShareCertificateSuccessAction,
 } from '../redux/certificates';
 import { apiInstance } from '../services/api';
 import CONFIG from '../config/env';
@@ -132,6 +135,28 @@ function* loadBackup({ backupPath, key }: LoadBackupAction) {
   }
 }
 
+function* shareCertificate({ certificate }: ShareCertificateAction) {
+  try {
+    const certificateString: string = yield call(JSON.stringify, certificate);
+
+    const filename = `certificate_${moment().format('YYYY_MM_DD__HH_mm')}.json`;
+    const filepath = yield call(
+      FileManager.createFile,
+      filename,
+      certificateString,
+    );
+
+    yield call(FileManager.shareFile, filepath, filename);
+    yield put<ShareCertificateSuccessAction>(
+      certificatesActionCreators.shareCertificateSuccess(),
+    );
+  } catch (error) {
+    yield put<ShareCertificateFailureAction>(
+      certificatesActionCreators.shareCertificateFailure(error),
+    );
+  }
+}
+
 export function* certificatesSaga() {
   yield all([
     takeLatest<AddCertificateAction>(
@@ -149,6 +174,10 @@ export function* certificatesSaga() {
     takeLatest<LoadBackupAction>(
       certificatesActionTypes.LOAD_BACKUP,
       loadBackup,
+    ),
+    takeLatest<ShareCertificateAction>(
+      certificatesActionTypes.SHARE_CERTIFICATE,
+      shareCertificate,
     ),
   ]);
 }
