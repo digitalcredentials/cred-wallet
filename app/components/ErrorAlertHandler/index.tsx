@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
+import { Vibration } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-root-toast';
@@ -19,6 +20,8 @@ const TOAST_CONFIG = {
   delay: 0,
 };
 
+const DURATION_OF_VIBRATION = 400;
+
 export const ErrorAlertHandler: React.FC = () => {
   const insets = useSafeAreaInsets();
 
@@ -34,6 +37,7 @@ export const ErrorAlertHandler: React.FC = () => {
   useEffect(() => {
     if (errorType && error) {
       Toast.show(error, { position: insets.top + MIN_GAP, ...TOAST_CONFIG });
+      Vibration.vibrate(DURATION_OF_VIBRATION);
       onResetErrors();
     }
   }, [errorType, error]);
