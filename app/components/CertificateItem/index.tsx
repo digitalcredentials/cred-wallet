@@ -66,7 +66,7 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
           style={styles.buttonShareContainer}
           onPress={() => onSharePress(certificate)}
         >
-          <Text style={styles.buttonShare}>SHARE</Text>
+          <Image source={IMAGES.SHARE_ICON} />
         </TouchableOpacity>
       )}
 

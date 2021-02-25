@@ -20,6 +20,7 @@ export const IMAGES = {
   QR_CODE: require('./images/qr-code.png'),
   FOLDER: require('./images/folder.png'),
   CLOUD_STORAGE: require('./images/cloud-storage.png'),
+  SHARE_ICON: require('./images/share.png'),
 
   // Tabs
   HOME_ACTIVE: require('./images/home-active.png'),

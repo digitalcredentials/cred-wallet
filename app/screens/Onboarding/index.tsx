@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { Image, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Swiper from 'react-native-swiper';
 import { useDispatch } from 'react-redux';
