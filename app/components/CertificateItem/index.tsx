@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 
@@ -17,7 +17,7 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
   onSharePress = () => {},
   preset,
 }) => {
-  const styles = presetStyles[preset];
+  const styles = useMemo(() => presetStyles[preset], [preset]);
 
   return (
     <View style={styles.container}>
