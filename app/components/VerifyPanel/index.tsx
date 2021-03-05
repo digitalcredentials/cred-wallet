@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image } from 'react-native';
 import TouchID from 'react-native-touch-id';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 
 import {
@@ -17,7 +17,6 @@ import { DotsProgress } from '../DotsProgress';
 import { ErrorType, VerifyPanelStatus } from '../../utils/types';
 import { Keystore } from '../../services/keychain';
 import { IMAGES } from '../../assets';
-import { useDispatch } from 'react-redux';
 import { useSetErrorCallback } from '../../redux/app';
 import { useIsFirstLaunch, useSetFirstLaunchCallback } from '../../redux/cache';
 
