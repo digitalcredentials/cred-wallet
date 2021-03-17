@@ -1,14 +1,18 @@
-import { all, takeLatest } from 'redux-saga/effects';
-import { GetUserAccountAction, userActionTypes } from '../redux/user';
+import { all } from 'redux-saga/effects';
 
-import { getUser } from './user';
+import { userSaga } from './user';
+import { certificatesSaga } from './certificates';
 import { appStateListenerSaga } from './event-channel';
+import { searchSaga } from './search';
 
 export default function* rootSaga() {
   yield all([
     // Event Channels
     appStateListenerSaga(),
 
-    takeLatest<GetUserAccountAction>(userActionTypes.GET_USER, getUser),
+    // Sagas
+    userSaga(),
+    certificatesSaga(),
+    searchSaga(),
   ]);
 }

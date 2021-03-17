@@ -2,13 +2,28 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
-import { PinScreen } from '../screens';
+import {
+  PinScreen,
+  QRScannerScreen,
+  AddCertificateScreen,
+  OnboardingScreen,
+  LoadingScreen,
+} from '../screens';
 import { MainTabNavigator } from './main-tab-navigator';
-import { WITHOUT_HEADER_OPTIONS } from './options';
+import {
+  MODAL_OPTIONS,
+  TRANSPARENT_MODAL_WITH_FADE_ANIM_OPTIONS,
+  WITHOUT_HEADER_OPTIONS,
+} from './options';
 import { navigationRef } from '../services/navigator';
+import { ICertificate, IIssuer } from '../utils/types';
 
 export type RootParams = {
-  Pin: undefined;
+  Loading: undefined;
+  Onboarding: undefined;
+  Pin: { isPushed: boolean };
+  QRScanner: undefined;
+  AddCertificate: { certificate: ICertificate; issuer: IIssuer };
   MainTabs: undefined;
 };
 
@@ -16,17 +31,25 @@ const Stack = createNativeStackNavigator<RootParams>();
 
 const RootNavigator = () => (
   <NavigationContainer ref={navigationRef}>
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={WITHOUT_HEADER_OPTIONS}>
+      <Stack.Screen name="Loading" component={LoadingScreen} />
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen
         name="Pin"
         component={PinScreen}
-        options={WITHOUT_HEADER_OPTIONS}
+        options={TRANSPARENT_MODAL_WITH_FADE_ANIM_OPTIONS}
       />
       <Stack.Screen
-        name="MainTabs"
-        component={MainTabNavigator}
-        options={WITHOUT_HEADER_OPTIONS}
+        name="QRScanner"
+        component={QRScannerScreen}
+        options={MODAL_OPTIONS}
       />
+      <Stack.Screen
+        name="AddCertificate"
+        component={AddCertificateScreen}
+        options={TRANSPARENT_MODAL_WITH_FADE_ANIM_OPTIONS}
+      />
+      <Stack.Screen name="MainTabs" component={MainTabNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "pexels-photo-1535162.jpeg",
+      "filename" : "splash screen.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "splash screen@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "splash screen@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

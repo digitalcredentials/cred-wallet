@@ -8,16 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CredWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CredWalletTests.m */; };
+		01E8F27428E448EB8093DB7F /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDE36DCA0E9E4F9D9A0280C5 /* Poppins-Bold.ttf */; };
 		09D1788546231F8212ACAFAF /* libPods-CredWallet-CredWalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 462F31052124DF8D3095DB30 /* libPods-CredWallet-CredWalletTests.a */; };
+		10CF9D99C0634B598BAF61A2 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09FD9A032FB34895AE4B3425 /* Poppins-SemiBold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1641A34AC8214CD290C58952 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEE1F960F04554BCAC1639 /* Poppins-ThinItalic.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* CredWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CredWalletTests.m */; };
+		2FB6C7532F3F41BC931B7478 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA0213F51CF4434F967A97FA /* Poppins-Medium.ttf */; };
+		35163EBFED8D4A77A260041E /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D50DF0CE28CD492E8C117535 /* Poppins-LightItalic.ttf */; };
+		40A6BB68EE0F402F883EE7F9 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 332B517BF056429BB67A35A3 /* Poppins-SemiBoldItalic.ttf */; };
+		46B9C318CADF4A79832CFA75 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC3A9B26301743A1A1B44078 /* Poppins-ExtraBoldItalic.ttf */; };
+		561E8430620B42A7B9F130C8 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 615B620FD5BE45A88405AD1F /* Poppins-ExtraLight.ttf */; };
+		5C49FC9FADAF4BD1B76F076E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63AF4C4CBA024A3A8B66F433 /* Poppins-Light.ttf */; };
+		5D9F45A7EA624FC4906CFB49 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E613F2FBACF4CFA81DFB3AD /* Poppins-ExtraLightItalic.ttf */; };
+		674B812AEAC84CE9B8DF43B1 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7874F1E4132F4FCBAFF91E0A /* Poppins-ExtraBold.ttf */; };
+		6A177C9FAB0E4C3596281024 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8434D828AD484D548219F112 /* Poppins-Italic.ttf */; };
+		6C7A7BF1C2444DE0A3EBF04E /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D694CF8307544CC8BF767A1 /* Poppins-BlackItalic.ttf */; };
+		763C72C576E0486A91925CD8 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E3CF1350311433498998A6E /* Poppins-Regular.ttf */; };
+		7B015D16406E4F29B3F7CE4F /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01A45CFE73AF491D87A7E454 /* SFProDisplay-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		866FC34B3C224E1A933F20C9 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 055CCC7A15114D46B2A08DAC /* Poppins-MediumItalic.ttf */; };
+		9030E267BA604EEF9FFE4CCC /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7BFA232B725447EB8553760 /* Poppins-BoldItalic.ttf */; };
+		98976C93E9BC487AA94B0533 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A236637792E4EDFA66BBDEB /* Poppins-Thin.ttf */; };
 		E1393F2F9B0C5667C7BAF408 /* libPods-CredWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62DBC5F81806D17A463AD60 /* libPods-CredWallet.a */; };
+		FFC0A5408D684DCC90C212EB /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 574DB158962B46FABF7ECDB4 /* Poppins-Black.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +61,10 @@
 		00E356EE1AD99517003FC87E /* CredWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CredWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CredWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CredWalletTests.m; sourceTree = "<group>"; };
+		01A45CFE73AF491D87A7E454 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProDisplay-Regular.ttf"; path = "../app/assets/fonts/SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		055CCC7A15114D46B2A08DAC /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../app/assets/fonts/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		09FD9A032FB34895AE4B3425 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../app/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		0E613F2FBACF4CFA81DFB3AD /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLightItalic.ttf"; path = "../app/assets/fonts/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* CredWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CredWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CredWallet/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CredWallet/AppDelegate.m; sourceTree = "<group>"; };
@@ -51,14 +74,29 @@
 		14416B35310679D3820CE0B6 /* Pods-CredWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CredWallet.debug.xcconfig"; path = "Target Support Files/Pods-CredWallet/Pods-CredWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* CredWallet-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CredWallet-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* CredWallet-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CredWallet-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		332B517BF056429BB67A35A3 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.ttf"; path = "../app/assets/fonts/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		462F31052124DF8D3095DB30 /* libPods-CredWallet-CredWalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CredWallet-CredWalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CAC84B157CE625BBFC6EFA2 /* Pods-CredWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CredWallet.release.xcconfig"; path = "Target Support Files/Pods-CredWallet/Pods-CredWallet.release.xcconfig"; sourceTree = "<group>"; };
+		574DB158962B46FABF7ECDB4 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../app/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
+		615B620FD5BE45A88405AD1F /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../app/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		63AF4C4CBA024A3A8B66F433 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../app/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		6A236637792E4EDFA66BBDEB /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../app/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		6D694CF8307544CC8BF767A1 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../app/assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
+		7874F1E4132F4FCBAFF91E0A /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../app/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CredWallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8434D828AD484D548219F112 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../app/assets/fonts/Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		8E3CF1350311433498998A6E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../app/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		96432F85DD78641B9DE12738 /* Pods-CredWallet-CredWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CredWallet-CredWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-CredWallet-CredWalletTests/Pods-CredWallet-CredWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A62DBC5F81806D17A463AD60 /* libPods-CredWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CredWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64D3029D8FCC69ED59297A9 /* Pods-CredWallet-CredWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CredWallet-CredWalletTests.release.xcconfig"; path = "Target Support Files/Pods-CredWallet-CredWalletTests/Pods-CredWallet-CredWalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		A7BFA232B725447EB8553760 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../app/assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		BC3A9B26301743A1A1B44078 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../app/assets/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		BDE36DCA0E9E4F9D9A0280C5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../app/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		D50DF0CE28CD492E8C117535 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../app/assets/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F2FEE1F960F04554BCAC1639 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../app/assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		FA0213F51CF4434F967A97FA /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../app/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +175,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		81CBBA0A9EFD4694A5723E97 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8E3CF1350311433498998A6E /* Poppins-Regular.ttf */,
+				01A45CFE73AF491D87A7E454 /* SFProDisplay-Regular.ttf */,
+				574DB158962B46FABF7ECDB4 /* Poppins-Black.ttf */,
+				6D694CF8307544CC8BF767A1 /* Poppins-BlackItalic.ttf */,
+				BDE36DCA0E9E4F9D9A0280C5 /* Poppins-Bold.ttf */,
+				A7BFA232B725447EB8553760 /* Poppins-BoldItalic.ttf */,
+				7874F1E4132F4FCBAFF91E0A /* Poppins-ExtraBold.ttf */,
+				BC3A9B26301743A1A1B44078 /* Poppins-ExtraBoldItalic.ttf */,
+				615B620FD5BE45A88405AD1F /* Poppins-ExtraLight.ttf */,
+				0E613F2FBACF4CFA81DFB3AD /* Poppins-ExtraLightItalic.ttf */,
+				8434D828AD484D548219F112 /* Poppins-Italic.ttf */,
+				63AF4C4CBA024A3A8B66F433 /* Poppins-Light.ttf */,
+				D50DF0CE28CD492E8C117535 /* Poppins-LightItalic.ttf */,
+				FA0213F51CF4434F967A97FA /* Poppins-Medium.ttf */,
+				055CCC7A15114D46B2A08DAC /* Poppins-MediumItalic.ttf */,
+				09FD9A032FB34895AE4B3425 /* Poppins-SemiBold.ttf */,
+				332B517BF056429BB67A35A3 /* Poppins-SemiBoldItalic.ttf */,
+				6A236637792E4EDFA66BBDEB /* Poppins-Thin.ttf */,
+				F2FEE1F960F04554BCAC1639 /* Poppins-ThinItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +217,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				8A504A0E4F77D194F2F0E3AB /* Pods */,
+				81CBBA0A9EFD4694A5723E97 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -178,7 +243,6 @@
 				96432F85DD78641B9DE12738 /* Pods-CredWallet-CredWalletTests.debug.xcconfig */,
 				A64D3029D8FCC69ED59297A9 /* Pods-CredWallet-CredWalletTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -276,7 +340,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = A35W4MM59Y;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -324,6 +390,25 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				763C72C576E0486A91925CD8 /* Poppins-Regular.ttf in Resources */,
+				7B015D16406E4F29B3F7CE4F /* SFProDisplay-Regular.ttf in Resources */,
+				FFC0A5408D684DCC90C212EB /* Poppins-Black.ttf in Resources */,
+				6C7A7BF1C2444DE0A3EBF04E /* Poppins-BlackItalic.ttf in Resources */,
+				01E8F27428E448EB8093DB7F /* Poppins-Bold.ttf in Resources */,
+				9030E267BA604EEF9FFE4CCC /* Poppins-BoldItalic.ttf in Resources */,
+				674B812AEAC84CE9B8DF43B1 /* Poppins-ExtraBold.ttf in Resources */,
+				46B9C318CADF4A79832CFA75 /* Poppins-ExtraBoldItalic.ttf in Resources */,
+				561E8430620B42A7B9F130C8 /* Poppins-ExtraLight.ttf in Resources */,
+				5D9F45A7EA624FC4906CFB49 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				6A177C9FAB0E4C3596281024 /* Poppins-Italic.ttf in Resources */,
+				5C49FC9FADAF4BD1B76F076E /* Poppins-Light.ttf in Resources */,
+				35163EBFED8D4A77A260041E /* Poppins-LightItalic.ttf in Resources */,
+				2FB6C7532F3F41BC931B7478 /* Poppins-Medium.ttf in Resources */,
+				866FC34B3C224E1A933F20C9 /* Poppins-MediumItalic.ttf in Resources */,
+				10CF9D99C0634B598BAF61A2 /* Poppins-SemiBold.ttf in Resources */,
+				40A6BB68EE0F402F883EE7F9 /* Poppins-SemiBoldItalic.ttf in Resources */,
+				98976C93E9BC487AA94B0533 /* Poppins-Thin.ttf in Resources */,
+				1641A34AC8214CD290C58952 /* Poppins-ThinItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,7 +742,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = A35W4MM59Y;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CredWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -666,8 +754,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.wallet;
 				PRODUCT_NAME = CredWallet;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -680,7 +769,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = A35W4MM59Y;
 				INFOPLIST_FILE = CredWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -688,8 +780,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.wallet;
 				PRODUCT_NAME = CredWallet;
+				PROVISIONING_PROFILE_SPECIFIER = CredWallet_Distribution;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

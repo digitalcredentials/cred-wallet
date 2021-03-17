@@ -1,16 +1,37 @@
+import process from 'process';
+import buffer from 'buffer';
+global.Buffer = buffer.Buffer;
+
 import 'react-native-gesture-handler';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
+import { RootSiblingParent } from 'react-native-root-siblings';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import RootNavigator from './app/navigation/root-navigator';
-import { store } from './app/redux';
+import { ErrorAlertHandler, Loader } from './app/components';
+import { store, persistor } from './app/redux';
+
+import './shim';
 
 enableScreens();
 
-const App: FunctionComponent = () => (
-  <Provider store={store}>
-    <RootNavigator />
-  </Provider>
-);
+const App: React.FC = () => {
+  return (
+    <RootSiblingParent>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <PersistGate persistor={persistor} loading={null}>
+            <RootNavigator />
+            <Loader />
+            <ErrorAlertHandler />
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
+    </RootSiblingParent>
+  );
+};
 
 export default App;

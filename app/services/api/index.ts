@@ -1,11 +1,11 @@
 import apisauce, { ApisauceInstance } from 'apisauce';
-import config from '../../config/env';
-import { User } from './api.types';
+import CONFIG from '../../config/env';
+import { Credential, User } from './api.types';
 
 class Api {
   private client: ApisauceInstance;
 
-  constructor(baseURL = config.API_URL) {
+  constructor(baseURL = CONFIG.API_URL) {
     this.client = apisauce.create({
       baseURL,
       timeout: 10000,
@@ -14,6 +14,11 @@ class Api {
   }
 
   getUser = () => this.client.get<User>('/api/user/'); // TOOD: Remove this sample method
+
+  addCertificate = (url: string, data: any) =>
+    this.client.post<Credential>(url, data);
 }
+
+export const apiInstance = new Api();
 
 export default Api;

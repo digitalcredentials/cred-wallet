@@ -1,9 +1,9 @@
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import COLORS from '../../utils/colors';
+import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { COLORS } from '../../utils/colors';
 
 interface HomeScreenStyles {
   root: ViewStyle;
-  body: ViewStyle;
+  flexContainer: ViewStyle;
   description: TextStyle;
 }
 
@@ -12,8 +12,8 @@ export const styles = StyleSheet.create<HomeScreenStyles>({
     flex: 1,
     backgroundColor: COLORS.WHITE,
   },
-  body: {
-    padding: 20,
+  flexContainer: {
+    flex: 1,
   },
   description: {
     marginTop: 15,
