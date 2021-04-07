@@ -1,7 +1,10 @@
 import { Platform } from 'react-native';
 import queryString from 'query-string';
 import * as ed25519 from '@transmute/did-key-ed25519';
+import { keyToDidDoc } from '@transmute/did-key-common';
 import { generateSecureRandom } from 'react-native-securerandom';
+import { createIssuer } from '@digitalcredentials/sign-and-verify-core';
+import { uuid } from 'uuidv4';
 
 import { Credential } from '../services/api/api.types';
 import {
@@ -44,6 +47,30 @@ export async function generateDid(): Promise<string> {
   });
 
   return keyPair.controller;
+}
+
+export async function generateDidDoc(): Promise<any> {
+  const BYTES_LENGTH = 32;
+
+  const randomBytes = await generateSecureRandom(BYTES_LENGTH);
+  const keyPair = await ed25519.Ed25519KeyPair.generate({
+    secureRandom: () => randomBytes,
+  });
+
+  return keyToDidDoc(keyPair);
+}
+
+export async function generateAndProveDid(challenge: string): Promise<any> {
+  const didDoc = await generateDidDoc();
+  const issuer = createIssuer(didDoc);
+  const presentationId = uuid(); // can use this to track the request
+
+  const options = {
+    'verificationMethod': didDoc.publicKey[0].id,
+    'challenge': challenge
+  };
+  // this is the signed payload (REQUEST_PAYLOAD) to pass to vc_request_url
+  return issuer.createAndSignPresentation(null, presentationId, didDoc.controller, options);
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {
