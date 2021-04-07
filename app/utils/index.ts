@@ -63,14 +63,14 @@ async function generateDidDoc(): Promise<any> {
 export async function generateAndProveDid(challenge: string): Promise<any> {
   const didDoc = await generateDidDoc();
   const issuer = createIssuer(didDoc);
-  const presentationId = uuid(); // can use this to track the request
 
   const options = {
+    // TODO: in did-core, publicKey is deprecrated, changed to verificationMethod
     'verificationMethod': didDoc.publicKey[0].id,
     'challenge': challenge
   };
   // this is the signed payload (REQUEST_PAYLOAD) to pass to vc_request_url
-  return issuer.createAndSignPresentation(null, presentationId, didDoc.controller, options);
+  return issuer.createAndSignPresentation(null, 'TODO', didDoc.controller, options);
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {

@@ -83,6 +83,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             deeplinkUrl,
           );
           onAddCertificate({
+            // instead of passing just the DID to vc_request_url, create the DID and sign it with the challenge (resulting in REQUEST_PAYLOAD)
+            // I created this convenience function, but can't quite figure out how to wire it in
+            // generateAndProveDid(challenge)
             did: await generateDid(),
             ...parsedCertificateDeeplink,
           });
