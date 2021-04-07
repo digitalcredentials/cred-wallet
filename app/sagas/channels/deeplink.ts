@@ -77,12 +77,12 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
   const authorizeConfig: AuthConfiguration = {
     clientId: providerData.cliendId,
     issuer: providerData.issuer,
-    redirectUrl: 'dccrequest://request?aaa=1',
+    redirectUrl: 'dccrequest://oauth',
     serviceConfiguration: {
       authorizationEndpoint: providerData.issuerAuthorizationEndpoint,
       tokenEndpoint: providerData.issuerTokenEndpoint,
     },
-    scopes: [],
+    scopes: ['digitalcredentials'],
   };
   console.tron?.log('authorizeConfig', authorizeConfig);
   try {
@@ -104,6 +104,7 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
       payload,
     );
   } catch (e) {
+    console.tron?.log('error', e);
     // Cancelled authorization
   }
 }
