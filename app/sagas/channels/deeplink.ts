@@ -1,18 +1,62 @@
-import { actionChannel, delay, select, take, call } from 'redux-saga/effects';
-import { StaticNavigator } from '../../services/navigator';
+import {
+  actionChannel,
+  delay,
+  select,
+  take,
+  call,
+  put,
+} from 'redux-saga/effects';
+import queryString from 'query-string';
 import _ from 'lodash';
 
+import { StaticNavigator } from '../../services/navigator';
 import {
+  appActionCreators,
   appActionTypes,
   AppSelectors,
   SetDeeplinkUrlAction,
   SetVerificationProcessAction,
 } from '../../redux/app';
+import {
+  generateDid,
+  getDeeplinkType,
+  parseCertificateDeeplink,
+} from '../../utils';
+import { DeeplinkType } from '../../utils/types';
+import { certificatesActionCreators } from '../../redux/certificates';
 
-function handleDeeplinkUrl(deeplinkUrl: string) {
-  // TODO
-  switch (deeplinkUrl) {
-    default:
+function handleBackupDeeplink(backupDeeplinkUrl: string) {
+  StaticNavigator.navigateTo('CreateBackup', {
+    isLoadBackup: true,
+    backupPath: backupDeeplinkUrl,
+  });
+}
+
+function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
+  const parsedCertificateDeeplink = parseCertificateDeeplink(
+    certificateDeeplinkUrl,
+  );
+
+  const did = yield call(generateDid);
+  yield put(
+    certificatesActionCreators.addCertificate({
+      did,
+      ...parsedCertificateDeeplink,
+    }),
+  );
+
+  yield put(appActionCreators.setDeeplinkUrl(null));
+}
+
+function* handleDeeplinkUrl(deeplinkUrl: string) {
+  const deeplinkType: DeeplinkType = yield call(getDeeplinkType, deeplinkUrl);
+
+  switch (deeplinkType) {
+    case DeeplinkType.Backup:
+      yield call(handleBackupDeeplink, deeplinkUrl);
+      break;
+    case DeeplinkType.Default:
+      yield call(handleCertificateDeeplink, deeplinkUrl);
       break;
   }
 }

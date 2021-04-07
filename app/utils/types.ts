@@ -114,3 +114,20 @@ export interface ISwiperItem {
   title: string;
   description: string;
 }
+
+export enum DeeplinkType {
+  Backup = 'Backup',
+  Default = 'Default',
+  OAuth = 'OAuth',
+}
+
+export enum DeeplinkOAuthSourceType {
+  XPro = 'xpro',
+}
+
+export interface IDeeplinkSourceData {
+  cliendId: string;
+  issuer: string;
+  issuerAuthorizationEndpoint: string;
+  issuerTokenEndpoint: string;
+}

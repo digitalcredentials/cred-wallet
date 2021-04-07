@@ -5,6 +5,7 @@ import { generateSecureRandom } from 'react-native-securerandom';
 
 import { Credential } from '../services/api/api.types';
 import {
+  DeeplinkType,
   ICertificate,
   ICertificateDeeplink,
   IIssuer,
@@ -18,7 +19,7 @@ export const isAndroid = Platform.OS === 'android';
 
 export const isIOS = Platform.OS === 'ios';
 
-//TODO: remove sum function
+// TODO: remove sum function
 // created for jest first test only
 export function sum(a: number, b: number): number {
   return a + b;
@@ -33,6 +34,22 @@ export function parseCertificateDeeplink(
     challenge: parsedUrl.query.challenge,
     requestUrl: parsedUrl.query.request_url,
   };
+}
+
+export function getDeeplinkType(deeplinkUrl: string): DeeplinkType {
+  let resultDeeplinkType: DeeplinkType = DeeplinkType.Default;
+
+  const isBackup = isBackupUrl(deeplinkUrl);
+  if (isBackup) {
+    resultDeeplinkType = DeeplinkType.Backup;
+  } else {
+    const parsedUrl = queryString.parseUrl(deeplinkUrl);
+    if (parsedUrl.query.auth_type) {
+      resultDeeplinkType = DeeplinkType.OAuth;
+    }
+  }
+
+  return resultDeeplinkType;
 }
 
 export async function generateDid(): Promise<string> {

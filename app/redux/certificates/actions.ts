@@ -93,7 +93,7 @@ export interface ShareCertificateFailureAction {
 }
 
 interface CertificatesActionCreators {
-  addCertificate(): AddCertificateAction;
+  addCertificate(data: ICertificateDeeplinkWithDID): AddCertificateAction;
   addCertificateSuccess(): AddCertificateSuccessAction;
   addCertificateFailure(error: string): AddCertificateFailureAction;
 
@@ -137,7 +137,7 @@ const { Types, Creators } = createActions<
   CertificatesActionCreators
 >(
   {
-    addCertificate: null,
+    addCertificate: ['data'],
     addCertificateSuccess: null,
     addCertificateFailure: ['error'],
 

@@ -7,45 +7,32 @@ import {
   Linking,
   KeyboardAvoidingView,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 
 import { CredentialsSearchList, SearchBar } from '../../components';
 import { HomeScreenProps } from './home.props';
 import { styles } from './home.styles';
 import { CredentialsList } from '../../components/CredentialsList';
-import { useDispatch } from 'react-redux';
 import { useSearchCredentialsCallback } from '../../redux/search';
 import { COLORS } from '../../utils/colors';
 import { ICredentials } from '../../utils/types';
-import { useAddCertificateCallback } from '../../redux/certificates';
 import { useMount } from '../../utils/hooks';
-import {
-  generateDid,
-  isBackupUrl,
-  parseCertificateDeeplink,
-} from '../../utils';
-import {
-  useDeeplinkUrl,
-  useIsVerificationProcess,
-  useSetDeeplinkUrlCallback,
-} from '../../redux/app';
+import { isBackupUrl } from '../../utils';
+import { useSetDeeplinkUrlCallback } from '../../redux/app';
 
 const ANIMATION_DURATION = 250;
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
-  const isVerificationProcess = useIsVerificationProcess();
-  const deeplinkUrl = useDeeplinkUrl();
   const onSearch = useSearchCredentialsCallback(dispatch);
   const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
-  const onAddCertificate = useAddCertificateCallback(dispatch);
 
   /* ------ State ------ */
   const extendedListOpacity = useRef(new Animated.Value(1));
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [isExtendedList, setIsExtendedList] = useState<boolean>(true);
-  const prevIsVerificationProcess = useRef(true);
 
   useMount(() => {
     // Handle late deeplink urls
@@ -62,40 +49,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     });
     return () => Linking.removeAllListeners('url');
   });
-
-  // Dispatch addCertificate action only when isVerificationProcess === false
-  useEffect(() => {
-    if (
-      deeplinkUrl &&
-      prevIsVerificationProcess.current &&
-      !isVerificationProcess
-    ) {
-      const parseUrlAndDispatch = async () => {
-        const isBackupOpened = isBackupUrl(deeplinkUrl);
-
-        if (isBackupOpened) {
-          navigation.navigate('CreateBackup', {
-            isLoadBackup: true,
-            backupPath: deeplinkUrl,
-          });
-        } else {
-          const parsedCertificateDeeplink = parseCertificateDeeplink(
-            deeplinkUrl,
-          );
-          onAddCertificate({
-            did: await generateDid(),
-            ...parsedCertificateDeeplink,
-          });
-        }
-
-        onSetDeeplinkUrl(null);
-      };
-
-      parseUrlAndDispatch();
-    }
-
-    prevIsVerificationProcess.current = isVerificationProcess;
-  }, [deeplinkUrl, isVerificationProcess]);
 
   useEffect(() => {
     onSearch(searchValue);
