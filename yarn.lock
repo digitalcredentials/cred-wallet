@@ -4315,7 +4315,7 @@ internal-slot@^1.0.2:
     has "^1.0.3"
     side-channel "^1.0.2"
 
-invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -6701,6 +6701,19 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-native-app-auth@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-app-auth/-/react-native-app-auth-6.2.0.tgz#f05a35dd0370af271393cf50ea684ef3d49e010b"
+  integrity sha512-TaQu4jiWO2C4Uj/3lM+QNfg826Eldh8ykxEK1DsQqfD68ZEms6GTjR2S3MegTsezoVug6utt+j/XrZlB26X1gA==
+  dependencies:
+    invariant "2.2.4"
+    react-native-base64 "0.0.2"
+
+react-native-base64@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-base64/-/react-native-base64-0.0.2.tgz#c28463c2c6779ac3ec5fdd12979ebc8c5f9b410a"
+  integrity sha512-Fu/J1a2y0X22EJDWqJR2oEa1fpP4gTFjYxk8ElJdt1Yak3HOXmFJ7EohLVHU2DaQkgmKfw8qb7u/48gpzveRbg==
 
 react-native-camera@^3.40.0:
   version "3.40.0"

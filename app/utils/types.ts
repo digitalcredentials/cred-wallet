@@ -47,8 +47,15 @@ export interface ICredentials extends IWithID {
 }
 
 export interface ICertificateDeeplink {
-  challenge: any;
-  requestUrl: any;
+  challenge: string;
+  requestUrl: string;
+}
+
+export interface IOAuthDeeplink {
+  authType: DeeplinkOAuthSourceType;
+  issuer: string;
+  vcRequestUrl: string;
+  challenge: string;
 }
 
 export interface ISubjectDID {

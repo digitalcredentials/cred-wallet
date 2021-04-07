@@ -5,10 +5,12 @@ import { generateSecureRandom } from 'react-native-securerandom';
 
 import { Credential } from '../services/api/api.types';
 import {
+  DeeplinkOAuthSourceType,
   DeeplinkType,
   ICertificate,
   ICertificateDeeplink,
   IIssuer,
+  IOAuthDeeplink,
   ShareActivityType,
 } from './types';
 import { ImageSource } from 'react-native-vector-icons/Icon';
@@ -25,14 +27,25 @@ export function sum(a: number, b: number): number {
   return a + b;
 }
 
+export function parseOAuthDeeplink(deeplinkUrl: string): IOAuthDeeplink {
+  const parsedUrl = queryString.parseUrl(deeplinkUrl);
+
+  return {
+    authType: parsedUrl.query.auth_type as DeeplinkOAuthSourceType,
+    issuer: parsedUrl.query.issuer as string,
+    vcRequestUrl: parsedUrl.query.vc_request_url as string,
+    challenge: parsedUrl.query.challenge as string,
+  };
+}
+
 export function parseCertificateDeeplink(
   deeplinkUrl: string,
 ): ICertificateDeeplink {
   const parsedUrl = queryString.parseUrl(deeplinkUrl);
 
   return {
-    challenge: parsedUrl.query.challenge,
-    requestUrl: parsedUrl.query.request_url,
+    challenge: parsedUrl.query.challenge as string,
+    requestUrl: parsedUrl.query.request_url as string,
   };
 }
 

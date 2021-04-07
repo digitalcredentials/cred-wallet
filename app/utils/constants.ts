@@ -13,7 +13,7 @@ export const EXTENDED_HIT_SLOP: Insets = {
 
 export const BACKUP_EXTENSION = 'dcc';
 
-export const DeeplinkOAuthSourceData: Record<
+export const DEEPLINK_OAUTH_SOURCE_DATA: Record<
   DeeplinkOAuthSourceType,
   IDeeplinkSourceData
 > = {
