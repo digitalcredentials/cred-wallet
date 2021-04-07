@@ -49,7 +49,7 @@ export async function generateDid(): Promise<string> {
   return keyPair.controller;
 }
 
-export async function generateDidDoc(): Promise<any> {
+async function generateDidDoc(): Promise<any> {
   const BYTES_LENGTH = 32;
 
   const randomBytes = await generateSecureRandom(BYTES_LENGTH);
