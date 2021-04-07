@@ -49,7 +49,7 @@ export async function generateDid(): Promise<string> {
   return keyPair.controller;
 }
 
-async function generateDidDoc(): Promise<any> {
+async function generateUnlockedDidDoc(): Promise<any> {
   const BYTES_LENGTH = 32;
 
   const randomBytes = await generateSecureRandom(BYTES_LENGTH);
@@ -57,20 +57,23 @@ async function generateDidDoc(): Promise<any> {
     secureRandom: () => randomBytes,
   });
 
+  // TODO: this may be missing private key info
   return keyToDidDoc(keyPair);
 }
 
 export async function generateAndProveDid(challenge: string): Promise<any> {
-  const didDoc = await generateDidDoc();
+  const didDoc = await generateUnlockedDidDoc();
   const issuer = createIssuer(didDoc);
+  // TODO: don't need presentationId; fix signature
+  const presentationId = uuid();
 
   const options = {
-    // TODO: in did-core, publicKey is deprecrated, changed to verificationMethod
+    // TODO: in did-core, publicKey is deprecrated, changed to
     'verificationMethod': didDoc.publicKey[0].id,
     'challenge': challenge
   };
   // this is the signed payload (REQUEST_PAYLOAD) to pass to vc_request_url
-  return issuer.createAndSignPresentation(null, 'TODO', didDoc.controller, options);
+  return issuer.createAndSignPresentation(null, presentationId, didDoc.controller, options);
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {
