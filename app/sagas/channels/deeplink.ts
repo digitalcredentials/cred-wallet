@@ -62,17 +62,12 @@ function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
 }
 
 function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
-  console.tron?.log('handleOAuthDeeplink', oauthDeeplinkUrl);
   const parsedOAuthDeeplink: IOAuthDeeplink = yield call(
     parseOAuthDeeplink,
     oauthDeeplinkUrl,
   );
 
-  console.tron?.log('parsedOAuthDeeplink', parsedOAuthDeeplink);
-
   const providerData = DEEPLINK_OAUTH_SOURCE_DATA[parsedOAuthDeeplink.authType];
-
-  console.tron?.log('providerData', providerData);
 
   const authorizeConfig: AuthConfiguration = {
     clientId: providerData.cliendId,
@@ -84,28 +79,31 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
     },
     scopes: ['digitalcredentials'],
   };
-  console.tron?.log('authorizeConfig', authorizeConfig);
+
   try {
     const authorizeResponse = yield call(authorize, authorizeConfig);
-    console.tron?.log('response', authorizeResponse);
-
-    // TODO: replace dummyTokens by real
-    const dummyTokens = {};
 
     const payload = {
-      // TODO: generate did token???
-      ...dummyTokens,
+      // TODO
+      holder: yield call(generateDid),
+      id: yield call(generateDid),
+      ...authorizeResponse,
+      ...parsedOAuthDeeplink,
     };
 
-    // TODO: check addCertificate & do it like there
-    const addCertResponse = yield call(
-      apiInstance.addCertificate,
-      parsedOAuthDeeplink.vcRequestUrl,
-      payload,
-    );
+    // TODO: add correct payload
+    const response = yield fetch(parsedOAuthDeeplink.vcRequestUrl, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `${authorizeResponse.tokenType} ${authorizeResponse.accessToken}`,
+      },
+      body: JSON.stringify(payload),
+    });
   } catch (e) {
-    console.tron?.log('error', e);
     // Cancelled authorization
+    console.tron?.log('error', e);
   }
 }
 
