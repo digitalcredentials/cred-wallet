@@ -1,10 +1,11 @@
 import { Platform } from 'react-native';
 import queryString from 'query-string';
 import * as ed25519 from '@transmute/did-key-ed25519';
-import { keyToDidDoc } from '@transmute/did-key-common';
 import { generateSecureRandom } from 'react-native-securerandom';
-import { createIssuer } from '@digitalcredentials/sign-and-verify-core';
-import { uuid } from 'uuidv4';
+import vc from "vc-js";
+const { suites: { Ed25519Signature2018 } } = require('jsonld-signatures');
+const didContext = require('did-context');
+import { contexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import { Credential } from '../services/api/api.types';
 import {
@@ -38,42 +39,59 @@ export function parseCertificateDeeplink(
   };
 }
 
-export async function generateDid(): Promise<string> {
+async function generateDidKeyPair(): Promise<ed25519.Ed25519KeyPair> {
   const BYTES_LENGTH = 32;
 
   const randomBytes = await generateSecureRandom(BYTES_LENGTH);
-  const keyPair = await ed25519.Ed25519KeyPair.generate({
+  return ed25519.Ed25519KeyPair.generate({
     secureRandom: () => randomBytes,
   });
+}
 
+export async function generateDid(): Promise<string> {
+  const keyPair = await generateDidKeyPair();
   return keyPair.controller;
 }
 
-async function generateUnlockedDidDoc(): Promise<any> {
-  const BYTES_LENGTH = 32;
-
-  const randomBytes = await generateSecureRandom(BYTES_LENGTH);
-  const keyPair = await ed25519.Ed25519KeyPair.generate({
-    secureRandom: () => randomBytes,
+function generateDidKeySuite(
+  keyPair: ed25519.Ed25519KeyPair
+): any {
+  const suite = new Ed25519Signature2018({
+    verificationMethod: keyPair.id,
+    key: keyPair
   });
-
-  // TODO: this may be missing private key info
-  return keyToDidDoc(keyPair);
+  return suite;
 }
 
 export async function generateAndProveDid(challenge: string): Promise<any> {
-  const didDoc = await generateUnlockedDidDoc();
-  const issuer = createIssuer(didDoc);
-  // TODO: don't need presentationId; fix signature
-  const presentationId = uuid();
+  const keyPair = await generateDidKeyPair();
+  const suite = generateDidKeySuite(keyPair);
 
-  const options = {
-    // TODO: in did-core, publicKey is deprecrated, changed to
-    'verificationMethod': didDoc.publicKey[0].id,
-    'challenge': challenge
-  };
-  // this is the signed payload (REQUEST_PAYLOAD) to pass to vc_request_url
-  return issuer.createAndSignPresentation(null, presentationId, didDoc.controller, options);
+  const documentLoader = documentLoaderFactory.pluginFactory
+    .build({
+      contexts: {
+        ...contexts.W3C_Verifiable_Credentials,
+        ...contexts.W3ID_Security_Vocabulary,
+        ...contexts.W3C_Decentralized_Identifiers
+      },
+    })
+    // workaround for DB using permaid
+    .addContext({ [didContext.constants.DID_CONTEXT_URL]: didContext.contexts.get(didContext.constants.DID_CONTEXT_URL) })
+    .buildDocumentLoader();
+
+  const presentation = vc.createPresentation({
+    verifiableCredential: null,
+    holder: keyPair.controller
+  });
+  presentation["@context"].push('https://w3id.org/did/v1');
+
+  const signedPresentation = await vc.signPresentation({
+    presentation: presentation,
+    documentLoader: documentLoader,
+    suite,
+    challenge: challenge
+  });
+  return signedPresentation;
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {
