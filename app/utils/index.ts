@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import queryString from 'query-string';
 import * as ed25519 from '@transmute/did-key-ed25519';
 import { generateSecureRandom } from 'react-native-securerandom';
-import vc from "vc-js";
+import vc from '@transmute/vc.js';
 const { suites: { Ed25519Signature2018 } } = require('jsonld-signatures');
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
@@ -91,13 +91,13 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
     .addContext({ [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_V1 })
     .buildDocumentLoader();
 
-  const presentation = vc.createPresentation({
+  const presentation = await vc.ld.createPresentation({
     verifiableCredential: null,
     holder: keyPair.controller
   });
   presentation["@context"].push('https://w3id.org/did/v1');
 
-  const signedPresentation = await vc.signPresentation({
+  const signedPresentation = await vc.ld.signPresentation({
     presentation: presentation,
     documentLoader: documentLoader,
     suite,
