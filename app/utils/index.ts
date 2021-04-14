@@ -24,6 +24,19 @@ export const isIOS = Platform.OS === 'ios';
 
 export const DID_CONTEXT_URL = 'https://www.w3.org/ns/did/v1';
 
+import W3ID_SEC_V1 from './sec-v1.json';
+import W3ID_SEC_V2 from './sec-v2.json';
+
+const W3ID_SEC_URL_V1 = 'https://w3id.org/security/v1';
+const W3ID_SEC_URL_V2 = 'https://w3id.org/security/v2';
+
+import W3C_VC_DATA_MODEL_V1 from './vc-v1.json';
+import W3C_VC_DATA_MODEL_EXAMPLES_V1 from './vc-example-v1.json';
+
+const W3C_VC_DATA_MODEL_URL_V1 = 'https://www.w3.org/2018/credentials/v1';
+const W3C_VC_DATA_MODEL_EXAMPLES_URL_V1 =
+  'https://www.w3.org/2018/credentials/examples/v1';
+
 //TODO: remove sum function
 // created for jest first test only
 export function sum(a: number, b: number): number {
@@ -70,14 +83,12 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
   const suite = generateDidKeySuite(keyPair);
 
   const documentLoader = documentLoaderFactory.pluginFactory
-    .build({
-      contexts: {
-        ...contexts.W3C_Verifiable_Credentials,
-        ...contexts.W3ID_Security_Vocabulary,
-        ...contexts.W3C_Decentralized_Identifiers
-      },
-    })
+    .build()
     .addContext({ [DID_CONTEXT_URL]: DidContext })
+    .addContext({ [W3ID_SEC_URL_V1]: W3ID_SEC_V1 })
+    .addContext({ [W3ID_SEC_URL_V2]: W3ID_SEC_V2 })
+    .addContext({ [W3C_VC_DATA_MODEL_URL_V1]: W3C_VC_DATA_MODEL_V1 })
+    .addContext({ [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_URL_V1 })
     .buildDocumentLoader();
 
   const presentation = vc.createPresentation({
