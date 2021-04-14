@@ -59,6 +59,7 @@
         "./types/vc-js"
       ]
     },
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",
