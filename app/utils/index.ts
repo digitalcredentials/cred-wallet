@@ -4,7 +4,6 @@ import * as ed25519 from '@transmute/did-key-ed25519';
 import { generateSecureRandom } from 'react-native-securerandom';
 import vc from "vc-js";
 const { suites: { Ed25519Signature2018 } } = require('jsonld-signatures');
-const didContext = require('did-context');
 import { contexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import { Credential } from '../services/api/api.types';
@@ -21,6 +20,8 @@ import { BACKUP_EXTENSION } from './constants';
 export const isAndroid = Platform.OS === 'android';
 
 export const isIOS = Platform.OS === 'ios';
+
+export const DID_CONTEXT_URL = 'https://www.w3.org/ns/did/v1';
 
 //TODO: remove sum function
 // created for jest first test only
@@ -76,7 +77,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
       },
     })
     // workaround for DB using permaid
-    .addContext({ [didContext.constants.DID_CONTEXT_URL]: didContext.contexts.get(didContext.constants.DID_CONTEXT_URL) })
+    .addContext({ [DID_CONTEXT_URL]:  })
     .buildDocumentLoader();
 
   const presentation = vc.createPresentation({
