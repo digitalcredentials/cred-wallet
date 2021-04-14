@@ -4,7 +4,7 @@ import * as ed25519 from '@transmute/did-key-ed25519';
 import { generateSecureRandom } from 'react-native-securerandom';
 import vc from "vc-js";
 const { suites: { Ed25519Signature2018 } } = require('jsonld-signatures');
-import { contexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
+import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import { Credential } from '../services/api/api.types';
 import {
@@ -88,7 +88,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
     .addContext({ [W3ID_SEC_URL_V1]: W3ID_SEC_V1 })
     .addContext({ [W3ID_SEC_URL_V2]: W3ID_SEC_V2 })
     .addContext({ [W3C_VC_DATA_MODEL_URL_V1]: W3C_VC_DATA_MODEL_V1 })
-    .addContext({ [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_URL_V1 })
+    .addContext({ [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_V1 })
     .buildDocumentLoader();
 
   const presentation = vc.createPresentation({
