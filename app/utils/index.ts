@@ -16,6 +16,7 @@ import {
 import { ImageSource } from 'react-native-vector-icons/Icon';
 import { IMAGES } from '../assets';
 import { BACKUP_EXTENSION } from './constants';
+import DidContext from './did-v1.json';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -76,8 +77,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
         ...contexts.W3C_Decentralized_Identifiers
       },
     })
-    // workaround for DB using permaid
-    .addContext({ [DID_CONTEXT_URL]:  })
+    .addContext({ [DID_CONTEXT_URL]: DidContext })
     .buildDocumentLoader();
 
   const presentation = vc.createPresentation({
