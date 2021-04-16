@@ -3,14 +3,11 @@ import queryString from 'query-string';
 import * as ed25519 from '@transmute/did-key-ed25519';
 import { generateSecureRandom } from 'react-native-securerandom';
 import vc from '@transmute/vc.js';
-const {
-  suites: { Ed25519Signature2018 },
-} = require('jsonld-signatures');
 
 // @ts-ignore
-import JSONLD from 'jsonld-signatures';
+import { Ed25519Signature2018 } from '@transmute/ed25519-signature-2018';
 
-console.tron?.log('JSONLD', JSONLD);
+console.tron?.log('JSONLD', Ed25519Signature2018);
 
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
@@ -108,9 +105,9 @@ export async function generateDid(): Promise<string> {
 
 function generateDidKeySuite(keyPair: ed25519.Ed25519KeyPair): any {
   const suite = new Ed25519Signature2018({
-    verificationMethod: keyPair.id,
     key: keyPair,
   });
+
   return suite;
 }
 
@@ -137,6 +134,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
     verifiableCredential: null,
     holder: keyPair.controller,
   });
+
   console.tron?.log('presentation', presentation);
   presentation['@context'].push('https://w3id.org/did/v1');
 
