@@ -6,6 +6,12 @@ import vc from '@transmute/vc.js';
 const {
   suites: { Ed25519Signature2018 },
 } = require('jsonld-signatures');
+
+// @ts-ignore
+import JSONLD from 'jsonld-signatures';
+
+console.tron?.log('JSONLD', JSONLD);
+
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import { Credential } from '../services/api/api.types';
@@ -109,8 +115,11 @@ function generateDidKeySuite(keyPair: ed25519.Ed25519KeyPair): any {
 }
 
 export async function generateAndProveDid(challenge: string): Promise<any> {
+  console.tron?.log('start');
   const keyPair = await generateDidKeyPair();
+  console.tron?.log('keyPair', keyPair);
   const suite = generateDidKeySuite(keyPair);
+  console.tron?.log('suite', suite);
 
   const documentLoader = documentLoaderFactory.pluginFactory
     .build()
@@ -122,11 +131,13 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
       [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_V1,
     })
     .buildDocumentLoader();
+  console.tron?.log('documentLoader', documentLoader);
 
   const presentation = await vc.ld.createPresentation({
     verifiableCredential: null,
     holder: keyPair.controller,
   });
+  console.tron?.log('presentation', presentation);
   presentation['@context'].push('https://w3id.org/did/v1');
 
   const signedPresentation = await vc.ld.signPresentation({
@@ -135,6 +146,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
     suite,
     challenge: challenge,
   });
+  console.tron?.log('signedPres', signedPresentation);
   return signedPresentation;
 }
 

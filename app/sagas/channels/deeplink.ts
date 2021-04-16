@@ -18,6 +18,7 @@ import {
   SetVerificationProcessAction,
 } from '../../redux/app';
 import {
+  generateAndProveDid,
   generateDid,
   getDeeplinkType,
   parseCertificateDeeplink,
@@ -83,13 +84,14 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
   try {
     const authorizeResponse = yield call(authorize, authorizeConfig);
 
-    const payload = {
-      // TODO
-      holder: yield call(generateDid),
-      id: yield call(generateDid),
-      ...authorizeResponse,
-      ...parsedOAuthDeeplink,
-    };
+    console.tron?.log('authorizeResponse', authorizeResponse);
+
+    const payload = yield call(
+      generateAndProveDid,
+      parsedOAuthDeeplink.challenge,
+    );
+
+    console.tron?.log('payload', payload);
 
     // TODO: add correct payload
     const response = yield fetch(parsedOAuthDeeplink.vcRequestUrl, {
@@ -101,6 +103,8 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
       },
       body: JSON.stringify(payload),
     });
+
+    console.tron?.log('response', response);
   } catch (e) {
     // Cancelled authorization
     console.tron?.log('error', e);
