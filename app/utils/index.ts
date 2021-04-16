@@ -1,10 +1,12 @@
 import { Platform } from 'react-native';
 import queryString from 'query-string';
 import * as ed25519 from '@transmute/did-key-ed25519';
-import { keyToDidDoc } from '@transmute/did-key-common';
 import { generateSecureRandom } from 'react-native-securerandom';
-import { createIssuer } from '@digitalcredentials/sign-and-verify-core';
-import { uuid } from 'uuidv4';
+import vc from '@transmute/vc.js';
+const {
+  suites: { Ed25519Signature2018 },
+} = require('jsonld-signatures');
+import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import { Credential } from '../services/api/api.types';
 import {
@@ -19,12 +21,28 @@ import {
 import { ImageSource } from 'react-native-vector-icons/Icon';
 import { IMAGES } from '../assets';
 import { BACKUP_EXTENSION } from './constants';
+import DidContext from './did-v1.json';
 
 export const isAndroid = Platform.OS === 'android';
 
 export const isIOS = Platform.OS === 'ios';
 
-// TODO: remove sum function
+export const DID_CONTEXT_URL = 'https://www.w3.org/ns/did/v1';
+
+import W3ID_SEC_V1 from './sec-v1.json';
+import W3ID_SEC_V2 from './sec-v2.json';
+
+const W3ID_SEC_URL_V1 = 'https://w3id.org/security/v1';
+const W3ID_SEC_URL_V2 = 'https://w3id.org/security/v2';
+
+import W3C_VC_DATA_MODEL_V1 from './vc-v1.json';
+import W3C_VC_DATA_MODEL_EXAMPLES_V1 from './vc-example-v1.json';
+
+const W3C_VC_DATA_MODEL_URL_V1 = 'https://www.w3.org/2018/credentials/v1';
+const W3C_VC_DATA_MODEL_EXAMPLES_URL_V1 =
+  'https://www.w3.org/2018/credentials/examples/v1';
+
+//TODO: remove sum function
 // created for jest first test only
 export function sum(a: number, b: number): number {
   return a + b;
@@ -68,42 +86,56 @@ export function getDeeplinkType(deeplinkUrl: string): DeeplinkType {
   return resultDeeplinkType;
 }
 
-export async function generateDid(): Promise<string> {
+async function generateDidKeyPair(): Promise<ed25519.Ed25519KeyPair> {
   const BYTES_LENGTH = 32;
 
   const randomBytes = await generateSecureRandom(BYTES_LENGTH);
-  const keyPair = await ed25519.Ed25519KeyPair.generate({
+  return ed25519.Ed25519KeyPair.generate({
     secureRandom: () => randomBytes,
   });
+}
 
+export async function generateDid(): Promise<string> {
+  const keyPair = await generateDidKeyPair();
   return keyPair.controller;
 }
 
-async function generateUnlockedDidDoc(): Promise<any> {
-  const BYTES_LENGTH = 32;
-
-  const randomBytes = await generateSecureRandom(BYTES_LENGTH);
-  const keyPair = await ed25519.Ed25519KeyPair.generate({
-    secureRandom: () => randomBytes,
+function generateDidKeySuite(keyPair: ed25519.Ed25519KeyPair): any {
+  const suite = new Ed25519Signature2018({
+    verificationMethod: keyPair.id,
+    key: keyPair,
   });
-
-  // TODO: this may be missing private key info
-  return keyToDidDoc(keyPair);
+  return suite;
 }
 
 export async function generateAndProveDid(challenge: string): Promise<any> {
-  const didDoc = await generateUnlockedDidDoc();
-  const issuer = createIssuer(didDoc);
-  // TODO: don't need presentationId; fix signature
-  const presentationId = uuid();
+  const keyPair = await generateDidKeyPair();
+  const suite = generateDidKeySuite(keyPair);
 
-  const options = {
-    // TODO: in did-core, publicKey is deprecrated, changed to
-    'verificationMethod': didDoc.publicKey[0].id,
-    'challenge': challenge
-  };
-  // this is the signed payload (REQUEST_PAYLOAD) to pass to vc_request_url
-  return issuer.createAndSignPresentation(null, presentationId, didDoc.controller, options);
+  const documentLoader = documentLoaderFactory.pluginFactory
+    .build()
+    .addContext({ [DID_CONTEXT_URL]: DidContext })
+    .addContext({ [W3ID_SEC_URL_V1]: W3ID_SEC_V1 })
+    .addContext({ [W3ID_SEC_URL_V2]: W3ID_SEC_V2 })
+    .addContext({ [W3C_VC_DATA_MODEL_URL_V1]: W3C_VC_DATA_MODEL_V1 })
+    .addContext({
+      [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_V1,
+    })
+    .buildDocumentLoader();
+
+  const presentation = await vc.ld.createPresentation({
+    verifiableCredential: null,
+    holder: keyPair.controller,
+  });
+  presentation['@context'].push('https://w3id.org/did/v1');
+
+  const signedPresentation = await vc.ld.signPresentation({
+    presentation: presentation,
+    documentLoader: documentLoader,
+    suite,
+    challenge: challenge,
+  });
+  return signedPresentation;
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {
