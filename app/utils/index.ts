@@ -7,8 +7,6 @@ import vc from '@transmute/vc.js';
 // @ts-ignore
 import { Ed25519Signature2018 } from '@transmute/ed25519-signature-2018';
 
-console.tron?.log('JSONLD', Ed25519Signature2018);
-
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import { Credential } from '../services/api/api.types';
@@ -25,6 +23,7 @@ import { ImageSource } from 'react-native-vector-icons/Icon';
 import { IMAGES } from '../assets';
 import { BACKUP_EXTENSION } from './constants';
 import DidContext from './did-v1.json';
+import JWS_V1 from './jws2020.json';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -37,6 +36,8 @@ import W3ID_SEC_V2 from './sec-v2.json';
 
 const W3ID_SEC_URL_V1 = 'https://w3id.org/security/v1';
 const W3ID_SEC_URL_V2 = 'https://w3id.org/security/v2';
+
+const JWS_URL_V1 = 'https://w3id.org/security/jws/v1';
 
 import W3C_VC_DATA_MODEL_V1 from './vc-v1.json';
 import W3C_VC_DATA_MODEL_EXAMPLES_V1 from './vc-example-v1.json';
@@ -105,49 +106,58 @@ export async function generateDid(): Promise<string> {
 
 function generateDidKeySuite(keyPair: ed25519.Ed25519KeyPair): any {
   const suite = new Ed25519Signature2018({
+    // verificationMethod: keyPair.id,
     key: keyPair,
   });
-
   return suite;
 }
 
+function createPresentation(holder: string): any {
+  return {
+    '@context': [
+      'https://www.w3.org/2018/credentials/v1',
+      'https://w3id.org/security/jws/v1',
+    ],
+    type: ['VerifiablePresentation'],
+    holder: holder,
+  };
+}
+
 export async function generateAndProveDid(challenge: string): Promise<any> {
-  console.tron?.log('start');
+  console.tron.log('start');
   const keyPair = await generateDidKeyPair();
-  console.tron?.log('keyPair', keyPair);
+  console.tron.log('keyPair', keyPair);
   const suite = generateDidKeySuite(keyPair);
-  console.tron?.log('suite', suite);
+  console.tron.log('suite', suite);
 
   const documentLoader = documentLoaderFactory.pluginFactory
     .build()
     .addContext({ [DID_CONTEXT_URL]: DidContext })
     .addContext({ [W3ID_SEC_URL_V1]: W3ID_SEC_V1 })
     .addContext({ [W3ID_SEC_URL_V2]: W3ID_SEC_V2 })
+    .addContext({ [JWS_URL_V1]: JWS_V1 })
     .addContext({ [W3C_VC_DATA_MODEL_URL_V1]: W3C_VC_DATA_MODEL_V1 })
     .addContext({
       [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_V1,
     })
     .buildDocumentLoader();
-  console.tron?.log('documentLoader', documentLoader);
+  console.tron.log('documentLoader', documentLoader);
 
-  const presentation = await vc.ld.createPresentation({
-    verifiableCredential: null,
-    holder: keyPair.controller,
-  });
+  console.tron.log('controller: ' + keyPair.controller);
 
-  console.tron?.log('presentation', presentation);
-  presentation['@context'].push('https://w3id.org/did/v1');
-
+  const presentation = createPresentation(keyPair.controller);
+  console.tron.log('presentation', JSON.stringify(presentation, null, 2));
+  //presentation['@context'].push('https://w3id.org/did/v1');
   const signedPresentation = await vc.ld.signPresentation({
     presentation: presentation,
     documentLoader: documentLoader,
     suite,
     challenge: challenge,
   });
-  console.tron?.log('signedPres', signedPresentation);
+
+  console.tron.log('signedPres', signedPresentation);
   return signedPresentation;
 }
-
 export function getCredentialCertificate(credential: Credential): ICertificate {
   const proof = {};
 

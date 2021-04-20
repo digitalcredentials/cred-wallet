@@ -18,12 +18,12 @@ import {
   SetVerificationProcessAction,
 } from '../../redux/app';
 import {
-  generateAndProveDid,
   generateDid,
   getDeeplinkType,
   parseCertificateDeeplink,
   parseOAuthDeeplink,
 } from '../../utils';
+import { generateAndProveDid } from '../../didKey';
 import {
   DeeplinkType,
   ICertificateDeeplink,
