@@ -42,6 +42,7 @@ function createPresentation(holder: string): any {
       'https://w3id.org/security/jws/v1',
     ],
     type: ['VerifiablePresentation'],
+    id: '123', // TODO: uuid
     holder: holder,
   };
 }

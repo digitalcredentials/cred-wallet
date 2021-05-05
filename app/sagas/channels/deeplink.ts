@@ -93,6 +93,8 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
 
     console.tron?.log('payload', payload);
 
+    console.tron?.log('headers', `${authorizeResponse.tokenType} ${authorizeResponse.accessToken}`);
+
     // TODO: add correct payload
     const response = yield fetch(parsedOAuthDeeplink.vcRequestUrl, {
       method: 'POST',

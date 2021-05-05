@@ -1,13 +1,36 @@
 import { Platform } from 'react-native';
 import queryString from 'query-string';
-import * as ed25519 from '@transmute/did-key-ed25519';
+const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 import { generateSecureRandom } from 'react-native-securerandom';
-import vc from '@transmute/vc.js';
+const vc = require('@digitalbazaar/vc');
+const ed25519 = require('@digitalbazaar/ed25519-signature-2020');
+const ed25519Verification = require('@digitalbazaar/ed25519-verification-key-2020');
 
-// @ts-ignore
-import { Ed25519Signature2018 } from '@transmute/ed25519-signature-2018';
+import { contexts as ldContexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
-import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
+const didContext = require('did-context');
+const ed25519Context = require('ed25519-signature-2020-context');
+const DccContextV1Url = "https://w3id.org/dcc/v1";
+const x25519Ctx = require('x25519-key-agreement-2020-context');
+
+export function getController(fullDid: string) {
+  return fullDid.split('#')[0];
+}
+
+export function getCustomLoader(): any {
+  const customLoaderProto = documentLoaderFactory.pluginFactory
+    .build({
+      contexts: {
+        ...ldContexts.W3C_Verifiable_Credentials,
+        ...ldContexts.W3ID_Security_Vocabulary,
+        ...ldContexts.W3C_Decentralized_Identifiers
+      },
+    })
+    .addContext({ [ed25519Context.constants.CONTEXT_URL]: ed25519.contexts.get(ed25519Context.constants.CONTEXT_URL) })
+    .addContext({ [didContext.constants.DID_CONTEXT_URL]: didContext.contexts.get(didContext.constants.DID_CONTEXT_URL) })
+    .addContext({ [x25519Ctx.constants.CONTEXT_URL]: x25519Ctx.contexts.get(x25519Ctx.constants.CONTEXT_URL) });
+  return customLoaderProto;
+}
 
 import { Credential } from '../services/api/api.types';
 import {
@@ -22,29 +45,10 @@ import {
 import { ImageSource } from 'react-native-vector-icons/Icon';
 import { IMAGES } from '../assets';
 import { BACKUP_EXTENSION } from './constants';
-import DidContext from './did-v1.json';
-import JWS_V1 from './jws2020.json';
 
 export const isAndroid = Platform.OS === 'android';
 
 export const isIOS = Platform.OS === 'ios';
-
-export const DID_CONTEXT_URL = 'https://www.w3.org/ns/did/v1';
-
-import W3ID_SEC_V1 from './sec-v1.json';
-import W3ID_SEC_V2 from './sec-v2.json';
-
-const W3ID_SEC_URL_V1 = 'https://w3id.org/security/v1';
-const W3ID_SEC_URL_V2 = 'https://w3id.org/security/v2';
-
-const JWS_URL_V1 = 'https://w3id.org/security/jws/v1';
-
-import W3C_VC_DATA_MODEL_V1 from './vc-v1.json';
-import W3C_VC_DATA_MODEL_EXAMPLES_V1 from './vc-example-v1.json';
-
-const W3C_VC_DATA_MODEL_URL_V1 = 'https://www.w3.org/2018/credentials/v1';
-const W3C_VC_DATA_MODEL_EXAMPLES_URL_V1 =
-  'https://www.w3.org/2018/credentials/examples/v1';
 
 //TODO: remove sum function
 // created for jest first test only
@@ -90,13 +94,15 @@ export function getDeeplinkType(deeplinkUrl: string): DeeplinkType {
   return resultDeeplinkType;
 }
 
-async function generateDidKeyPair(): Promise<ed25519.Ed25519KeyPair> {
+async function generateDidKeyPair(): Promise<any> {
   const BYTES_LENGTH = 32;
 
   const randomBytes = await generateSecureRandom(BYTES_LENGTH);
-  return ed25519.Ed25519KeyPair.generate({
-    secureRandom: () => randomBytes,
-  });
+
+  const { didKeyDocument, keyPairs } = await didKeyDriver.generate({ randomBytes });
+  const kp = keyPairs.entries().next().value;
+  const v = kp[1];
+  return v;
 }
 
 export async function generateDid(): Promise<string> {
@@ -104,22 +110,22 @@ export async function generateDid(): Promise<string> {
   return keyPair.controller;
 }
 
-function generateDidKeySuite(keyPair: ed25519.Ed25519KeyPair): any {
-  const suite = new Ed25519Signature2018({
-    // verificationMethod: keyPair.id,
-    key: keyPair,
-  });
-  return suite;
+function generateDidKeySuite(keyPair: any): any {
+  const signingSuite = new ed25519.Ed25519Signature2020({ key: keyPair });
+  return signingSuite;
 }
 
 function createPresentation(holder: string): any {
   return {
-    '@context': [
-      'https://www.w3.org/2018/credentials/v1',
-      'https://w3id.org/security/jws/v1',
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://w3id.org/security/suites/ed25519-2020/v1"
     ],
-    type: ['VerifiablePresentation'],
-    holder: holder,
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "id": "123",
+    "holder": holder
   };
 }
 
@@ -129,35 +135,29 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
   console.tron.log('keyPair', keyPair);
   const suite = generateDidKeySuite(keyPair);
   console.tron.log('suite', suite);
-
-  const documentLoader = documentLoaderFactory.pluginFactory
-    .build()
-    .addContext({ [DID_CONTEXT_URL]: DidContext })
-    .addContext({ [W3ID_SEC_URL_V1]: W3ID_SEC_V1 })
-    .addContext({ [W3ID_SEC_URL_V2]: W3ID_SEC_V2 })
-    .addContext({ [JWS_URL_V1]: JWS_V1 })
-    .addContext({ [W3C_VC_DATA_MODEL_URL_V1]: W3C_VC_DATA_MODEL_V1 })
-    .addContext({
-      [W3C_VC_DATA_MODEL_EXAMPLES_URL_V1]: W3C_VC_DATA_MODEL_EXAMPLES_V1,
-    })
-    .buildDocumentLoader();
-  console.tron.log('documentLoader', documentLoader);
-
   console.tron.log('controller: ' + keyPair.controller);
 
   const presentation = createPresentation(keyPair.controller);
   console.tron.log('presentation', JSON.stringify(presentation, null, 2));
-  //presentation['@context'].push('https://w3id.org/did/v1');
-  const signedPresentation = await vc.ld.signPresentation({
-    presentation: presentation,
-    documentLoader: documentLoader,
-    suite,
-    challenge: challenge,
-  });
+  const customLoader = getCustomLoader();
+  let signedPresentation = null;
+  try {
+
+    signedPresentation = await vc.signPresentation({
+      presentation: presentation,
+      documentLoader: customLoader,
+      suite: suite,
+      challenge: challenge
+    });
+
+  } catch (e) {
+    console.tron.log('exception: ' + e);
+  }
 
   console.tron.log('signedPres', signedPresentation);
   return signedPresentation;
 }
+
 export function getCredentialCertificate(credential: Credential): ICertificate {
   const proof = {};
 
