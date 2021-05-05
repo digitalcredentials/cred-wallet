@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "node_modules/.bin/rn-nodeify --install crypto,process,stream,events --hack; node post-install.js"
+    "postinstall": "node_modules/.bin/rn-nodeify --install crypto,process,stream,events,module --hack; node post-install.js"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",

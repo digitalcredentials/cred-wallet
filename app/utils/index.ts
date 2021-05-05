@@ -8,7 +8,7 @@ const ed25519Verification = require('@digitalbazaar/ed25519-verification-key-202
 
 import { contexts as ldContexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
-const didContext = require('did-context');
+//const didContext = require('did-context');
 const ed25519Context = require('ed25519-signature-2020-context');
 const DccContextV1Url = "https://w3id.org/dcc/v1";
 const x25519Ctx = require('x25519-key-agreement-2020-context');
@@ -27,7 +27,7 @@ export function getCustomLoader(): any {
       },
     })
     .addContext({ [ed25519Context.constants.CONTEXT_URL]: ed25519.contexts.get(ed25519Context.constants.CONTEXT_URL) })
-    .addContext({ [didContext.constants.DID_CONTEXT_URL]: didContext.contexts.get(didContext.constants.DID_CONTEXT_URL) })
+    //   .addContext({ [didContext.constants.DID_CONTEXT_URL]: didContext.contexts.get(didContext.constants.DID_CONTEXT_URL) })
     .addContext({ [x25519Ctx.constants.CONTEXT_URL]: x25519Ctx.contexts.get(x25519Ctx.constants.CONTEXT_URL) });
   return customLoaderProto;
 }

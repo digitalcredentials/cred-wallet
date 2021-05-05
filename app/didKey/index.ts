@@ -1,9 +1,6 @@
 #!/usr/bin/env node
-import * as ed25519 from '@transmute/did-key-ed25519';
-import * as vc from '@transmute/vc.js';
 
 // @ts-ignore
-import { Ed25519Signature2018 } from '@transmute/ed25519-signature-2018';
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 import DidContext from './did-v1.json';
