@@ -733,48 +733,40 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@digitalbazaar/did-io@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@digitalbazaar/did-io/-/did-io-1.0.0.tgz#0c37089895f544a3a5c95d35f2dadc63267b2ad1"
-  integrity sha512-JhcthnWZrRuS1v4In21EGLmUl9gCyvCgwiuFf+N9XhwAG97PMGZWBjTKuCRM5vFuWZv/tvsiG15giIW71snhdA==
+"@digitalbazaar/did-io@digitalbazaar/did-io#noesm":
+  version "1.0.1-0"
+  resolved "https://codeload.github.com/digitalbazaar/did-io/tar.gz/aedbe7b0c04424254e71207a3f4ba32b37fcca48"
   dependencies:
-    "@digitalbazaar/lru-memoize" "^2.0.0"
-    esm "^3.2.25"
+    "@digitalbazaar/lru-memoize" digitalbazaar/lru-memoize#noesm
 
-"@digitalbazaar/did-method-key@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@digitalbazaar/did-method-key/-/did-method-key-1.1.0.tgz#fb703ceda7897329e344b298d1baf575493c237b"
-  integrity sha512-gDHuLoK9f0tLENUlP/Ym+XLlNLzWUDSy5RQJaUarAztRYDIrIScwqoyKXuzT7HZ1EMTyfsUL45ib4NRpKairvQ==
+"@digitalbazaar/did-method-key@digitalbazaar/did-method-key-js#noesm":
+  version "1.0.1-0"
+  resolved "https://codeload.github.com/digitalbazaar/did-method-key-js/tar.gz/fc04ed8e002c2caf74fdad707d78adb27e1b1335"
   dependencies:
-    "@digitalbazaar/did-io" "^1.0.0"
-    "@digitalbazaar/ed25519-verification-key-2020" "^2.1.1"
-    "@digitalbazaar/x25519-key-agreement-key-2020" "^1.0.0"
-    did-context "^3.0.0"
+    "@digitalbazaar/did-io" digitalbazaar/did-io#noesm
+    "@digitalbazaar/ed25519-verification-key-2020" digitalbazaar/ed25519-verification-key-2020#noesm
+    "@digitalbazaar/x25519-key-agreement-key-2020" digitalbazaar/x25519-key-agreement-key-2020#noesm
+    did-context digitalbazaar/did-context#nofs
     ed25519-signature-2020-context "^1.0.1"
-    esm "^3.2.25"
-    x25519-key-agreement-2020-context "^1.0.0"
+    x25519-key-agreement-2020-context digitalbazaar/x25519-key-agreement-2020-context#nofs
 
-"@digitalbazaar/ed25519-signature-2020@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@digitalbazaar/ed25519-signature-2020/-/ed25519-signature-2020-2.1.0.tgz#bde3e7e0ce274ccacefc8a383a09c15ebf8c749a"
-  integrity sha512-84qPJDDD9bE7zOkA9v4Qwl20yHH38guRAnsiyQY6llE/HsHQx8ETaY69ehHHelxzONXazG84Y4H0wGgoY2AxzA==
+"@digitalbazaar/ed25519-signature-2020@digitalbazaar/ed25519-signature-2020#noesm":
+  version "2.1.1-0"
+  resolved "https://codeload.github.com/digitalbazaar/ed25519-signature-2020/tar.gz/28be64a038ffb9291c137af472f6b3d06fc8a49b"
   dependencies:
-    "@digitalbazaar/ed25519-verification-key-2020" "^2.1.1"
-    base58-universal "^1.0.0"
+    "@digitalbazaar/ed25519-verification-key-2020" digitalbazaar/ed25519-verification-key-2020#noesm
+    base58-universal digitalbazaar/base58-universal#noesm
     ed25519-signature-2020-context "^1.0.1"
-    esm "^3.2.25"
     jsonld "^5.2.0"
     jsonld-signatures "^9.0.1"
 
-"@digitalbazaar/ed25519-verification-key-2020@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@digitalbazaar/ed25519-verification-key-2020/-/ed25519-verification-key-2020-2.1.1.tgz#8b04772d83ef684a1ef56faae392d8cd7bd7d045"
-  integrity sha512-yqwImwV+e7xgUU/ZSRQjt2I/+72iOtco9jnr3lN70aTCXJjiowWHoT7mjEEtYmj+hdO7tWEFEuwcDGoSORdc7A==
+"@digitalbazaar/ed25519-verification-key-2020@digitalbazaar/ed25519-verification-key-2020#noesm":
+  version "2.1.2-0"
+  resolved "https://codeload.github.com/digitalbazaar/ed25519-verification-key-2020/tar.gz/ae62214e106d6e8154ff0bab14da64e8bd7a6e72"
   dependencies:
     "@stablelib/ed25519" "^1.0.1"
-    base58-universal "^1.0.0"
-    crypto-ld "^5.1.0"
-    esm "^3.2.25"
+    base58-universal digitalbazaar/base58-universal#noesm
+    crypto-ld "^6.0.0"
 
 "@digitalbazaar/http-client@^1.1.0":
   version "1.1.0"
@@ -785,12 +777,10 @@
     ky "^0.25.1"
     ky-universal "^0.8.2"
 
-"@digitalbazaar/lru-memoize@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@digitalbazaar/lru-memoize/-/lru-memoize-2.0.0.tgz#0115ae8496532c044b9daacb0996a12f2199617a"
-  integrity sha512-WlE892ALJedUcb1H/8crAIJ3a8YRW/ia8yNWS8S0HuZlGAhAPgJoafOvdTwUKc/Qa5WN3DV55Hz68KkxqB08Ow==
+"@digitalbazaar/lru-memoize@digitalbazaar/lru-memoize#noesm":
+  version "2.0.1-0"
+  resolved "https://codeload.github.com/digitalbazaar/lru-memoize/tar.gz/f654908c6ff88513cfda236aa8a576f4bebacf3b"
   dependencies:
-    esm "^3.2.25"
     lru-cache "^6.0.0"
 
 "@digitalbazaar/security-context@^1.0.0":
@@ -807,15 +797,13 @@
     jsonld "^5.2.0"
     jsonld-signatures "^9.0.2"
 
-"@digitalbazaar/x25519-key-agreement-key-2020@^1.0.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@digitalbazaar/x25519-key-agreement-key-2020/-/x25519-key-agreement-key-2020-1.2.0.tgz#573522da08f96a67df4b156f9eba58003996fe27"
-  integrity sha512-VYOpdPeAldGXHsqmju2pRZKpD78U7l4bQfhWbKqnf/ACRazH07NqWjT7NgQsc3VaejuVf/NTDjcUcqkcuGyvVg==
+"@digitalbazaar/x25519-key-agreement-key-2020@digitalbazaar/x25519-key-agreement-key-2020#noesm":
+  version "1.2.1-0"
+  resolved "https://codeload.github.com/digitalbazaar/x25519-key-agreement-key-2020/tar.gz/8bde0da46a73ec61a5390eed182ec37a04163630"
   dependencies:
-    base58-universal "^1.0.0"
-    crypto-ld "^5.0.0"
+    base58-universal digitalbazaar/base58-universal#noesm
+    crypto-ld "^6.0.0"
     ed2curve "^0.3.0"
-    esm "^3.2.25"
     tweetnacl "^1.0.3"
 
 "@egjs/hammerjs@^2.0.17":
@@ -2340,12 +2328,9 @@ base-x@^3.0.2:
   dependencies:
     safe-buffer "^5.0.1"
 
-base58-universal@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/base58-universal/-/base58-universal-1.0.0.tgz#6da5b89c2c9be8fc40bcf6b3a5a03f123ad3825e"
-  integrity sha512-v0Ja4jwaQP8gBZPNXpfaXlLht2ed/Gp3AsVUZXtlZgY1qbKS0CjxvYs43U0Gh00zbVc1neMe+q/ULJ7ubVyB+w==
-  dependencies:
-    esm "^3.2.25"
+base58-universal@digitalbazaar/base58-universal#noesm:
+  version "1.0.1-0"
+  resolved "https://codeload.github.com/digitalbazaar/base58-universal/tar.gz/91c924e29ae3ab80a6a7d0b59f0d56ad543a1d02"
 
 base64-js@*, base64-js@^1.3.1:
   version "1.5.1"
@@ -3044,10 +3029,10 @@ crypto-js@^4.0.0:
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.0.0.tgz"
   integrity sha512-bzHZN8Pn+gS7DQA6n+iUmBfl0hO5DJq++QP3U6uTucDtk/0iGpXd/Gg7CGR0p8tJhofJyaKoWBuJI4eAO00BBg==
 
-crypto-ld@^5.0.0, crypto-ld@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/crypto-ld/-/crypto-ld-5.1.0.tgz#fbc1344c553f10aa1bcfc9d94c8c161a56c07150"
-  integrity sha512-Dy1QoQzj+2K6UlGZ9l34cPp+g/YHOd+r3/DXXQTnnz5btGb0vqDlkZBn+icYmwntEmW0bvGVwFWvcwZSbk1EEQ==
+crypto-ld@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/crypto-ld/-/crypto-ld-6.0.0.tgz#cf8dcf566cb3020bdb27f0279e6cc9b46d031cd7"
+  integrity sha512-XWL1LslqggNoaCI/m3I7HcvaSt9b2tYzdrXO+jHLUj9G1BvRfvV7ZTFDVY5nifYuIGAPdAGu7unPxLRustw3VA==
 
 cssom@^0.4.1:
   version "0.4.4"
@@ -3231,10 +3216,9 @@ detect-newline@^3.0.0:
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
-did-context@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/did-context/-/did-context-3.0.1.tgz#e75f18b0c85412dbcb79ad04e2421b2f307a72c7"
-  integrity sha512-VJNA6QWU1OeSB3uKC3nwJhrGjBUgdIUcLiX6eLI5BAaTBWYJxYje2w1viWvOdBbOEs05R7528Db2joMfGdoCXA==
+did-context@digitalbazaar/did-context#nofs:
+  version "3.0.2-0"
+  resolved "https://codeload.github.com/digitalbazaar/did-context/tar.gz/3f11b1fa38bc912a970da7588e81abd9cb872785"
 
 diff-sequences@^25.2.6:
   version "25.2.6"
@@ -3279,7 +3263,7 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-ed25519-signature-2020-context@^1.0.1:
+ed25519-signature-2020-context@^1.0.1, ed25519-signature-2020-context@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ed25519-signature-2020-context/-/ed25519-signature-2020-context-1.1.0.tgz#b2f724f07db154ddf0fd6605410d88736e56fd07"
   integrity sha512-dBGSmoUIK6h2vadDctrDnhhTO01PR2hJk0mRNEfrRDPCjaIwrfy4J+eziEQ9Q1m8By4f/CSRgKM1h53ydKfdNg==
@@ -3568,7 +3552,7 @@ eslint@^6.5.1:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
-esm@^3.2.22, esm@^3.2.25:
+esm@^3.2.22:
   version "3.2.25"
   resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
   integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
@@ -8767,10 +8751,9 @@ ws@^7, ws@^7.0.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.3.1.tgz"
   integrity sha512-D3RuNkynyHmEJIpD2qrgVkc9DQ23OrN/moAwZX4L8DfvszsJxpjQuUq3LMx6HoYji9fbIOBY18XWBsAux1ZZUA==
 
-x25519-key-agreement-2020-context@^1.0.0:
+x25519-key-agreement-2020-context@digitalbazaar/x25519-key-agreement-2020-context#nofs:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/x25519-key-agreement-2020-context/-/x25519-key-agreement-2020-context-1.0.0.tgz#5d18692630e718afcb8ddedbf82b1c6d9c478945"
-  integrity sha512-zblYd8oSg6hNAD+fA9X7ek1hJQRircl3jVlEVCaBTNN9Mv9b4G32uJvRZFMQEMmda8iaTtYo9i2dRMdXX8pjpA==
+  resolved "https://codeload.github.com/digitalbazaar/x25519-key-agreement-2020-context/tar.gz/ecb22cd453c229625314ad97732a9b8f4e8f18a2"
 
 xcode@^2.0.0:
   version "2.1.0"
