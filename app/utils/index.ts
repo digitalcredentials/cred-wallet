@@ -4,11 +4,9 @@ const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
 import { generateSecureRandom } from 'react-native-securerandom';
 const vc = require('@digitalbazaar/vc');
 const ed25519 = require('@digitalbazaar/ed25519-signature-2020');
-const ed25519Verification = require('@digitalbazaar/ed25519-verification-key-2020');
 
-import { contexts as ldContexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
+import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
-//const didContext = require('did-context');
 const ed25519Ctx = require('ed25519-signature-2020-context');
 const x25519Ctx = require('x25519-key-agreement-2020-context');
 const credentialsCtx = require('credentials-context');
@@ -25,7 +23,6 @@ export function getCustomLoader(): any {
     .addContext({ [x25519Ctx.constants.CONTEXT_URL]: x25519Ctx.contexts.get(x25519Ctx.constants.CONTEXT_URL) });
   return customLoaderProto.buildDocumentLoader();
 }
-
 
 import { Credential } from '../services/api/api.types';
 import {
@@ -125,15 +122,15 @@ function createPresentation(holder: string): any {
 }
 
 export async function generateAndProveDid(challenge: string): Promise<any> {
-  console.tron.log('start');
+  console.log('start');
   const keyPair = await generateDidKeyPair();
-  console.tron.log('keyPair', keyPair);
+  console.log('keyPair', keyPair);
   const suite = generateDidKeySuite(keyPair);
-  console.tron.log('suite', suite);
-  console.tron.log('controller: ' + keyPair.controller);
+  console.log('suite', suite);
+  console.log('controller: ' + keyPair.controller);
 
   const presentation = createPresentation(keyPair.controller);
-  console.tron.log('presentation', JSON.stringify(presentation, null, 2));
+  console.log('presentation', JSON.stringify(presentation, null, 2));
   const customLoader = getCustomLoader();
   let signedPresentation = null;
   try {
@@ -146,10 +143,10 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
     });
 
   } catch (e) {
-    console.tron.log('exception: ' + e);
+    console.log('exception: ' + e);
   }
 
-  console.tron.log('signedPres', signedPresentation);
+  console.log('signedPres', signedPresentation);
   return signedPresentation;
 }
 
