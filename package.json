@@ -15,7 +15,7 @@
     "@digitalbazaar/ed25519-signature-2020": "digitalbazaar/ed25519-signature-2020#noesm",
     "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#noesm",
     "@digitalbazaar/security-context": "^1.0.0",
-    "@digitalbazaar/vc": "^1.0.0",
+    "@digitalbazaar/vc": "kimdhamilton/vc-js",
     "@react-native-community/async-storage": "^1.12.0",
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/masked-view": "^0.1.10",
