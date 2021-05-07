@@ -9,9 +9,9 @@ const ed25519Verification = require('@digitalbazaar/ed25519-verification-key-202
 import { contexts as ldContexts, documentLoaderFactory } from '@transmute/jsonld-document-loader';
 
 //const didContext = require('did-context');
-const ed25519Context = require('ed25519-signature-2020-context');
-const DccContextV1Url = "https://w3id.org/dcc/v1";
+const ed25519Ctx = require('ed25519-signature-2020-context');
 const x25519Ctx = require('x25519-key-agreement-2020-context');
+const credentialsCtx = require('credentials-context');
 
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
@@ -19,18 +19,13 @@ export function getController(fullDid: string) {
 
 export function getCustomLoader(): any {
   const customLoaderProto = documentLoaderFactory.pluginFactory
-    .build({
-      contexts: {
-        ...ldContexts.W3C_Verifiable_Credentials,
-        ...ldContexts.W3ID_Security_Vocabulary,
-        ...ldContexts.W3C_Decentralized_Identifiers
-      },
-    })
-    .addContext({ [ed25519Context.constants.CONTEXT_URL]: ed25519.contexts.get(ed25519Context.constants.CONTEXT_URL) })
-    //   .addContext({ [didContext.constants.DID_CONTEXT_URL]: didContext.contexts.get(didContext.constants.DID_CONTEXT_URL) })
+    .build()
+    .addContext({ [ed25519Ctx.constants.CONTEXT_URL]: ed25519Ctx.contexts.get(ed25519Ctx.constants.CONTEXT_URL) })
+    .addContext({ [credentialsCtx.CONTEXT_URL]: credentialsCtx.CONTEXT })
     .addContext({ [x25519Ctx.constants.CONTEXT_URL]: x25519Ctx.contexts.get(x25519Ctx.constants.CONTEXT_URL) });
-  return customLoaderProto;
+  return customLoaderProto.buildDocumentLoader();
 }
+
 
 import { Credential } from '../services/api/api.types';
 import {
