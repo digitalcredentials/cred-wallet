@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@digitalbazaar/did-method-key": "digitalbazaar/did-method-key-js#noesm",
-    "@digitalbazaar/ed25519-signature-2020": "digitalbazaar/ed25519-signature-2020#noesm",
+    "@digitalbazaar/ed25519-signature-2020": "digitalbazaar/ed25519-signature-2020#v2.2.0-rc1",
     "@digitalbazaar/ed25519-verification-key-2020": "digitalbazaar/ed25519-verification-key-2020#noesm",
     "@digitalbazaar/security-context": "^1.0.0",
-    "@digitalbazaar/vc": "kimdhamilton/vc-js",
+    "@digitalbazaar/vc": "digitalbazaar/vc-js#v1.0.1-rc1",
     "@react-native-community/async-storage": "^1.12.0",
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/masked-view": "^0.1.10",
