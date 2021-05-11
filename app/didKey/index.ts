@@ -36,11 +36,6 @@ async function generateDidKeyPair(): Promise<any> {
   return v;
 }
 
-export async function generateDid(): Promise<string> {
-  const keyPair = await generateDidKeyPair();
-  return keyPair.controller;
-}
-
 function generateDidKeySuite(keyPair: any): any {
   const signingSuite = new ed25519.Ed25519Signature2020({ key: keyPair });
   return signingSuite;
@@ -82,7 +77,8 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
     });
 
   } catch (e) {
-    console.log('exception: ' + e);
+    console.tron?.error(e);
+    console.trace(e);
   }
 
   console.log('signedPres', signedPresentation);

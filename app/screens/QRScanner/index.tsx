@@ -6,7 +6,12 @@ import { useDispatch } from 'react-redux';
 
 import { QRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
-import { generateDid, parseCertificateDeeplink, generateAndProveDid } from '../../utils';
+import { generateAndProveDid } from '../../didKey';
+import {
+  getDeeplinkType,
+  parseCertificateDeeplink,
+  parseOAuthDeeplink,
+} from '../../utils';
 import { useAddCertificateCallback } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
 import { EXTENDED_HIT_SLOP } from '../../utils/constants';
@@ -40,13 +45,12 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
       onAddCertificate({
         // instead of passing just the DID to vc_request_url, create the DID and sign it with the challenge (resulting in REQUEST_PAYLOAD)
         // I created this convenience function, but can't quite figure out how to wire it in
-        // generateAndProveDid(challenge)
-        did: await generateDid(),
+        did: await generateAndProveDid(certificateDeeplink.challenge),
         ...certificateDeeplink,
       });
       goBack();
     },
-    [parseCertificateDeeplink, generateDid, goBack],
+    [parseCertificateDeeplink, generateAndProveDid, goBack],
   );
 
   return (

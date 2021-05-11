@@ -18,7 +18,6 @@ import {
   SetVerificationProcessAction,
 } from '../../redux/app';
 import {
-  generateDid,
   getDeeplinkType,
   parseCertificateDeeplink,
   parseOAuthDeeplink,
@@ -41,27 +40,43 @@ function* handleBackupDeeplink(backupDeeplinkUrl: string) {
   });
 }
 
+// Unauthenticated deep link
 function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
-  console.tron?.log('handleCertificateDeeplink:', certificateDeeplinkUrl);
+  console.log('handleCertificateDeeplink:', certificateDeeplinkUrl);
 
-  // TODO: uncomment these lines when `handleOAuthDeeplink` works
+  const parsedDeeplink: ICertificateDeeplink = yield call(
+    parseCertificateDeeplink,
+    certificateDeeplinkUrl,
+  );
+  const payload = yield call(
+    generateAndProveDid,
+    parsedDeeplink.challenge,
+  );
 
-  // const parsedCertificateDeeplink: ICertificateDeeplink = yield call(
-  //   parseCertificateDeeplink,
-  //   certificateDeeplinkUrl,
-  // );
+  console.log('payload', payload);
 
-  // const did = yield call(generateDid);
-  // yield put(
-  //   certificatesActionCreators.addCertificate({
-  //     did,
-  //     ...parsedCertificateDeeplink,
-  //   }),
-  // );
+  try {
+    console.log(parsedDeeplink.requestUrl);
+    const result = yield fetch(parsedDeeplink.requestUrl, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+    });
 
-  // yield put(appActionCreators.setDeeplinkUrl(null));
+    console.log('response', result);
+
+    // TODO
+
+  } catch (e) {
+    console.log(e);
+  }
+
 }
 
+// Oauth deep link
 function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
   const parsedOAuthDeeplink: IOAuthDeeplink = yield call(
     parseOAuthDeeplink,
