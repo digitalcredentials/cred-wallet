@@ -50,7 +50,7 @@ function createPresentation(holder: string): any {
     "type": [
       "VerifiablePresentation"
     ],
-    "id": "123", // TODO: generate a UID for use here
+    "id": "123", // TODO: generate a UUID for use here
     "holder": holder
   };
 }
