@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { useDispatch } from 'react-redux';
@@ -7,21 +7,18 @@ import { useDispatch } from 'react-redux';
 import { QRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
 import { generateAndProveDid } from '../../didKey';
-import {
-  getDeeplinkType,
-  parseCertificateDeeplink,
-  parseOAuthDeeplink,
-} from '../../utils';
+import { parseCertificateDeeplink } from '../../utils';
 import { useAddCertificateCallback } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
-import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 import { FocusStatus } from '../../utils/types';
+import { useSetDeeplinkUrlCallback } from '../../redux/app';
 
 export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();
   const onAddCertificate = useAddCertificateCallback(dispatch);
+  const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
 
   const [focusStatus, setFocusStatus] = useState<FocusStatus>(
     FocusStatus.Focus,
@@ -41,13 +38,14 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
 
   const onSuccess = useCallback(
     async (result) => {
-      const certificateDeeplink = parseCertificateDeeplink(result.data);
-      onAddCertificate({
-        // instead of passing just the DID to vc_request_url, create the DID and sign it with the challenge (resulting in REQUEST_PAYLOAD)
-        // I created this convenience function, but can't quite figure out how to wire it in
-        did: await generateAndProveDid(certificateDeeplink.challenge),
-        ...certificateDeeplink,
-      });
+      onSetDeeplinkUrl(result.data);
+      // const certificateDeeplink = parseCertificateDeeplink(result.data);
+      // onAddCertificate({
+      //   // instead of passing just the DID to vc_request_url, create the DID and sign it with the challenge (resulting in REQUEST_PAYLOAD)
+      //   // I created this convenience function, but can't quite figure out how to wire it in
+      //   did: await generateAndProveDid(certificateDeeplink.challenge),
+      //   ...certificateDeeplink,
+      // });
       goBack();
     },
     [parseCertificateDeeplink, generateAndProveDid, goBack],

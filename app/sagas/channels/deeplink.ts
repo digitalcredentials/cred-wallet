@@ -1,17 +1,13 @@
+import { actionChannel, delay, select, take, call } from 'redux-saga/effects';
 import {
-  actionChannel,
-  delay,
-  select,
-  take,
-  call,
-  put,
-} from 'redux-saga/effects';
-import { authorize, AuthConfiguration } from 'react-native-app-auth';
+  authorize,
+  AuthConfiguration,
+  AuthorizeResult,
+} from 'react-native-app-auth';
 import _ from 'lodash';
 
 import { StaticNavigator } from '../../services/navigator';
 import {
-  appActionCreators,
   appActionTypes,
   AppSelectors,
   SetDeeplinkUrlAction,
@@ -26,12 +22,9 @@ import { generateAndProveDid } from '../../didKey';
 import {
   DeeplinkType,
   ICertificateDeeplink,
-  IDeeplinkSourceData,
   IOAuthDeeplink,
 } from '../../utils/types';
-import { certificatesActionCreators } from '../../redux/certificates';
 import { DEEPLINK_OAUTH_SOURCE_DATA } from '../../utils/constants';
-import { apiInstance } from '../../services/api';
 
 function* handleBackupDeeplink(backupDeeplinkUrl: string) {
   yield call(StaticNavigator.navigateTo, 'CreateBackup', {
@@ -42,42 +35,41 @@ function* handleBackupDeeplink(backupDeeplinkUrl: string) {
 
 // Unauthenticated deep link
 function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
-  console.log('handleCertificateDeeplink:', certificateDeeplinkUrl);
+  console.tron.log('handleCertificateDeeplink:', certificateDeeplinkUrl);
 
   const parsedDeeplink: ICertificateDeeplink = yield call(
     parseCertificateDeeplink,
     certificateDeeplinkUrl,
   );
-  const payload = yield call(
+  const payload: Object = yield call(
     generateAndProveDid,
     parsedDeeplink.challenge,
   );
 
-  console.log('payload', payload);
+  console.tron.log('payload', payload);
 
   try {
     console.log(parsedDeeplink.requestUrl);
-    const result = yield fetch(parsedDeeplink.requestUrl, {
+    const result: Response = yield fetch(parsedDeeplink.requestUrl, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
     });
 
-    console.log('response', result);
+    console.tron.log('response', result);
 
     // TODO
-
   } catch (e) {
     console.log(e);
   }
-
 }
 
 // Oauth deep link
 function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
+  console.tron?.log('handleOAuthDeeplink', oauthDeeplinkUrl);
   const parsedOAuthDeeplink: IOAuthDeeplink = yield call(
     parseOAuthDeeplink,
     oauthDeeplinkUrl,
@@ -97,21 +89,26 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
   };
 
   try {
-    const authorizeResponse = yield call(authorize, authorizeConfig);
+    const authorizeResponse: AuthorizeResult = yield call(
+      authorize,
+      authorizeConfig,
+    );
 
     console.tron?.log('authorizeResponse', authorizeResponse);
 
-    const payload = yield call(
+    const payload: Object = yield call(
       generateAndProveDid,
       parsedOAuthDeeplink.challenge,
     );
 
     console.tron?.log('payload', payload);
 
-    console.tron?.log('headers', `${authorizeResponse.tokenType} ${authorizeResponse.accessToken}`);
+    console.tron?.log(
+      'headers',
+      `${authorizeResponse.tokenType} ${authorizeResponse.accessToken}`,
+    );
 
-    // TODO: add correct payload
-    const response = yield fetch(parsedOAuthDeeplink.vcRequestUrl, {
+    const response: Response = yield fetch(parsedOAuthDeeplink.vcRequestUrl, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -147,6 +144,7 @@ export function* deeplinkListenerSaga(): Generator<any, any, any> {
   const deeplinkChannel = yield actionChannel(appActionTypes.SET_DEEPLINK_URL);
   while (true) {
     const { deeplinkUrl }: SetDeeplinkUrlAction = yield take(deeplinkChannel);
+    console.tron?.log('deeplinkChannel', deeplinkUrl);
 
     // Handle only not null
     if (deeplinkUrl) {
