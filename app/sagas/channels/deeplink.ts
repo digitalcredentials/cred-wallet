@@ -1,4 +1,11 @@
-import { actionChannel, delay, select, take, call } from 'redux-saga/effects';
+import {
+  actionChannel,
+  delay,
+  select,
+  take,
+  call,
+  put,
+} from 'redux-saga/effects';
 import {
   authorize,
   AuthConfiguration,
@@ -23,8 +30,18 @@ import {
   DeeplinkType,
   ICertificateDeeplink,
   IOAuthDeeplink,
+  RequestMethod,
 } from '../../utils/types';
-import { DEEPLINK_OAUTH_SOURCE_DATA } from '../../utils/constants';
+import {
+  DEEPLINK_OAUTH_SOURCE_DATA,
+  DEFAULT_JSON_HEADERS,
+} from '../../utils/constants';
+import {
+  AddCertificateAction,
+  AddCertificateFailureAction,
+  certificatesActionCreators,
+} from '../../redux/certificates';
+import { Credential } from '../../services/api/api.types';
 
 function* handleBackupDeeplink(backupDeeplinkUrl: string) {
   yield call(StaticNavigator.navigateTo, 'CreateBackup', {
@@ -35,8 +52,6 @@ function* handleBackupDeeplink(backupDeeplinkUrl: string) {
 
 // Unauthenticated deep link
 function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
-  console.tron.log('handleCertificateDeeplink:', certificateDeeplinkUrl);
-
   const parsedDeeplink: ICertificateDeeplink = yield call(
     parseCertificateDeeplink,
     certificateDeeplinkUrl,
@@ -46,30 +61,26 @@ function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
     parsedDeeplink.challenge,
   );
 
-  console.tron.log('payload', payload);
-
   try {
-    console.log(parsedDeeplink.requestUrl);
-    const result: Response = yield fetch(parsedDeeplink.requestUrl, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+    const response: Response = yield fetch(parsedDeeplink.requestUrl, {
+      method: RequestMethod.Post,
+      headers: DEFAULT_JSON_HEADERS,
       body: JSON.stringify(payload),
     });
 
-    console.tron.log('response', result);
-
-    // TODO
+    const credential: Credential = yield response.json();
+    yield put<AddCertificateAction>(
+      certificatesActionCreators.addCertificate(credential),
+    );
   } catch (e) {
-    console.log(e);
+    yield put<AddCertificateFailureAction>(
+      certificatesActionCreators.addCertificateFailure('Wrong QR code.'),
+    );
   }
 }
 
 // Oauth deep link
 function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
-  console.tron?.log('handleOAuthDeeplink', oauthDeeplinkUrl);
   const parsedOAuthDeeplink: IOAuthDeeplink = yield call(
     parseOAuthDeeplink,
     oauthDeeplinkUrl,
@@ -94,31 +105,25 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
       authorizeConfig,
     );
 
-    console.tron?.log('authorizeResponse', authorizeResponse);
-
     const payload: Object = yield call(
       generateAndProveDid,
       parsedOAuthDeeplink.challenge,
     );
 
-    console.tron?.log('payload', payload);
-
-    console.tron?.log(
-      'headers',
-      `${authorizeResponse.tokenType} ${authorizeResponse.accessToken}`,
-    );
-
     const response: Response = yield fetch(parsedOAuthDeeplink.vcRequestUrl, {
-      method: 'POST',
+      method: RequestMethod.Post,
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        ...DEFAULT_JSON_HEADERS,
         Authorization: `${authorizeResponse.tokenType} ${authorizeResponse.accessToken}`,
       },
       body: JSON.stringify(payload),
     });
 
-    console.tron?.log('response', response);
+    const credential: Credential = yield response.json();
+    console.tron.log('credential', credential);
+    yield put<AddCertificateAction>(
+      certificatesActionCreators.addCertificate(credential),
+    );
   } catch (e) {
     // Cancelled authorization
     console.tron?.log('error', e);
@@ -144,7 +149,6 @@ export function* deeplinkListenerSaga(): Generator<any, any, any> {
   const deeplinkChannel = yield actionChannel(appActionTypes.SET_DEEPLINK_URL);
   while (true) {
     const { deeplinkUrl }: SetDeeplinkUrlAction = yield take(deeplinkChannel);
-    console.tron?.log('deeplinkChannel', deeplinkUrl);
 
     // Handle only not null
     if (deeplinkUrl) {

@@ -8,7 +8,6 @@ import { QRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
 import { generateAndProveDid } from '../../didKey';
 import { parseCertificateDeeplink } from '../../utils';
-import { useAddCertificateCallback } from '../../redux/certificates';
 import { IMAGES } from '../../assets';
 import { FocusStatus } from '../../utils/types';
 import { useSetDeeplinkUrlCallback } from '../../redux/app';
@@ -17,7 +16,6 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();
-  const onAddCertificate = useAddCertificateCallback(dispatch);
   const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
 
   const [focusStatus, setFocusStatus] = useState<FocusStatus>(
@@ -37,15 +35,8 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   );
 
   const onSuccess = useCallback(
-    async (result) => {
+    (result) => {
       onSetDeeplinkUrl(result.data);
-      // const certificateDeeplink = parseCertificateDeeplink(result.data);
-      // onAddCertificate({
-      //   // instead of passing just the DID to vc_request_url, create the DID and sign it with the challenge (resulting in REQUEST_PAYLOAD)
-      //   // I created this convenience function, but can't quite figure out how to wire it in
-      //   did: await generateAndProveDid(certificateDeeplink.challenge),
-      //   ...certificateDeeplink,
-      // });
       goBack();
     },
     [parseCertificateDeeplink, generateAndProveDid, goBack],
