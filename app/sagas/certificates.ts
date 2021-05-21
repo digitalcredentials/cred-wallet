@@ -62,7 +62,7 @@ function* createBackup({ key }: CreateBackupAction) {
     );
 
     const filename = `backup_${moment().format('YYYY_MM_DD__HH_mm')}.dcc`;
-    const filepath = yield call(
+    const filepath: string = yield call(
       FileManager.createFile,
       filename,
       encryptedCertificatesString,
@@ -97,9 +97,9 @@ function* createBackupSuccess({ backupInfo }: CreateBackupSuccessAction) {
 
 function* loadBackup({ backupPath, key }: LoadBackupAction) {
   try {
-    const cipher = yield call(FileManager.readFile, backupPath);
+    const cipher: string = yield call(FileManager.readFile, backupPath);
 
-    const decryptedBackup = yield call(
+    const decryptedBackup: string = yield call(
       EncryptionManager.decryptAES,
       cipher,
       key,
@@ -129,7 +129,7 @@ function* shareCertificate({ certificate }: ShareCertificateAction) {
     const certificateString: string = yield call(JSON.stringify, certificate);
 
     const filename = `certificate_${moment().format('YYYY_MM_DD__HH_mm')}.json`;
-    const filepath = yield call(
+    const filepath: string = yield call(
       FileManager.createFile,
       filename,
       certificateString,

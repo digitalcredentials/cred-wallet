@@ -120,7 +120,6 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
     });
 
     const credential: Credential = yield response.json();
-    console.tron.log('credential', credential);
     yield put<AddCertificateAction>(
       certificatesActionCreators.addCertificate(credential),
     );
