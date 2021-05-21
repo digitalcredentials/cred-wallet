@@ -124,7 +124,7 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    console.tron?.log('error', e);
+    // console.tron?.log('error', e);
   }
 }
 

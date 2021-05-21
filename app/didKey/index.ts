@@ -76,7 +76,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
       challenge: challenge,
     });
   } catch (e) {
-    console.tron?.error(e);
+    // console.tron?.error(e);
     console.trace(e);
   }
 
