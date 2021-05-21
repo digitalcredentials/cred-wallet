@@ -1,8 +1,9 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
-interface AddCertificateScreenStyles {
+interface IAddCertificateScreenStyles {
   container: ViewStyle;
   requestContainer: ViewStyle;
   requestTitle: TextStyle;
@@ -21,7 +22,7 @@ interface AddCertificateScreenStyles {
   yesButtonText: TextStyle;
 }
 
-export const styles = StyleSheet.create<AddCertificateScreenStyles>({
+export const styles = StyleSheet.create<IAddCertificateScreenStyles>({
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_TRANSPARENT_BACKGROUND,

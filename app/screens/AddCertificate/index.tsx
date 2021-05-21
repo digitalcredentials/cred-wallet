@@ -1,16 +1,15 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
 import _ from 'lodash';
 
 import { IMAGES } from '../../assets';
 import { useSaveCertificateCallback } from '../../redux/certificates';
-import { AddCertificateScreenProps } from './add-certificate.props';
+import { IAddCertificateScreenProps } from './add-certificate.props';
 import { styles } from './add-certificate.styles';
 import { FIELDS } from './add-certificate.data';
 
-export const AddCertificateScreen: React.FC<AddCertificateScreenProps> = ({
+export const AddCertificateScreen: React.FC<IAddCertificateScreenProps> = ({
   navigation,
   route,
 }) => {
@@ -20,14 +19,14 @@ export const AddCertificateScreen: React.FC<AddCertificateScreenProps> = ({
   const certificate = useMemo(() => route.params.certificate, [route.params]);
   const issuer = useMemo(() => route.params.issuer, [route.params]);
 
-  const onYesPress = useCallback(() => {
+  const onYesPress = () => {
     saveCertificate(certificate, issuer);
     navigation.goBack();
-  }, [saveCertificate, certificate, issuer, navigation]);
+  };
 
-  const onNoPress = useCallback(() => {
+  const onNoPress = () => {
     navigation.goBack();
-  }, [navigation]);
+  };
 
   return (
     <View style={styles.container}>
