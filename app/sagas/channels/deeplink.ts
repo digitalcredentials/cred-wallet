@@ -124,7 +124,6 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    // Cancelled authorization
     console.tron?.log('error', e);
   }
 }
