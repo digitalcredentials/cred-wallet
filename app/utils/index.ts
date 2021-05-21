@@ -63,7 +63,6 @@ export function getDeeplinkType(deeplinkUrl: string): DeeplinkType {
   return resultDeeplinkType;
 }
 
-
 export function getCredentialCertificate(credential: Credential): ICertificate {
   const proof = {};
 

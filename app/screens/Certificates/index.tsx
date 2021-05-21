@@ -7,7 +7,6 @@ import { ICertificatesScreenProps } from './certificates.props';
 import { styles } from './certificates.styles';
 
 export const CertificatesScreen: React.FC<ICertificatesScreenProps> = ({
-  navigation,
   route,
 }) => {
   const credentialsId = useMemo(() => route.params.credentialsId, [route]);

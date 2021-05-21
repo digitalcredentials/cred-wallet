@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import _ from 'lodash';
