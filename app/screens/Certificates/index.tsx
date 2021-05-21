@@ -3,10 +3,10 @@ import { View } from 'react-native';
 
 import { Header, CertificateCarousel } from '../../components';
 import { useCredentialsById } from '../../redux/certificates';
-import { CertificatesScreenProps } from './certificates.props';
+import { ICertificatesScreenProps } from './certificates.props';
 import { styles } from './certificates.styles';
 
-export const CertificatesScreen: React.FC<CertificatesScreenProps> = ({
+export const CertificatesScreen: React.FC<ICertificatesScreenProps> = ({
   navigation,
   route,
 }) => {
