@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { useDispatch } from 'react-redux';
 
-import { QRScannerScreenProps } from './qr-scanner.props';
+import { IQRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
 import { generateAndProveDid } from '../../didKey';
 import { parseCertificateDeeplink } from '../../utils';
@@ -12,7 +12,7 @@ import { IMAGES } from '../../assets';
 import { FocusStatus } from '../../utils/types';
 import { useSetDeeplinkUrlCallback } from '../../redux/app';
 
-export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
+export const QRScannerScreen: React.FC<IQRScannerScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();
@@ -21,8 +21,6 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   const [focusStatus, setFocusStatus] = useState<FocusStatus>(
     FocusStatus.Focus,
   );
-
-  const goBack = useCallback(() => navigation.goBack(), [navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -37,9 +35,9 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   const onSuccess = useCallback(
     (result) => {
       onSetDeeplinkUrl(result.data);
-      goBack();
+      navigation.goBack();
     },
-    [parseCertificateDeeplink, generateAndProveDid, goBack],
+    [parseCertificateDeeplink, generateAndProveDid, navigation],
   );
 
   return (
