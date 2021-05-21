@@ -1,5 +1,4 @@
 import { createActions } from 'reduxsauce';
-import { ErrorType } from '../../utils/types';
 
 interface CacheActionTypes {
   SET_FIRST_LAUNCH: 'SET_FIRST_LAUNCH';

@@ -20,37 +20,26 @@ import {
   ShareCertificateFailureAction,
   ShareCertificateSuccessAction,
 } from '../redux/certificates';
-import { apiInstance } from '../services/api';
-import CONFIG from '../config/env';
-import { Credential } from '../services/api/api.types';
 import { StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
 import EncryptionManager from '../services/encryption-manager';
-import { CredentialsByIssuer } from '../utils/types';
+import { CredentialsByIssuer, ICertificate, IIssuer } from '../utils/types';
 import { FileManager } from '../services/file-manager';
 
 function* addCertificate({ data }: AddCertificateAction) {
   try {
-    const response: ApiResponse<Credential, Credential> = yield call(
-      apiInstance.addCertificate,
-      data.requestUrl.replace(CONFIG.API_URL, ''),
-      {
-        holder: data.did,
-        ...data,
-      },
+    const certificate: ICertificate = yield call(
+      getCredentialCertificate,
+      data,
     );
-
-    if (response.ok) {
-      const certificate = yield call(getCredentialCertificate, response.data!);
-      const issuer = yield call(getCredentialIssuer, response.data!);
-      yield put<AddCertificateSuccessAction>(
-        certificatesActionCreators.addCertificateSuccess(),
-      );
-      yield call(StaticNavigator.navigateTo, 'AddCertificate', {
-        certificate,
-        issuer,
-      });
-    }
+    const issuer: IIssuer = yield call(getCredentialIssuer, data);
+    yield put<AddCertificateSuccessAction>(
+      certificatesActionCreators.addCertificateSuccess(),
+    );
+    yield call(StaticNavigator.navigateTo, 'AddCertificate', {
+      certificate,
+      issuer,
+    });
   } catch (err) {
     yield put<AddCertificateFailureAction>(
       certificatesActionCreators.addCertificateFailure(

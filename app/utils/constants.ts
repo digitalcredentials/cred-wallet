@@ -24,3 +24,8 @@ export const DEEPLINK_OAUTH_SOURCE_DATA: Record<
     issuerTokenEndpoint: 'https://rc.xpro.mit.edu/oauth2/token/',
   },
 };
+
+export const DEFAULT_JSON_HEADERS = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};

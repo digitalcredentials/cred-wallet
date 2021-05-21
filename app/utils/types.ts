@@ -138,3 +138,10 @@ export interface IDeeplinkSourceData {
   issuerAuthorizationEndpoint: string;
   issuerTokenEndpoint: string;
 }
+
+export enum RequestMethod {
+  Post = 'POST',
+  Get = 'GET',
+  Put = 'PUT',
+  Delete = 'DELETE',
+}
