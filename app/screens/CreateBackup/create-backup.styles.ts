@@ -1,8 +1,9 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
-interface CreateBackupStyles {
+interface ICreateBackupStyles {
   container: ViewStyle;
   contentContainer: ViewStyle;
   title: TextStyle;
@@ -15,7 +16,7 @@ interface CreateBackupStyles {
   okButtonText: TextStyle;
 }
 
-export const styles = StyleSheet.create<CreateBackupStyles>({
+export const styles = StyleSheet.create<ICreateBackupStyles>({
   container: {
     flex: 1,
     backgroundColor: COLORS.GRAY_TRANSPARENT_BACKGROUND,

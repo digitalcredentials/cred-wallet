@@ -1,16 +1,16 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import {
   useCreateBackupCallback,
   useLoadBackupCallback,
 } from '../../redux/certificates';
-import { CreateBackupScreenProps } from './create-backup.props';
+import { ICreateBackupScreenProps } from './create-backup.props';
 import { styles } from './create-backup.styles';
 import { DefaultTextInput } from '../../components';
 
-export const CreateBackupScreen: React.FC<CreateBackupScreenProps> = ({
+export const CreateBackupScreen: React.FC<ICreateBackupScreenProps> = ({
   navigation,
   route,
 }) => {
@@ -22,17 +22,13 @@ export const CreateBackupScreen: React.FC<CreateBackupScreenProps> = ({
 
   const [key, setKey] = useState<string>('');
 
-  const onSubmitPress = useCallback(() => {
+  const onSubmitPress = () => {
     if (params.isLoadBackup) {
       onLoadBackup(params.backupPath!, key);
     } else {
       onCreateBackup(key);
     }
-  }, [key]);
-
-  const onCancelPress = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
+  };
 
   return (
     <View style={styles.container}>
@@ -51,7 +47,7 @@ export const CreateBackupScreen: React.FC<CreateBackupScreenProps> = ({
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={styles.cancelButtonContainer}
-            onPress={onCancelPress}
+            onPress={navigation.goBack}
           >
             <Text style={styles.cancelButtonText}>CANCEL</Text>
           </TouchableOpacity>
