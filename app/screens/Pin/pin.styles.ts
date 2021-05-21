@@ -1,13 +1,14 @@
 import { StyleSheet, ViewStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 
-interface PinScreenStyles {
+interface IPinScreenStyles {
   container: ViewStyle;
   safeAreaContainer: ViewStyle;
   backgroundWhite: ViewStyle;
 }
 
-export const styles = StyleSheet.create<PinScreenStyles>({
+export const styles = StyleSheet.create<IPinScreenStyles>({
   container: {
     flex: 1,
     backgroundColor: 'transparent',
