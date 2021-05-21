@@ -18,22 +18,30 @@ export function getController(fullDid: string) {
 export function getCustomLoader(): any {
   const customLoaderProto = documentLoaderFactory.pluginFactory
     .build()
-    .addContext({ [ed25519Ctx.constants.CONTEXT_URL]: ed25519Ctx.contexts.get(ed25519Ctx.constants.CONTEXT_URL) })
+    .addContext({
+      [ed25519Ctx.constants.CONTEXT_URL]: ed25519Ctx.contexts.get(
+        ed25519Ctx.constants.CONTEXT_URL,
+      ),
+    })
     .addContext({ [credentialsCtx.CONTEXT_URL]: credentialsCtx.CONTEXT })
-    .addContext({ [x25519Ctx.constants.CONTEXT_URL]: x25519Ctx.contexts.get(x25519Ctx.constants.CONTEXT_URL) });
+    .addContext({
+      [x25519Ctx.constants.CONTEXT_URL]: x25519Ctx.contexts.get(
+        x25519Ctx.constants.CONTEXT_URL,
+      ),
+    });
   return customLoaderProto.buildDocumentLoader();
 }
-
 
 async function generateDidKeyPair(): Promise<any> {
   const BYTES_LENGTH = 32;
 
   const randomBytes = await generateSecureRandom(BYTES_LENGTH);
 
-  const { didKeyDocument, keyPairs } = await didKeyDriver.generate({ randomBytes });
-  const kp = keyPairs.entries().next().value;
-  const v = kp[1];
-  return v;
+  const { keyPairs } = await didKeyDriver.generate({
+    randomBytes,
+  });
+
+  return keyPairs.entries().next().value[1];
 }
 
 function generateDidKeySuite(keyPair: any): any {
@@ -43,53 +51,34 @@ function generateDidKeySuite(keyPair: any): any {
 
 function createPresentation(holder: string): any {
   return {
-    "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-      "https://w3id.org/security/suites/ed25519-2020/v1"
+    '@context': [
+      'https://www.w3.org/2018/credentials/v1',
+      'https://w3id.org/security/suites/ed25519-2020/v1',
     ],
-    "type": [
-      "VerifiablePresentation"
-    ],
-    "id": "123", // TODO: generate a UUID for use here
-    "holder": holder
+    type: ['VerifiablePresentation'],
+    id: '123', // TODO: generate a UUID for use here
+    holder: holder,
   };
 }
 
 export async function generateAndProveDid(challenge: string): Promise<any> {
-  console.log('start');
   const keyPair = await generateDidKeyPair();
-  console.log('keyPair', keyPair);
   const suite = generateDidKeySuite(keyPair);
-  console.log('suite', suite);
-  console.log('controller: ' + keyPair.controller);
 
   const presentation = createPresentation(keyPair.controller);
-  console.log('presentation', JSON.stringify(presentation, null, 2));
   const customLoader = getCustomLoader();
   let signedPresentation = null;
   try {
-
     signedPresentation = await vc.signPresentation({
       presentation: presentation,
       documentLoader: customLoader,
       suite: suite,
-      challenge: challenge
+      challenge: challenge,
     });
-
   } catch (e) {
     console.tron?.error(e);
     console.trace(e);
   }
 
-  console.log('signedPres', signedPresentation);
   return signedPresentation;
 }
-
-
-(async () => {
-  var text = await generateAndProveDid('3443wrerwrew');
-  console.log(text);
-})().catch((e) => {
-  console.error(e);
-  // Deal with the fact the chain failed
-});
