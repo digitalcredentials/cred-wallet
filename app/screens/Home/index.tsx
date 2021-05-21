@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 
 import { CredentialsSearchList, SearchBar } from '../../components';
-import { HomeScreenProps } from './home.props';
+import { IHomeScreenProps } from './home.props';
 import { styles } from './home.styles';
 import { CredentialsList } from '../../components/CredentialsList';
 import { useSearchCredentialsCallback } from '../../redux/search';
@@ -23,7 +23,7 @@ import { useSetDeeplinkUrlCallback } from '../../redux/app';
 
 const ANIMATION_DURATION = 250;
 
-export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+export const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const onSearch = useSearchCredentialsCallback(dispatch);
   const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
@@ -34,6 +34,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isExtendedList, setIsExtendedList] = useState<boolean>(true);
 
+  // TODO: remove this maybe (use deeplink saga)
   useMount(() => {
     // Handle late deeplink urls
     Linking.addEventListener('url', (data) => {
@@ -85,15 +86,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     startExtendedListAnimation(1);
   }, [startExtendedListAnimation]);
 
-  const renderExtendedList = useCallback(
-    () => (
-      <Animated.View
-        style={[styles.flexContainer, { opacity: extendedListOpacity.current }]}
-      >
-        <CredentialsList onCredentialsPress={onCredentialsPress} />
-      </Animated.View>
-    ),
-    [extendedListOpacity.current],
+  const renderExtendedList = () => (
+    <Animated.View
+      style={[styles.flexContainer, { opacity: extendedListOpacity.current }]}
+    >
+      <CredentialsList onCredentialsPress={onCredentialsPress} />
+    </Animated.View>
   );
 
   const renderCurrentList = useCallback(
