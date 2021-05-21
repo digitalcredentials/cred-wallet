@@ -1,18 +1,16 @@
 import React, { useCallback } from 'react';
 import { SectionList, View, Text, Image, TouchableOpacity } from 'react-native';
 
-import { SettingsScreenProps } from './settings.props';
+import { ISettingsScreenProps } from './settings.props';
 import { styles } from './settings.styles';
 import { SettingsHeader } from '../../components';
 import { MENU_ITEMS, IMenuOption } from './settings.data';
 import { useKeyExtractor } from '../../utils/hooks';
 import { IMAGES } from '../../assets';
 
-export const SettingsScreen: React.FC<SettingsScreenProps> = ({
+export const SettingsScreen: React.FC<ISettingsScreenProps> = ({
   navigation,
 }) => {
-  // const dispatch = useDispatch();
-
   const renderSectionHeader = useCallback(
     ({ section: { title } }) => (
       <Text style={styles.sectionTitle}>{title}</Text>
