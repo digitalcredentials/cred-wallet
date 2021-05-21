@@ -1,8 +1,9 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
-interface BackupsScreenStyles {
+interface IBackupsScreenStyles {
   container: ViewStyle;
   contentContainer: ViewStyle;
   sectionTitle: TextStyle;
@@ -15,7 +16,7 @@ interface BackupsScreenStyles {
   backupItemImage: ImageStyle;
 }
 
-export const styles = StyleSheet.create<BackupsScreenStyles>({
+export const styles = StyleSheet.create<IBackupsScreenStyles>({
   container: {
     flex: 1,
     backgroundColor: COLORS.WHITE,
