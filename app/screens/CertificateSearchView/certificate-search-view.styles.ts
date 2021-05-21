@@ -1,12 +1,12 @@
 import { StyleSheet, ViewStyle } from 'react-native';
 
-interface CertificateViewScreenStyles {
+interface ICertificateViewScreenStyles {
   container: ViewStyle;
   contentContainer: ViewStyle;
   flexContainer: ViewStyle;
 }
 
-export const styles = StyleSheet.create<CertificateViewScreenStyles>({
+export const styles = StyleSheet.create<ICertificateViewScreenStyles>({
   container: {
     flex: 1,
   },
