@@ -2,14 +2,14 @@
 
 // @ts-ignore
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
-const vc = require('@digitalbazaar/vc');
+const vc = require('@digitalcredentials/vc');
 import { generateSecureRandom } from 'react-native-securerandom';
-const didKeyDriver = require('@digitalbazaar/did-method-key').driver();
+const didKeyDriver = require('@digitalcredentials/did-method-key').driver();
 
-const ed25519 = require('@digitalbazaar/ed25519-signature-2020');
-const x25519Ctx = require('x25519-key-agreement-2020-context');
+const ed25519 = require('@digitalcredentials/ed25519-signature-2020');
+const x25519Ctx = require('@digitalcredentials/x25519-key-agreement-2020-context');
 const ed25519Ctx = require('ed25519-signature-2020-context');
-const credentialsCtx = require('credentials-context');
+const credentialsCtx = require('@digitalcredentials/credentials-context');
 
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
