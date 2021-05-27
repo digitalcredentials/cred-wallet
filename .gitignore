@@ -60,3 +60,7 @@ buck-out/
 
 # Config
 env.*.js
+
+
+yarn.lock
+ios/CredMaker.xcworkspace/
