@@ -1,8 +1,9 @@
 import { AppState, AppStateStatus } from 'react-native';
 import { eventChannel } from 'redux-saga';
 import { take, call, cancelled, put, delay } from 'redux-saga/effects';
-import { StaticNavigator } from '../../services/navigator';
 import _ from 'lodash';
+
+import { StaticNavigator } from '../../services/navigator';
 import { appActionCreators } from '../../redux/app';
 
 function createAppStateChannel() {

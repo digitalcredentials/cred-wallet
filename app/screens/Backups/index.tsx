@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import moment from 'moment';
@@ -7,21 +7,24 @@ import _ from 'lodash';
 import { IMAGES } from '../../assets';
 import { DefaultButton, SettingsHeader } from '../../components';
 import { useBackups } from '../../redux/certificates';
-import { BackupsScreenProps } from './backups.props';
+import { IBackupsScreenProps } from './backups.props';
 import { styles } from './backups.styles';
 import { useSpecificKeyExtractor } from '../../utils/hooks';
 import { IBackupInfo } from '../../utils/types';
 import { getSocialShareImageSource } from '../../utils';
 
-export const BackupsScreen: React.FC<BackupsScreenProps> = ({ navigation }) => {
+export const BackupsScreen: React.FC<IBackupsScreenProps> = ({
+  navigation,
+}) => {
   const backups = useBackups();
-  const backupsByDate = useMemo(() => _.orderBy(backups, 'date', 'desc'), [
-    backups,
-  ]);
+  const backupsByDate = useMemo(
+    () => _.orderBy(backups, 'date', 'desc'),
+    [backups],
+  );
 
-  const onCreateBackupPress = useCallback(() => {
+  const onCreateBackupPress = () => {
     navigation.navigate('CreateBackup', { isLoadBackup: false });
-  }, [navigation]);
+  };
 
   const backupListKeyExtractor = useSpecificKeyExtractor<IBackupInfo>(
     'backup-item',

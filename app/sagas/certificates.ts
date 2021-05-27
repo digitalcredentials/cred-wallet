@@ -20,37 +20,26 @@ import {
   ShareCertificateFailureAction,
   ShareCertificateSuccessAction,
 } from '../redux/certificates';
-import { apiInstance } from '../services/api';
-import CONFIG from '../config/env';
-import { Credential } from '../services/api/api.types';
 import { StaticNavigator } from '../services/navigator';
 import { getCredentialCertificate, getCredentialIssuer } from '../utils';
 import EncryptionManager from '../services/encryption-manager';
-import { CredentialsByIssuer } from '../utils/types';
+import { CredentialsByIssuer, ICertificate, IIssuer } from '../utils/types';
 import { FileManager } from '../services/file-manager';
 
 function* addCertificate({ data }: AddCertificateAction) {
   try {
-    const response: ApiResponse<Credential, Credential> = yield call(
-      apiInstance.addCertificate,
-      data.requestUrl.replace(CONFIG.API_URL, ''),
-      {
-        holder: data.did,
-        ...data,
-      },
+    const certificate: ICertificate = yield call(
+      getCredentialCertificate,
+      data,
     );
-
-    if (response.ok) {
-      const certificate = yield call(getCredentialCertificate, response.data!);
-      const issuer = yield call(getCredentialIssuer, response.data!);
-      yield put<AddCertificateSuccessAction>(
-        certificatesActionCreators.addCertificateSuccess(),
-      );
-      yield call(StaticNavigator.navigateTo, 'AddCertificate', {
-        certificate,
-        issuer,
-      });
-    }
+    const issuer: IIssuer = yield call(getCredentialIssuer, data);
+    yield put<AddCertificateSuccessAction>(
+      certificatesActionCreators.addCertificateSuccess(),
+    );
+    yield call(StaticNavigator.navigateTo, 'AddCertificate', {
+      certificate,
+      issuer,
+    });
   } catch (err) {
     yield put<AddCertificateFailureAction>(
       certificatesActionCreators.addCertificateFailure(
@@ -73,7 +62,7 @@ function* createBackup({ key }: CreateBackupAction) {
     );
 
     const filename = `backup_${moment().format('YYYY_MM_DD__HH_mm')}.dcc`;
-    const filepath = yield call(
+    const filepath: string = yield call(
       FileManager.createFile,
       filename,
       encryptedCertificatesString,
@@ -108,9 +97,9 @@ function* createBackupSuccess({ backupInfo }: CreateBackupSuccessAction) {
 
 function* loadBackup({ backupPath, key }: LoadBackupAction) {
   try {
-    const cipher = yield call(FileManager.readFile, backupPath);
+    const cipher: string = yield call(FileManager.readFile, backupPath);
 
-    const decryptedBackup = yield call(
+    const decryptedBackup: string = yield call(
       EncryptionManager.decryptAES,
       cipher,
       key,
@@ -140,7 +129,7 @@ function* shareCertificate({ certificate }: ShareCertificateAction) {
     const certificateString: string = yield call(JSON.stringify, certificate);
 
     const filename = `certificate_${moment().format('YYYY_MM_DD__HH_mm')}.json`;
-    const filepath = yield call(
+    const filepath: string = yield call(
       FileManager.createFile,
       filename,
       certificateString,

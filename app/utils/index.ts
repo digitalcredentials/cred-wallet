@@ -1,13 +1,14 @@
 import { Platform } from 'react-native';
 import queryString from 'query-string';
-import * as ed25519 from '@transmute/did-key-ed25519';
-import { generateSecureRandom } from 'react-native-securerandom';
 
 import { Credential } from '../services/api/api.types';
 import {
+  DeeplinkOAuthSourceType,
+  DeeplinkType,
   ICertificate,
   ICertificateDeeplink,
   IIssuer,
+  IOAuthDeeplink,
   ShareActivityType,
 } from './types';
 import { ImageSource } from 'react-native-vector-icons/Icon';
@@ -24,26 +25,42 @@ export function sum(a: number, b: number): number {
   return a + b;
 }
 
+export function parseOAuthDeeplink(deeplinkUrl: string): IOAuthDeeplink {
+  const parsedUrl = queryString.parseUrl(deeplinkUrl);
+
+  return {
+    authType: parsedUrl.query.auth_type as DeeplinkOAuthSourceType,
+    issuer: parsedUrl.query.issuer as string,
+    vcRequestUrl: parsedUrl.query.vc_request_url as string,
+    challenge: parsedUrl.query.challenge as string,
+  };
+}
+
 export function parseCertificateDeeplink(
   deeplinkUrl: string,
 ): ICertificateDeeplink {
   const parsedUrl = queryString.parseUrl(deeplinkUrl);
 
   return {
-    challenge: parsedUrl.query.challenge,
-    requestUrl: parsedUrl.query.request_url,
+    challenge: parsedUrl.query.challenge as string,
+    requestUrl: parsedUrl.query.request_url as string,
   };
 }
 
-export async function generateDid(): Promise<string> {
-  const BYTES_LENGTH = 32;
+export function getDeeplinkType(deeplinkUrl: string): DeeplinkType {
+  let resultDeeplinkType: DeeplinkType = DeeplinkType.Default;
 
-  const randomBytes = await generateSecureRandom(BYTES_LENGTH);
-  const keyPair = await ed25519.Ed25519KeyPair.generate({
-    secureRandom: () => randomBytes,
-  });
+  const isBackup = isBackupUrl(deeplinkUrl);
+  if (isBackup) {
+    resultDeeplinkType = DeeplinkType.Backup;
+  } else {
+    const parsedUrl = queryString.parseUrl(deeplinkUrl);
+    if (parsedUrl.query.auth_type) {
+      resultDeeplinkType = DeeplinkType.OAuth;
+    }
+  }
 
-  return keyPair.controller;
+  return resultDeeplinkType;
 }
 
 export function getCredentialCertificate(credential: Credential): ICertificate {

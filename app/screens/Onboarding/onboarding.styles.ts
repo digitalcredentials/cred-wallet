@@ -1,8 +1,9 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
-interface OnboardingScreenStyles {
+interface IOnboardingScreenStyles {
   container: ViewStyle;
   swiperItemContainer: ViewStyle;
   swiperItemBodyContainer: any;
@@ -15,7 +16,7 @@ interface OnboardingScreenStyles {
   dot: ViewStyle;
 }
 
-export const styles = StyleSheet.create<OnboardingScreenStyles>({
+export const styles = StyleSheet.create<IOnboardingScreenStyles>({
   container: {
     flex: 1,
   },

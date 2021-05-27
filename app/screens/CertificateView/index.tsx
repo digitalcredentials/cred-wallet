@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import { CertificateViewScreenProps } from './certificate-view.props';
+import { ICertificateViewScreenProps } from './certificate-view.props';
 import { styles } from './certificate-view.styles';
 import { CertificateItem } from '../../components';
 import {
@@ -12,13 +12,14 @@ import {
 import { CertificateItemPresets } from '../../components/CertificateItem/certificate-item.props';
 import { ICertificate } from '../../utils/types';
 
-export const CertificateViewScreen: React.FC<CertificateViewScreenProps> = ({
+export const CertificateViewScreen: React.FC<ICertificateViewScreenProps> = ({
   navigation,
   route,
 }) => {
-  const certificateId = useMemo(() => route.params.certificateId, [
-    route.params,
-  ]);
+  const certificateId = useMemo(
+    () => route.params.certificateId,
+    [route.params],
+  );
   const issuerId = useMemo(() => route.params.issuerId, [route.params]);
 
   const { certificate, issuer } = useCertificateWithIssuer(
@@ -36,14 +37,12 @@ export const CertificateViewScreen: React.FC<CertificateViewScreenProps> = ({
     [certificate],
   );
 
-  const goBack = useCallback(() => navigation.goBack(), [navigation]);
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.flexContainer}
         activeOpacity={1}
-        onPress={goBack}
+        onPress={navigation.goBack}
       />
       <View style={styles.contentContainer}>
         <CertificateItem

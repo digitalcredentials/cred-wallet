@@ -1,7 +1,8 @@
-import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Dimensions, StyleSheet, ViewStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 
-interface QRScannerScreenStyles {
+interface IQRScannerScreenStyles {
   root: ViewStyle;
   cameraContainer: ViewStyle;
   closeButtonContainer: ViewStyle;
@@ -11,7 +12,7 @@ interface QRScannerScreenStyles {
   mainAbsoluteContainer: ViewStyle;
 }
 
-export const styles = StyleSheet.create<QRScannerScreenStyles>({
+export const styles = StyleSheet.create<IQRScannerScreenStyles>({
   root: {
     flex: 1,
     backgroundColor: COLORS.BLACK,

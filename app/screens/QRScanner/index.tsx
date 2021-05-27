@@ -1,28 +1,26 @@
 import React, { useCallback, useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { useDispatch } from 'react-redux';
 
-import { QRScannerScreenProps } from './qr-scanner.props';
+import { IQRScannerScreenProps } from './qr-scanner.props';
 import { styles } from './qr-scanner.styles';
-import { generateDid, parseCertificateDeeplink } from '../../utils';
-import { useAddCertificateCallback } from '../../redux/certificates';
+import { generateAndProveDid } from '../../didKey';
+import { parseCertificateDeeplink } from '../../utils';
 import { IMAGES } from '../../assets';
-import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 import { FocusStatus } from '../../utils/types';
+import { useSetDeeplinkUrlCallback } from '../../redux/app';
 
-export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
+export const QRScannerScreen: React.FC<IQRScannerScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();
-  const onAddCertificate = useAddCertificateCallback(dispatch);
+  const onSetDeeplinkUrl = useSetDeeplinkUrlCallback(dispatch);
 
   const [focusStatus, setFocusStatus] = useState<FocusStatus>(
     FocusStatus.Focus,
   );
-
-  const goBack = useCallback(() => navigation.goBack(), [navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -35,15 +33,11 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({
   );
 
   const onSuccess = useCallback(
-    async (result) => {
-      const certificateDeeplink = parseCertificateDeeplink(result.data);
-      onAddCertificate({
-        did: await generateDid(),
-        ...certificateDeeplink,
-      });
-      goBack();
+    (result) => {
+      onSetDeeplinkUrl(result.data);
+      navigation.goBack();
     },
-    [parseCertificateDeeplink, generateDid, goBack],
+    [parseCertificateDeeplink, generateAndProveDid, navigation],
   );
 
   return (

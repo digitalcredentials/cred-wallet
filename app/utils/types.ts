@@ -47,8 +47,15 @@ export interface ICredentials extends IWithID {
 }
 
 export interface ICertificateDeeplink {
-  challenge: any;
-  requestUrl: any;
+  challenge: string;
+  requestUrl: string;
+}
+
+export interface IOAuthDeeplink {
+  authType: DeeplinkOAuthSourceType;
+  issuer: string;
+  vcRequestUrl: string;
+  challenge: string;
 }
 
 export interface ISubjectDID {
@@ -113,4 +120,28 @@ export interface ISwiperItem {
   image: any;
   title: string;
   description: string;
+}
+
+export enum DeeplinkType {
+  Backup = 'Backup',
+  Default = 'Default',
+  OAuth = 'OAuth',
+}
+
+export enum DeeplinkOAuthSourceType {
+  XPro = 'xpro',
+}
+
+export interface IDeeplinkSourceData {
+  cliendId: string;
+  issuer: string;
+  issuerAuthorizationEndpoint: string;
+  issuerTokenEndpoint: string;
+}
+
+export enum RequestMethod {
+  Post = 'POST',
+  Get = 'GET',
+  Put = 'PUT',
+  Delete = 'DELETE',
 }

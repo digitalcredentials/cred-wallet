@@ -3,13 +3,9 @@ import { useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { AppDispatch, RootState } from '..';
-import {
-  ICertificate,
-  ICertificateDeeplinkWithDID,
-  ICredentials,
-  IIssuer,
-} from '../../utils/types';
+import { ICertificate, ICredentials, IIssuer } from '../../utils/types';
 import { certificatesActionTypes } from './actions';
+import { Credential } from '../../services/api/api.types';
 
 // Selector hooks
 export const useCredentials = () =>
@@ -52,7 +48,7 @@ export const useBackups = () =>
 // Callback hooks
 export const useAddCertificateCallback = (dispatch: AppDispatch) =>
   useCallback(
-    (data: ICertificateDeeplinkWithDID) =>
+    (data: Credential) =>
       dispatch({ type: certificatesActionTypes.ADD_CERTIFICATE, data }),
     [dispatch],
   );

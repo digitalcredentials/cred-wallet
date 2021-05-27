@@ -7,12 +7,12 @@ import _ from 'lodash';
 
 import { Text } from '../../components';
 import { useSetIsShownOnboarding } from '../../redux/cache';
-import { OnboardingScreenProps } from './onboarding.props';
+import { IOnboardingScreenProps } from './onboarding.props';
 import { styles } from './onboarding.styles';
 import { SWIPER_ITEMS } from './onboaring.data';
 import { ISwiperItem } from '../../utils/types';
 
-export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
+export const OnboardingScreen: React.FC<IOnboardingScreenProps> = ({
   navigation,
 }) => {
   const dispatch = useDispatch();

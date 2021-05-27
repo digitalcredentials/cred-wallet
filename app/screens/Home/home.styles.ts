@@ -1,13 +1,14 @@
-import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+
 import { COLORS } from '../../utils/colors';
 
-interface HomeScreenStyles {
+interface IHomeScreenStyles {
   root: ViewStyle;
   flexContainer: ViewStyle;
   description: TextStyle;
 }
 
-export const styles = StyleSheet.create<HomeScreenStyles>({
+export const styles = StyleSheet.create<IHomeScreenStyles>({
   root: {
     flex: 1,
     backgroundColor: COLORS.WHITE,

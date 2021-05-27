@@ -1,19 +1,15 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import moment from 'moment';
 
-import { DoneBackupScreenProps } from './done-backup.props';
+import { IDoneBackupScreenProps } from './done-backup.props';
 import { styles } from './done-backup.styles';
 
-export const DoneBackupScreen: React.FC<DoneBackupScreenProps> = ({
+export const DoneBackupScreen: React.FC<IDoneBackupScreenProps> = ({
   navigation,
   route,
 }) => {
   const backupInfo = useMemo(() => route.params.backupInfo, [route.params]);
-
-  const onSubmitPress = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -26,7 +22,7 @@ export const DoneBackupScreen: React.FC<DoneBackupScreenProps> = ({
         <View style={styles.separator} />
         <TouchableOpacity
           style={styles.okButtonContainer}
-          onPress={onSubmitPress}
+          onPress={navigation.goBack}
         >
           <Text style={styles.okButtonText}>Yeap</Text>
         </TouchableOpacity>

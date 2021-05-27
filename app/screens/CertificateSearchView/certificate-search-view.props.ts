@@ -1,4 +1,5 @@
 import { StackScreenProps, StackNavigationProp } from '@react-navigation/stack';
+
 import { MergedStackParams } from '../../navigation/stacks';
 
 type NavigationProps = StackNavigationProp<
@@ -7,6 +8,6 @@ type NavigationProps = StackNavigationProp<
 >;
 type RouteProps = StackScreenProps<MergedStackParams, 'CertificateSearchView'>;
 
-export interface CertificateSearchViewScreenProps
+export interface ICertificateSearchViewScreenProps
   extends NavigationProps,
     RouteProps {}

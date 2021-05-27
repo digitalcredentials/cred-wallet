@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import { useIsShownOnboarding } from '../../redux/cache';
-import { LoadingScreenProps } from './loading.props';
 
-export const LoadingScreen: React.FC<LoadingScreenProps> = ({ navigation }) => {
+import { useIsShownOnboarding } from '../../redux/cache';
+import { ILoadingScreenProps } from './loading.props';
+
+export const LoadingScreen: React.FC<ILoadingScreenProps> = ({
+  navigation,
+}) => {
   const isShownOnboarding = useIsShownOnboarding();
 
   useEffect(() => {

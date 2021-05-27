@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from '@react-native-community/blur';
 
 import { ErrorAlertHandler, VerifyPanel } from '../../components';
-import { PinScreenProps } from './pin.props';
+import { IPinScreenProps } from './pin.props';
 import { styles } from './pin.styles';
 import { isAndroid, isIOS } from '../../utils';
 import { useMount } from '../../utils/hooks';
@@ -17,8 +17,9 @@ import {
   useSetFirstVerificationCallback,
   useSetVerificationProcessCallback,
 } from '../../redux/app';
+import { RootParams } from '../../navigation/root-navigator';
 
-export const PinScreen: React.FC<PinScreenProps> = ({ navigation, route }) => {
+export const PinScreen: React.FC<IPinScreenProps> = ({ navigation, route }) => {
   const isFirstVerification = useIsFirstVerification();
   const savedRoute = useSavedNavRoute();
 
@@ -54,7 +55,10 @@ export const PinScreen: React.FC<PinScreenProps> = ({ navigation, route }) => {
     if (isPushedParam) {
       navigation.goBack();
       if (savedRoute) {
-        navigation.navigate(savedRoute?.name, savedRoute?.params);
+        navigation.navigate(
+          savedRoute?.name as keyof RootParams,
+          savedRoute?.params,
+        );
         onResetSavedRoute();
       }
     } else {
