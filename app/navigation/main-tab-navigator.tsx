@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeStackNavigator, SettingsStackNavigator } from './stacks';
 import { tabOptions, ScreenStub } from './options';
+import { AboutScreen } from '../screens/About';
 
 export type MainTabParams = {
   Home: undefined;
@@ -24,9 +25,9 @@ export const MainTabNavigator = () => (
       options={tabOptions.TabBarPlusButton}
     />
     <Tab.Screen
-      name="Settings"
-      component={SettingsStackNavigator}
-      options={tabOptions.Settings}
+      name="About"
+      component={AboutScreen}
+      options={tabOptions.About}
     />
   </Tab.Navigator>
 );

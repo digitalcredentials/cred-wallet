@@ -55,7 +55,7 @@ export const tabOptions: TabNavigatorOptions = {
     title: '',
     tabBarButton: () => <TabBarPlusButton />,
   },
-  Settings: {
+  About: {
     title: '',
     tabBarIcon: ({ focused }) => (
       <View
@@ -65,7 +65,7 @@ export const tabOptions: TabNavigatorOptions = {
         ]}
       >
         <Image
-          source={focused ? IMAGES.SETTINGS_ACTIVE : IMAGES.SETTINGS_INACTIVE}
+          source={focused ? IMAGES.ABOUT_ACTIVE : IMAGES.ABOUT_INACTIVE}
           style={styles.tabBarIcon}
         />
       </View>
