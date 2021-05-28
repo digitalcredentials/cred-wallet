@@ -4,9 +4,12 @@
 
 CredWallet is an open source wallet project that implements the standards developed by the Digital Credentials Consortium, a network of higher education institutions. The wallet allows the exchange, storage, and management of education certificates. The reference implementation is developed in React Native. 
 
+
 The target platforms: Android, iOS.
 
 # Install
+
+Install requirements: see [react-native instruction](https://reactnative.dev/docs/environment-setup) for setting up the required environment.
 
 ```sh
 git clone <ssh/https_git_url>
@@ -14,6 +17,14 @@ cd <your_project_name>
 yarn
 cd ios
 pod install
+```
+
+Create empty config files:
+
+```
+touch app/config/env.dev.js
+touch app/config/env.prod.js
+
 ```
 
 # Run
