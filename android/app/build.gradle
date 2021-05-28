@@ -143,6 +143,7 @@ android {
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
+        manifestPlaceholders = [appAuthRedirectScheme: 'com.credwallet']
     }
     splits {
         abi {

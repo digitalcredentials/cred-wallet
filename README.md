@@ -16,6 +16,14 @@ cd ios
 pod install
 ```
 
+Create empty config files:
+
+```
+touch app/config/env.dev.js
+touch app/config/env.prod.js
+
+```
+
 # Run
 
 ## Auto
