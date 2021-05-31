@@ -40,14 +40,6 @@ export const CredentialsList: React.FC<CredentialsListProps> = ({
                 >
                   {item.issuer.name}
                 </Text>
-                <Image
-                  style={styles.issuerImage}
-                  source={
-                    isSelected
-                      ? IMAGES.GRADUATION_WHITE
-                      : IMAGES.GRADUATION_ORANGE
-                  }
-                />
               </View>
               <Text
                 style={[
