@@ -21,6 +21,7 @@ export const IMAGES = {
   FOLDER: require('./images/folder.png'),
   CLOUD_STORAGE: require('./images/cloud-storage.png'),
   SHARE_ICON: require('./images/share.png'),
+  ABOUT: require('./images/about.png'),
 
   // Tabs
   HOME_ACTIVE: require('./images/home-active.png'),

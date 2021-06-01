@@ -11,3 +11,4 @@ export * from './Onboarding';
 export * from './Pin';
 export * from './QRScanner';
 export * from './Settings';
+export * from './About';

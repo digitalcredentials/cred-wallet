@@ -8,6 +8,7 @@ interface ISettingsScreenStyles {
   contentContainer: ViewStyle;
   sectionTitle: TextStyle;
   itemImage: ImageStyle;
+  aboutImage: ImageStyle;
   itemTitle: TextStyle;
   itemContainer: ViewStyle;
   itemChevron: ImageStyle;
@@ -29,6 +30,11 @@ export const styles = StyleSheet.create<ISettingsScreenStyles>({
     fontFamily: FONTS.POPPINS_REGULAR,
     fontSize: 11,
     lineHeight: 14,
+  },
+  aboutImage: {
+    width: 26,
+    height: 26,
+    marginRight: 10,
   },
   itemImage: {
     width: 26,

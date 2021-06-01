@@ -1,10 +1,15 @@
 import { IMAGES } from '../../assets';
 import { IWithID } from '../../utils/types';
 
+enum Navigation {
+  Backups = 'Backups',
+  About = 'About',
+}
+
 export interface IMenuOption extends IWithID {
   title: string;
   iconSource: any;
-  navigateTo: 'Backups';
+  navigateTo: Navigation;
 }
 
 interface ISectionData {
@@ -20,7 +25,7 @@ export const MENU_ITEMS: ISectionData[] = [
         id: 'backups',
         title: 'My Backups',
         iconSource: IMAGES.BACKUP,
-        navigateTo: 'Backups',
+        navigateTo: Navigation.Backups,
       },
     ],
   },
@@ -28,10 +33,10 @@ export const MENU_ITEMS: ISectionData[] = [
     title: 'Application settings',
     data: [
       {
-        id: 'backups',
+        id: 'about',
         title: 'About',
-        iconSource: IMAGES.MORE,
-        navigateTo: 'Backups',
+        iconSource: IMAGES.ABOUT,
+        navigateTo: Navigation.About,
       },
     ],
   },
