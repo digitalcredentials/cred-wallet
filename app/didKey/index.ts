@@ -12,6 +12,8 @@ const ed25519Ctx = require('ed25519-signature-2020-context');
 const credentialsCtx = require('@digitalcredentials/credentials-context');
 import uuid from 'react-native-uuid';
 
+import uuid from 'react-native-uuid';
+
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
 }
@@ -67,6 +69,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
   const suite = generateDidKeySuite(keyPair);
 
   const presentation = createPresentation(keyPair.controller);
+  console.trace(`Created presentation\n: ${JSON.stringify(presentation, null, 2)}`);
   const customLoader = getCustomLoader();
   let signedPresentation = null;
   try {
@@ -76,9 +79,10 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
       suite: suite,
       challenge: challenge,
     });
+    console.trace(`Signed presentation\n: ${JSON.stringify(signedPresentation, null, 2)}`);
   } catch (e) {
-    // console.tron?.error(e);
-    console.trace(e);
+    console.error(e);
+    throw e;
   }
 
   return signedPresentation;
