@@ -69,13 +69,13 @@ function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
     });
 
     const credential: Credential = yield response.json();
+    console.trace(`Received credential\n: ${JSON.stringify(credential, null, 2)}`);
     yield put<AddCertificateAction>(
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    yield put<AddCertificateFailureAction>(
-      certificatesActionCreators.addCertificateFailure('Wrong QR code.'),
-    );
+    console.error(e);
+    throw e;
   }
 }
 
@@ -120,11 +120,13 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
     });
 
     const credential: Credential = yield response.json();
+    console.trace(`Received credential\n: ${JSON.stringify(credential, null, 2)}`);
     yield put<AddCertificateAction>(
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    // console.tron?.log('error', e);
+    console.error(e);
+    throw e;
   }
 }
 

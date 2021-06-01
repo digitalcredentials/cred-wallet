@@ -11,6 +11,8 @@ const x25519Ctx = require('@digitalcredentials/x25519-key-agreement-2020-context
 const ed25519Ctx = require('ed25519-signature-2020-context');
 const credentialsCtx = require('@digitalcredentials/credentials-context');
 
+import uuid from 'react-native-uuid';
+
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
 }
@@ -56,7 +58,7 @@ function createPresentation(holder: string): any {
       'https://w3id.org/security/suites/ed25519-2020/v1',
     ],
     type: ['VerifiablePresentation'],
-    id: '123', // TODO: generate a UUID for use here
+    id: uuid.v4(),
     holder: holder,
   };
 }
@@ -66,6 +68,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
   const suite = generateDidKeySuite(keyPair);
 
   const presentation = createPresentation(keyPair.controller);
+  console.trace(`Created presentation\n: ${JSON.stringify(presentation, null, 2)}`);
   const customLoader = getCustomLoader();
   let signedPresentation = null;
   try {
@@ -75,9 +78,10 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
       suite: suite,
       challenge: challenge,
     });
+    console.trace(`Signed presentation\n: ${JSON.stringify(signedPresentation, null, 2)}`);
   } catch (e) {
-    // console.tron?.error(e);
-    console.trace(e);
+    console.error(e);
+    throw e;
   }
 
   return signedPresentation;
