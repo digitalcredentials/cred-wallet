@@ -24,4 +24,15 @@ export const MENU_ITEMS: ISectionData[] = [
       },
     ],
   },
+  {
+    title: 'Application settings',
+    data: [
+      {
+        id: 'backups',
+        title: 'About',
+        iconSource: IMAGES.MORE,
+        navigateTo: 'Backups',
+      },
+    ],
+  },
 ];

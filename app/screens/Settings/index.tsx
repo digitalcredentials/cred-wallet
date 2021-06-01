@@ -39,7 +39,7 @@ export const SettingsScreen: React.FC<ISettingsScreenProps> = ({
 
   return (
     <View style={styles.container}>
-      <SettingsHeader title="Settings" />
+      <SettingsHeader title="About for now" />
 
       <View style={styles.contentContainer}>
         <SectionList
