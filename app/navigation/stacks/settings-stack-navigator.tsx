@@ -9,12 +9,14 @@ import {
   SettingsScreen,
   CreateBackupScreen,
   DoneBackupScreen,
+  AboutScreen,
 } from '../../screens';
 import { IBackupInfo } from '../../utils/types';
 
 export type SettingsStackParams = {
   Settings: undefined;
   Backups: undefined;
+  About: undefined;
   CreateBackup: { isLoadBackup: boolean; backupPath?: string };
   DoneBackup: { backupInfo: IBackupInfo };
 };
@@ -25,6 +27,7 @@ export const SettingsStackNavigator = () => (
   <Stack.Navigator screenOptions={WITHOUT_HEADER_OPTIONS}>
     <Stack.Screen name="Settings" component={SettingsScreen} />
     <Stack.Screen name="Backups" component={BackupsScreen} />
+    <Stack.Screen name="About" component={AboutScreen} />
     <Stack.Screen
       name="CreateBackup"
       component={CreateBackupScreen}
