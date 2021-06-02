@@ -10,6 +10,7 @@ const ed25519 = require('@digitalcredentials/ed25519-signature-2020');
 const x25519Ctx = require('@digitalcredentials/x25519-key-agreement-2020-context');
 const ed25519Ctx = require('ed25519-signature-2020-context');
 const credentialsCtx = require('@digitalcredentials/credentials-context');
+import uuid from 'react-native-uuid';
 
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
@@ -56,7 +57,7 @@ function createPresentation(holder: string): any {
       'https://w3id.org/security/suites/ed25519-2020/v1',
     ],
     type: ['VerifiablePresentation'],
-    id: '123', // TODO: generate a UUID for use here
+    id: uuid.v4(),
     holder: holder,
   };
 }
