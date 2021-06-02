@@ -1,7 +1,10 @@
+import { ImageStyle } from 'react-native';
+
 import { IMAGES } from '../../assets';
 import { IWithID } from '../../utils/types';
+import { styles } from './settings.styles';
 
-enum Navigation {
+enum MenuOptionRedirect {
   Backups = 'Backups',
   About = 'About',
 }
@@ -9,7 +12,8 @@ enum Navigation {
 export interface IMenuOption extends IWithID {
   title: string;
   iconSource: any;
-  navigateTo: Navigation;
+  iconStyle: ImageStyle;
+  navigateTo: MenuOptionRedirect;
 }
 
 interface ISectionData {
@@ -25,7 +29,8 @@ export const MENU_ITEMS: ISectionData[] = [
         id: 'backups',
         title: 'My Backups',
         iconSource: IMAGES.BACKUP,
-        navigateTo: Navigation.Backups,
+        iconStyle: styles.itemImage,
+        navigateTo: MenuOptionRedirect.Backups,
       },
     ],
   },
@@ -36,7 +41,8 @@ export const MENU_ITEMS: ISectionData[] = [
         id: 'about',
         title: 'About',
         iconSource: IMAGES.ABOUT,
-        navigateTo: Navigation.About,
+        iconStyle: styles.aboutImage,
+        navigateTo: MenuOptionRedirect.About,
       },
     ],
   },

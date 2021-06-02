@@ -23,9 +23,11 @@ export const AboutScreen: React.FC<IAboutScreenProps> = () => {
             DC Home
           </Text>
           .{'\n'}
-          <Text style={styles.copyright}>
-            Copyright © 2021 Massachusetts Institute of Technology
-          </Text>
+        </Text>
+      </View>
+      <View style={styles.copyrightContainer}>
+        <Text style={styles.copyright}>
+          Copyright © 2021{'\n'}Massachusetts Institute of Technology
         </Text>
       </View>
     </View>

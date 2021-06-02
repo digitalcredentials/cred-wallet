@@ -24,10 +24,7 @@ export const SettingsScreen: React.FC<ISettingsScreenProps> = ({
         onPress={() => navigation.navigate(item.navigateTo)}
         style={styles.itemContainer}
       >
-        <Image
-          source={item.iconSource}
-          style={item.id === 'about' ? styles.aboutImage : styles.itemImage}
-        />
+        <Image source={item.iconSource} style={item.iconStyle} />
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Image
           source={IMAGES.CHEVRON_RIGHT_PURPLE}
