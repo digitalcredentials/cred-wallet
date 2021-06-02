@@ -40,6 +40,7 @@
     "react-native-camera": "^3.43.9",
     "react-native-crypto": "^2.2.0",
     "react-native-crypto-js": "^1.0.0",
+    "react-native-exception-handler": "^2.10.10",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-permissions": "^2.2.2",
@@ -67,6 +68,7 @@
     "util": "^0.12.3"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.170",
     "@types/react": "^17.0.9",
     "@types/react-native": "^0.64.9",
@@ -74,7 +76,7 @@
     "@types/react-native-vector-icons": "^6.4.6",
     "@types/react-redux": "^7.1.16",
     "eslint": "^7.27.0",
-    "jest": "^27.0.1",
+    "jest": "^27.0.3",
     "react-native-typescript-transformer": "^1.2.13",
     "reactotron-react-native": "^5.0.0",
     "reactotron-redux": "^3.1.3",

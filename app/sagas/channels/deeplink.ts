@@ -42,6 +42,7 @@ import {
   certificatesActionCreators,
 } from '../../redux/certificates';
 import { Credential } from '../../services/api/api.types';
+import { logInfo, logError } from '../../errors';
 
 function* handleBackupDeeplink(backupDeeplinkUrl: string) {
   yield call(StaticNavigator.navigateTo, 'CreateBackup', {
@@ -69,13 +70,16 @@ function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
     });
 
     const credential: Credential = yield response.json();
-    console.trace(`Received credential\n: ${JSON.stringify(credential, null, 2)}`);
+    logInfo(`Received credential\n: ${JSON.stringify(credential, null, 2)}`);
     yield put<AddCertificateAction>(
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    console.error(e);
-    throw e;
+    logError(e);
+    yield put<AddCertificateFailureAction>(
+      certificatesActionCreators.addCertificateFailure(e),
+    );
+    //throw e;
   }
 }
 
@@ -120,13 +124,13 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
     });
 
     const credential: Credential = yield response.json();
-    console.trace(`Received credential\n: ${JSON.stringify(credential, null, 2)}`);
+    logInfo(`Received credential\n: ${JSON.stringify(credential, null, 2)}`);
     yield put<AddCertificateAction>(
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    console.error(e);
-    throw e;
+    logError(e);
+    //throw e;
   }
 }
 
