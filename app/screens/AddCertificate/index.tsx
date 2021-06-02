@@ -46,8 +46,8 @@ export const AddCertificateScreen: React.FC<IAddCertificateScreenProps> = ({
 
           <Text style={styles.certificateInfoIssuer}>{issuer.name}</Text>
 
-          {_.map(FIELDS, ({ fieldName, getFieldValue }) => (
-            <View style={styles.certificateInfoFieldContainer}>
+          {_.map(FIELDS, ({ fieldName, getFieldValue }, index) => (
+            <View style={styles.certificateInfoFieldContainer} key={index}>
               <Text style={styles.certificateInfoFieldName}>{fieldName}</Text>
               <Text style={styles.certificateInfoFieldValue}>
                 {getFieldValue(certificate)}
