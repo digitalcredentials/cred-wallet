@@ -19,12 +19,6 @@ export const isAndroid = Platform.OS === 'android';
 
 export const isIOS = Platform.OS === 'ios';
 
-//TODO: remove sum function
-// created for jest first test only
-export function sum(a: number, b: number): number {
-  return a + b;
-}
-
 export function parseOAuthDeeplink(deeplinkUrl: string): IOAuthDeeplink {
   const parsedUrl = queryString.parseUrl(deeplinkUrl);
 
