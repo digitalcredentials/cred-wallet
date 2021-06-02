@@ -66,11 +66,10 @@ export function getCredentialCertificate(credential: Credential): ICertificate {
     ['@context']: credential['@context'],
     type: credential.type,
     id: credential.id,
-    issuerId: credential.issuer.id,
+    issuer: credential.issuer,
     issuanceDate: credential.issuanceDate,
     credentialSubject: credential.credentialSubject,
-    proof,
-    proofType: credential.proof.type as string,
+    proof: credential.proof
   };
 }
 

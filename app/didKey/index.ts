@@ -46,7 +46,7 @@ async function generateDidKeyPair(): Promise<any> {
 }
 
 function generateDidKeySuite(keyPair: any): any {
-  const signingSuite = new ed25519.Ed25519Signature2020({ key: keyPair });
+  const signingSuite = new ed25519.Ed255Signature2020({ key: keyPair });
   return signingSuite;
 }
 
