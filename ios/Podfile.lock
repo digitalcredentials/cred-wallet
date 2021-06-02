@@ -492,10 +492,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
+  DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 7b423f9e248eae65987838148c36eec1dbfe0b53
-  FBReactNativeSpec: ad1bd73eacf36ed8e305de34079ea59ee51b7f41
-  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
+  FBReactNativeSpec: 687b62a4ecc0030c4820eb51b720d0a3c74468fe
+  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   Permission-Camera: 5d2aaf95592660b6dcb5e8d1d90ed5d0156cad02
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: ec2ebc96b7bfba3ca5c32740f5a0c6a014a274d2
