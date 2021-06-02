@@ -8,6 +8,7 @@ import { useSaveCertificateCallback } from '../../redux/certificates';
 import { IAddCertificateScreenProps } from './add-certificate.props';
 import { styles } from './add-certificate.styles';
 import { FIELDS } from './add-certificate.data';
+import { logInfo, logError } from '../../errors';
 
 export const AddCertificateScreen: React.FC<IAddCertificateScreenProps> = ({
   navigation,
@@ -20,7 +21,12 @@ export const AddCertificateScreen: React.FC<IAddCertificateScreenProps> = ({
   const issuer = useMemo(() => route.params.issuer, [route.params]);
 
   const onYesPress = () => {
-    saveCertificate(certificate, issuer);
+    try {
+      saveCertificate(certificate, issuer);
+    } catch (e) {
+      logError(e);
+      //throw e;
+    }
     navigation.goBack();
   };
 
@@ -46,8 +52,8 @@ export const AddCertificateScreen: React.FC<IAddCertificateScreenProps> = ({
 
           <Text style={styles.certificateInfoIssuer}>{issuer.name}</Text>
 
-          {_.map(FIELDS, ({ fieldName, getFieldValue }) => (
-            <View style={styles.certificateInfoFieldContainer}>
+          {_.map(FIELDS, ({ fieldName, getFieldValue }, index) => (
+            <View style={styles.certificateInfoFieldContainer} key={index}>
               <Text style={styles.certificateInfoFieldName}>{fieldName}</Text>
               <Text style={styles.certificateInfoFieldValue}>
                 {getFieldValue(certificate)}

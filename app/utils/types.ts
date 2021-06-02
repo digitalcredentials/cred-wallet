@@ -16,7 +16,7 @@ export type VerifyPanelStatus =
 export interface ICertificate extends IWithID {
   '@context': string[];
   type: string[];
-  issuerId: string;
+  issuer: IIssuer;
   issuanceDate: string;
   credentialSubject: {
     id: string;
@@ -29,8 +29,7 @@ export interface ICertificate extends IWithID {
       description: string;
     };
   };
-  proofType: string;
-  proof: { [proofUrl: string]: Object | string };
+  proof: any;
 }
 
 export interface IIssuer {
@@ -77,7 +76,7 @@ export type TabNavigatorOptions = {
 
 export interface ICertificateDeeplinkWithDID
   extends ICertificateDeeplink,
-    ISubjectDID {}
+  ISubjectDID { }
 
 export enum LoadingType {
   isAddCertificate = 'isAddCertificate',

@@ -1,4 +1,4 @@
-import RNReactotron, { ReactotronReactNative } from 'reactotron-react-native';
+import RNReactotron, { ReactotronReactNative, trackGlobalErrors } from 'reactotron-react-native';
 import { NativeModules } from 'react-native';
 import { Reactotron } from 'reactotron-core-client';
 import AsyncStorage from '@react-native-community/async-storage';
