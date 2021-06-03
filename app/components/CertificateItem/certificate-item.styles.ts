@@ -13,6 +13,7 @@ interface CertificateItemStyles {
   valueTitle: TextStyle;
   value: TextStyle;
   separatorContainer: ViewStyle;
+  did: TextStyle;
   moreButtonContainer: ViewStyle;
   moreButtonImage: ImageStyle;
   modalLine: ViewStyle;
@@ -69,6 +70,11 @@ const baseStyles: CertificateItemStyles = {
     height: 1,
     width: '100%',
     backgroundColor: COLORS.LAVENDER_PURPLE,
+  },
+  did: {
+    fontSize: 8,
+    fontFamily: FONTS.POPPINS_300,
+    lineHeight: 10,
   },
   moreButtonContainer: {},
   moreButtonImage: {},

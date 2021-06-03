@@ -24,37 +24,34 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
       <View style={styles.modalLine} />
 
       <View style={styles.titleContainer}>
-        <Image
-          style={styles.titleImage}
-          source={issuer.image ? { uri: issuer.image } : IMAGES.MAN}
-        />
-        <Text style={styles.titleIssuer}>{issuer.name}</Text>
+        <Text>Issued By</Text>
+      </View>
+      <Image
+        style={styles.titleImage}
+        source={issuer.image ? { uri: issuer.image } : IMAGES.MAN}
+      />
+      <Text style={styles.titleIssuer}>{issuer.name}</Text>
+      <Text style={styles.did}>DID: {issuer.id}</Text>
+
+      <View style={styles.separatorContainer} />
+
+      <View style={styles.titleContainer}>
+        <Text>Issued To</Text>
+      </View>
+      <Text style={styles.name}>{certificate.credentialSubject.name}</Text>
+      <Text style={styles.did}>DID: {certificate.credentialSubject.id}</Text>
+
+      <View style={styles.separatorContainer} />
+
+      <View style={styles.titleContainer}>
+        <Text>Credential</Text>
       </View>
 
-      <Text style={styles.name}>{certificate.credentialSubject.name}</Text>
-
-      <View style={styles.separatorContainer} />
-
-      <Text style={styles.description}>Some description here</Text>
-
-      <View style={styles.separatorContainer} />
+      <Text style={styles.titleIssuer}>{certificate.credentialSubject.hasCredential.name}</Text>
+      <Text style={styles.description}>{certificate.credentialSubject.hasCredential.description}</Text>
 
       <Text>
-        <Text style={styles.valueTitle}>DID:</Text>
-        <Text style={styles.value}> {certificate.credentialSubject.id}</Text>
-      </Text>
-
-      <View style={styles.separatorContainer} />
-
-      <Text>
-        <Text style={styles.valueTitle}>Start date:</Text>
-        <Text style={styles.value}>
-          {' '}
-          {moment(certificate.issuanceDate).format('YYYY-MM-DD')}
-        </Text>
-      </Text>
-      <Text>
-        <Text style={styles.valueTitle}>End date:</Text>
+        <Text style={styles.valueTitle}>Issuance date:</Text>
         <Text style={styles.value}>
           {' '}
           {moment(certificate.issuanceDate).format('YYYY-MM-DD')}

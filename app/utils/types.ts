@@ -22,7 +22,7 @@ export interface ICertificate extends IWithID {
     id: string;
     type: string;
     name: string;
-    hasAchieved: {
+    hasCredential: {
       type: string[];
       id: string;
       name: string;
