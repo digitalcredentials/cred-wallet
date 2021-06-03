@@ -15,6 +15,9 @@ import uuid from 'react-native-uuid';
 import uuid from 'react-native-uuid';
 import { logInfo, logError } from '../errors';
 
+import uuid from 'react-native-uuid';
+import { logInfo, logError } from '../errors';
+
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
 }
