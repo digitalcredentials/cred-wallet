@@ -33,7 +33,7 @@ export const BackupsScreen: React.FC<IBackupsScreenProps> = ({
 
   return (
     <View style={styles.container}>
-      <SettingsHeader title="About for now" isBackButton />
+      <SettingsHeader title="About" isBackButton />
 
       <View style={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Cloud storage</Text>

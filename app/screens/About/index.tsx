@@ -8,7 +8,7 @@ import { styles } from './about.styles';
 export const AboutScreen: React.FC<IAboutScreenProps> = () => {
   return (
     <View style={styles.container}>
-      <SettingsHeader title="About for now" isBackButton />
+      <SettingsHeader title="About" isBackButton />
       <View style={styles.textContainer}>
         <Text style={styles.introduction}>
           This mobile wallet was developed by the Digital Credentials
