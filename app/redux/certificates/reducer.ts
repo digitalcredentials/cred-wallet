@@ -30,15 +30,22 @@ const saveCertificate: Handler<SaveCertificateAction> = (
   { certificate, issuer },
 ) => {
   const newIssuerCertificates = state.data[issuer.id]?.certificates || [];
-  const isNewCertificate = !_.find(
-    newIssuerCertificates,
-    (el) => el.id === certificate.id,
-  );
-  if (isNewCertificate) {
-    newIssuerCertificates.push(certificate);
-  } else {
-    logError(`Already have a credential with id=${certificate.id}`);
-    // TODO: alert to user  
+
+  try {
+    const isNewCertificate = !_.find(
+      newIssuerCertificates,
+      (el) => el.id === certificate.id,
+    );
+    if (isNewCertificate) {
+      newIssuerCertificates.push(certificate);
+    } else {
+      logError(`Already have a credential with id=${certificate.id}`);
+      // TODO: alert to user?  
+    }
+  } catch (error) {
+    logError("Error adding credential; please investigate");
+    logError(error);
+    // TODO: alert to user?
   }
 
   return {
