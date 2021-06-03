@@ -11,6 +11,7 @@ const x25519Ctx = require('@digitalcredentials/x25519-key-agreement-2020-context
 const ed25519Ctx = require('ed25519-signature-2020-context');
 const credentialsCtx = require('@digitalcredentials/credentials-context');
 import uuid from 'react-native-uuid';
+import { logInfo, logError } from '../utils/log';
 
 export function getController(fullDid: string) {
   return fullDid.split('#')[0];
@@ -46,7 +47,7 @@ async function generateDidKeyPair(): Promise<any> {
 }
 
 function generateDidKeySuite(keyPair: any): any {
-  const signingSuite = new ed25519.Ed255Signature2020({ key: keyPair });
+  const signingSuite = new ed25519.Ed25519Signature2020({ key: keyPair });
   return signingSuite;
 }
 
@@ -67,6 +68,7 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
   const suite = generateDidKeySuite(keyPair);
 
   const presentation = createPresentation(keyPair.controller);
+  logInfo(`Created presentation\n: ${JSON.stringify(presentation, null, 2)}`);
   const customLoader = getCustomLoader();
   let signedPresentation = null;
   try {
@@ -76,9 +78,9 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
       suite: suite,
       challenge: challenge,
     });
+    logInfo(`Signed presentation\n: ${JSON.stringify(signedPresentation, null, 2)}`);
   } catch (e) {
-    // console.tron?.error(e);
-    console.trace(e);
+    logError(e);
   }
 
   return signedPresentation;
