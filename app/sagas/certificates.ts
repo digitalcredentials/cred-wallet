@@ -25,6 +25,7 @@ import { getCredentialCertificate, getCredentialIssuer } from '../utils';
 import EncryptionManager from '../services/encryption-manager';
 import { CredentialsByIssuer, ICertificate, IIssuer } from '../utils/types';
 import { FileManager } from '../services/file-manager';
+import { logInfo, logError } from '../utils/log';
 
 function* addCertificate({ data }: AddCertificateAction) {
   try {
@@ -41,6 +42,7 @@ function* addCertificate({ data }: AddCertificateAction) {
       issuer,
     });
   } catch (err) {
+    logError(err);
     yield put<AddCertificateFailureAction>(
       certificatesActionCreators.addCertificateFailure(
         'Some problems with File/QRcode/deeplink. Try again.',
@@ -84,6 +86,7 @@ function* createBackup({ key }: CreateBackupAction) {
       );
     }
   } catch (error) {
+    logError(error);
     yield call(StaticNavigator.goBack);
     yield put<CreateBackupFailureAction>(
       certificatesActionCreators.createBackupFailure(error),
@@ -115,6 +118,7 @@ function* loadBackup({ backupPath, key }: LoadBackupAction) {
       certificatesActionCreators.loadBackupSuccess(parsedBackup),
     );
   } catch (error) {
+    logError(error);
     yield call(StaticNavigator.goBack);
     yield put<LoadBackupFailureAction>(
       certificatesActionCreators.loadBackupFailure(
@@ -140,6 +144,7 @@ function* shareCertificate({ certificate }: ShareCertificateAction) {
       certificatesActionCreators.shareCertificateSuccess(),
     );
   } catch (error) {
+    logError(error);
     yield put<ShareCertificateFailureAction>(
       certificatesActionCreators.shareCertificateFailure(error),
     );
