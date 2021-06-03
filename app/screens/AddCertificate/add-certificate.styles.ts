@@ -66,7 +66,6 @@ export const styles = StyleSheet.create<IAddCertificateScreenStyles>({
   certificateInfoTitle: {
     fontFamily: FONTS.POPPINS_600,
     fontSize: 17,
-    lineHeight: 25.5,
     color: COLORS.BUNTING,
   },
   certificateInfoIssuer: {
@@ -84,13 +83,13 @@ export const styles = StyleSheet.create<IAddCertificateScreenStyles>({
   },
   certificateInfoFieldName: {
     fontFamily: FONTS.POPPINS_500,
-    fontSize: 14,
+    fontSize: 12,
     lineHeight: 21,
     marginRight: 5,
   },
   certificateInfoFieldValue: {
     fontFamily: FONTS.POPPINS_300,
-    fontSize: 11,
+    fontSize: 12,
   },
   buttonsContainer: {
     marginBottom: 8,

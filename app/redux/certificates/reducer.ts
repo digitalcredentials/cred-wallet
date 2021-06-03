@@ -10,6 +10,9 @@ import {
   SaveCertificateAction,
 } from './actions';
 
+import { logInfo, logError } from '../../utils/log';
+
+
 export interface CertificatesState {
   data: CredentialsByIssuer;
   backups: IBackupInfo[];
@@ -33,6 +36,9 @@ const saveCertificate: Handler<SaveCertificateAction> = (
   );
   if (isNewCertificate) {
     newIssuerCertificates.push(certificate);
+  } else {
+    logError(`Already have a credential with id=${certificate.id}`);
+    // TODO: alert to user  
   }
 
   return {
