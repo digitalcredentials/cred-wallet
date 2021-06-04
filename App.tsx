@@ -20,14 +20,16 @@ import './shim';
 
 enableScreens();
 
-Sentry.init({
-  dsn: CONFIG.SENTRY_URL,
-  integrations: [
-    new Sentry.BrowserIntegrations.Breadcrumbs({
-      dom: false
-    }),
-  ]
-});
+if (!__DEV__) {
+  Sentry.init({
+    dsn: CONFIG.SENTRY_URL,
+    integrations: [
+      new Sentry.BrowserIntegrations.Breadcrumbs({
+        dom: false
+      }),
+    ]
+  });
+}
 
 const App: React.FC = () => {
   return (
