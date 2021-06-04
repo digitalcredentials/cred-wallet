@@ -20,7 +20,7 @@ export interface CertificatesState {
 
 const INITIAL_STATE: CertificatesState = {
   data: {},
-  backups: [],
+  backups: []
 };
 
 type Handler<A> = (state: CertificatesState, action: A) => CertificatesState;
@@ -38,7 +38,7 @@ const saveCertificate: Handler<SaveCertificateAction> = (
     newIssuerCertificates.push(certificate);
   } else {
     logError(`Already have a credential with id=${certificate.id}`);
-    // TODO: alert to user  
+    // TODO: add alert to user. May want to detect duplicate in "add certificate" view and ask to overwrite
   }
 
   return {
@@ -50,7 +50,7 @@ const saveCertificate: Handler<SaveCertificateAction> = (
         issuer,
         certificates: newIssuerCertificates,
       },
-    },
+    }
   };
 };
 

@@ -54,6 +54,9 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
+  "include": [
+    "app/**/*"
+  ],
   "exclude": [
     "node_modules",
     "babel.config.js",

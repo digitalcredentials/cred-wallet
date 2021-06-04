@@ -76,7 +76,8 @@ function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
   } catch (e) {
     logError(e);
     yield put<AddCertificateFailureAction>(
-      certificatesActionCreators.addCertificateFailure('Wrong QR code.'),
+      certificatesActionCreators.addCertificateFailure(`Encountered an error handling the credential or its link. Details: ${e}`),
+
     );
   }
 }
@@ -127,6 +128,9 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
     );
   } catch (e) {
     logError(e);
+    yield put<AddCertificateFailureAction>(
+      certificatesActionCreators.addCertificateFailure(`Encountered an error handling the credential or its authenticated link. Details: ${e}`),
+    );
   }
 }
 

@@ -19,6 +19,7 @@ import { Keystore } from '../../services/keychain';
 import { IMAGES } from '../../assets';
 import { useSetErrorCallback } from '../../redux/app';
 import { useIsFirstLaunch, useSetFirstLaunchCallback } from '../../redux/cache';
+import { logError } from '../../utils/log';
 
 // Keystore.resetPin();
 
@@ -151,6 +152,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
         setPanelStatus(PANEL_STATUS.BIOMETRIC_VERIFY);
       })
       .catch((error) => {
+        logError(error);
         setPanelStatus(PANEL_STATUS.PIN_ENTER);
       });
   }, [setPanelStatus, setBiometricType]);
@@ -168,6 +170,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
       })
       // Key does not present
       .catch((err) => {
+        logError(err);
         setPanelStatus(PANEL_STATUS.PIN_CREATE);
       });
   }, [setPanelStatus, setKeychainPin]);
@@ -198,7 +201,8 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
   const launchBiometricVerify = useCallback(() => {
     TouchID.authenticate('To access your accounts', BIOMETRY_OPTIONS)
       .then(() => setPanelStatus(PANEL_STATUS.VERIFIED))
-      .catch(() => {
+      .catch((err: any) => {
+        logError(err);
         setPanelStatus(PANEL_STATUS.PIN_ENTER);
       });
   }, [setPanelStatus]);

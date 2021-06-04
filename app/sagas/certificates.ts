@@ -45,7 +45,7 @@ function* addCertificate({ data }: AddCertificateAction) {
     logError(err);
     yield put<AddCertificateFailureAction>(
       certificatesActionCreators.addCertificateFailure(
-        'Some problems with File/QRcode/deeplink. Try again.',
+        `Encountered an error adding the credential. Details: ${err}`,
       ),
     );
   }

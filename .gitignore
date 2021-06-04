@@ -64,3 +64,4 @@ env.*.js
 
 yarn.lock
 ios/CredMaker.xcworkspace/
+.vscode

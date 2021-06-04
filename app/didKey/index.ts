@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-
-// @ts-ignore
 import { documentLoaderFactory } from '@transmute/jsonld-document-loader';
-const vc = require('@digitalcredentials/vc');
 import { generateSecureRandom } from 'react-native-securerandom';
+
+const vc = require('@digitalcredentials/vc');
 const didKeyDriver = require('@digitalcredentials/did-method-key').driver();
 
 const ed25519 = require('@digitalcredentials/ed25519-signature-2020');
@@ -71,17 +70,13 @@ export async function generateAndProveDid(challenge: string): Promise<any> {
   logInfo(`Created presentation\n: ${JSON.stringify(presentation, null, 2)}`);
   const customLoader = getCustomLoader();
   let signedPresentation = null;
-  try {
-    signedPresentation = await vc.signPresentation({
-      presentation: presentation,
-      documentLoader: customLoader,
-      suite: suite,
-      challenge: challenge,
-    });
-    logInfo(`Signed presentation\n: ${JSON.stringify(signedPresentation, null, 2)}`);
-  } catch (e) {
-    logError(e);
-  }
+  signedPresentation = await vc.signPresentation({
+    presentation: presentation,
+    documentLoader: customLoader,
+    suite: suite,
+    challenge: challenge,
+  });
+  logInfo(`Signed presentation\n: ${JSON.stringify(signedPresentation, null, 2)}`);
 
   return signedPresentation;
 }

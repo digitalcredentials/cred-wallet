@@ -13,10 +13,21 @@ import { PersistGate } from 'redux-persist/integration/react';
 import RootNavigator from './app/navigation/root-navigator';
 import { ErrorAlertHandler, Loader } from './app/components';
 import { store, persistor } from './app/redux';
+import * as Sentry from "@sentry/react-native";
+import CONFIG from './app/config/env';
 
 import './shim';
 
 enableScreens();
+
+Sentry.init({
+  dsn: CONFIG.SENTRY_URL,
+  integrations: [
+    new Sentry.BrowserIntegrations.Breadcrumbs({
+      dom: false
+    }),
+  ]
+});
 
 const App: React.FC = () => {
   return (
