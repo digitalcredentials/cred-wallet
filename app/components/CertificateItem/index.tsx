@@ -55,7 +55,7 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
       <Text style={styles.credentialName}>{certificate.credentialSubject.hasCredential.name}</Text>
       <Text>
         <Text style={styles.fieldTitle}>Type: </Text>
-        <Text style={styles.fieldValue}>{certificate.credentialSubject.hasCredential.type.join(', ')}</Text>
+        <Text style={styles.fieldValue}>{Array.isArray(certificate.credentialSubject.hasCredential.type) ? certificate.credentialSubject.hasCredential.type.join(', '): certificate.credentialSubject.hasCredential.type}</Text>
       </Text>
 
       <Text>
