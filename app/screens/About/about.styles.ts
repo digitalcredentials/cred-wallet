@@ -5,11 +5,10 @@ import { FONTS } from '../../utils/fonts';
 
 interface IAboutScreenStyles {
   container: ViewStyle;
-  textContainer: ViewStyle;
-  introduction: TextStyle;
+  contentContainer: ViewStyle;
+  sectionTitle: TextStyle;
   link: TextStyle;
-  copyrightContainer: ViewStyle;
-  copyright: TextStyle;
+  paragraph: TextStyle;
 }
 
 export const styles = StyleSheet.create<IAboutScreenStyles>({
@@ -17,23 +16,23 @@ export const styles = StyleSheet.create<IAboutScreenStyles>({
     flex: 1,
     backgroundColor: COLORS.WHITE,
   },
-  textContainer: {
-    marginHorizontal: 7,
-    marginTop: 12,
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 16,
   },
-  introduction: {
-    fontSize: 16,
-    fontFamily: FONTS.POPPINS_500,
-    color: COLORS.BUNTING,
+  sectionTitle: {
+    marginBottom: 10,
+    marginTop: 20,
+    color: COLORS.CRUSTA,
+    fontFamily: FONTS.POPPINS_REGULAR,
+    fontSize: 11,
+    lineHeight: 14,
   },
-  link: { color: COLORS.BAY_OF_MANY },
-  copyrightContainer: {
-    width: '100%',
-    paddingTop: 450,
+  paragraph: {
+    marginBottom: 5,
+    marginTop: 10,
   },
-  copyright: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: COLORS.GRAY_TRANSPARENT_BACKGROUND,
+  link: {
+    color: 'blue',
   },
 });
