@@ -12,6 +12,7 @@ import {
   AuthorizeResult,
 } from 'react-native-app-auth';
 import _ from 'lodash';
+import { logInfo, logError } from '../../utils/log';
 
 import { StaticNavigator } from '../../services/navigator';
 import {
@@ -73,6 +74,7 @@ function* handleCertificateDeeplink(certificateDeeplinkUrl: string) {
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
+    logError(e);
     yield put<AddCertificateFailureAction>(
       certificatesActionCreators.addCertificateFailure('Wrong QR code.'),
     );
@@ -124,7 +126,7 @@ function* handleOAuthDeeplink(oauthDeeplinkUrl: string) {
       certificatesActionCreators.addCertificate(credential),
     );
   } catch (e) {
-    // console.tron?.log('error', e);
+    logError(e);
   }
 }
 

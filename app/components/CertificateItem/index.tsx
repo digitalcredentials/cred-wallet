@@ -13,8 +13,8 @@ import { EXTENDED_HIT_SLOP } from '../../utils/constants';
 export const CertificateItem: React.FC<CertificateItemProps> = ({
   certificate,
   issuer,
-  onPress = () => {},
-  onSharePress = () => {},
+  onPress = () => { },
+  onSharePress = () => { },
   preset,
 }) => {
   const styles = useMemo(() => presetStyles[preset], [preset]);
@@ -24,38 +24,48 @@ export const CertificateItem: React.FC<CertificateItemProps> = ({
       <View style={styles.modalLine} />
 
       <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Issuer</Text>
+      </View>
+
+      { issuer.image ?
         <Image
           style={styles.titleImage}
           source={issuer.image ? { uri: issuer.image } : IMAGES.MAN}
         />
-        <Text style={styles.titleIssuer}>{issuer.name}</Text>
+        : <Text></Text>
+      }
+
+      <Text style={styles.credentialName}>{issuer.name}</Text>
+      <Text style={styles.did}>{issuer.id}</Text>
+
+      <View style={styles.separatorContainer} />
+
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Issued To</Text>
+      </View>
+      <Text style={styles.subjectName}>{certificate.credentialSubject.name}</Text>
+      <Text style={styles.did}>{certificate.credentialSubject.id}</Text>
+
+      <View style={styles.separatorContainer} />
+
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Credential</Text>
       </View>
 
-      <Text style={styles.name}>{certificate.credentialSubject.name}</Text>
-
-      <View style={styles.separatorContainer} />
-
-      <Text style={styles.description}>Some description here</Text>
-
-      <View style={styles.separatorContainer} />
-
+      <Text style={styles.credentialName}>{certificate.credentialSubject.hasCredential.name}</Text>
       <Text>
-        <Text style={styles.valueTitle}>DID:</Text>
-        <Text style={styles.value}> {certificate.credentialSubject.id}</Text>
+        <Text style={styles.fieldTitle}>Type: </Text>
+        <Text style={styles.fieldValue}>{Array.isArray(certificate.credentialSubject.hasCredential.type) ? certificate.credentialSubject.hasCredential.type.join(', '): certificate.credentialSubject.hasCredential.type}</Text>
       </Text>
 
-      <View style={styles.separatorContainer} />
+      <Text>
+        <Text style={styles.fieldTitle}>Description: </Text>
+        <Text style={styles.fieldValue}>{certificate.credentialSubject.hasCredential.description}</Text>
+      </Text>
 
       <Text>
-        <Text style={styles.valueTitle}>Start date:</Text>
-        <Text style={styles.value}>
-          {' '}
-          {moment(certificate.issuanceDate).format('YYYY-MM-DD')}
-        </Text>
-      </Text>
-      <Text>
-        <Text style={styles.valueTitle}>End date:</Text>
-        <Text style={styles.value}>
+        <Text style={styles.fieldTitle}>Issuance date:</Text>
+        <Text style={styles.fieldValue}>
           {' '}
           {moment(certificate.issuanceDate).format('YYYY-MM-DD')}
         </Text>

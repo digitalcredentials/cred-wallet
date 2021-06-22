@@ -4,17 +4,22 @@ import { ICertificate } from '../../utils/types';
 
 export const FIELDS = [
   {
-    fieldName: 'DID',
+    fieldName: 'Subject Name',
+    getFieldValue: (certificate: ICertificate) =>
+      certificate.credentialSubject.name,
+  },
+  {
+    fieldName: 'Subject DID',
     getFieldValue: (certificate: ICertificate) =>
       certificate.credentialSubject.id,
   },
   {
-    fieldName: 'ID',
+    fieldName: 'Certificate ID',
     getFieldValue: (certificate: ICertificate) => certificate.id,
   },
   {
-    fieldName: 'Date',
+    fieldName: 'Issuance Date',
     getFieldValue: (certificate: ICertificate) =>
       moment(certificate.issuanceDate).format('DD/MM/YYYY'),
-  },
+  }
 ];

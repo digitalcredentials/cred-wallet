@@ -6,13 +6,14 @@ import { CertificateItemPresets } from './certificate-item.props';
 interface CertificateItemStyles {
   container: ViewStyle;
   titleContainer: ViewStyle;
+  titleText: TextStyle;
   titleImage: ImageStyle;
-  titleIssuer: TextStyle;
-  name: TextStyle;
-  description: TextStyle;
-  valueTitle: TextStyle;
-  value: TextStyle;
+  credentialName: TextStyle;
+  subjectName: TextStyle;
+  fieldTitle: TextStyle;
+  fieldValue: TextStyle;
   separatorContainer: ViewStyle;
+  did: TextStyle;
   moreButtonContainer: ViewStyle;
   moreButtonImage: ImageStyle;
   modalLine: ViewStyle;
@@ -30,45 +31,48 @@ const baseStyles: CertificateItemStyles = {
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 10
+  },
+  titleText: {
+    fontFamily: FONTS.POPPINS_500,
+    fontSize: 12,
+    lineHeight: 20,
   },
   titleImage: {
     width: 64,
     height: 40,
     marginRight: 16,
   },
-  titleIssuer: {
-    fontFamily: FONTS.POPPINS_600,
-    fontSize: 17,
-    lineHeight: 25.5,
-    color: COLORS.BAY_OF_MANY,
-  },
-  name: {
-    fontFamily: FONTS.POPPINS_REGULAR,
-    fontSize: 14,
-    lineHeight: 21,
-  },
-  description: {
-    fontFamily: FONTS.POPPINS_300,
-    fontSize: 11,
-    lineHeight: 13,
-  },
-  valueTitle: {
+  credentialName: {
     color: COLORS.BAY_OF_MANY,
     fontFamily: FONTS.POPPINS_500,
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: 25.5,
   },
-  value: {
+  subjectName: {
+    color: COLORS.BAY_OF_MANY,
+    fontFamily: FONTS.POPPINS_500,
+    fontSize: 14,
+    lineHeight: 25.5,
+  },
+  fieldTitle: {
+    fontFamily: FONTS.POPPINS_500,
+    fontSize: 12
+  },
+  fieldValue: {
     fontFamily: FONTS.POPPINS_300,
-    fontSize: 11,
-    lineHeight: 13,
+    fontSize: 12
   },
   separatorContainer: {
     marginVertical: 10,
     height: 1,
     width: '100%',
     backgroundColor: COLORS.LAVENDER_PURPLE,
+  },
+  did: {
+    fontSize: 8,
+    fontFamily: FONTS.POPPINS_300,
+    lineHeight: 10,
   },
   moreButtonContainer: {},
   moreButtonImage: {},

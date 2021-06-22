@@ -295,7 +295,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
       case PANEL_STATUS.PIN_VERIFY:
         return 'Enter a pin';
       case PANEL_STATUS.BIOMETRIC_VERIFY:
-        return 'Biometric verify..';
+        return 'Biometric verifcation';
       case PANEL_STATUS.VERIFIED:
         return 'Verified!';
     }
@@ -319,7 +319,7 @@ export const VerifyPanel: React.FC<VerifyPanelProps> = ({
           <CipherRow
             biometricType={
               panelStatus === PANEL_STATUS.PIN_ENTER ||
-              panelStatus === PANEL_STATUS.BIOMETRIC_VERIFY
+                panelStatus === PANEL_STATUS.BIOMETRIC_VERIFY
                 ? biometricType
                 : null
             }

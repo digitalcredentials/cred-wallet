@@ -18,7 +18,7 @@ export interface Credential {
   credentialSubject: {
     type: string;
     name: string;
-    hasAchieved: {
+    hasCredential: {
       type: string[];
       id: string;
       name: string;

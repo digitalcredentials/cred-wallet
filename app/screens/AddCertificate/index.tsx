@@ -34,21 +34,21 @@ export const AddCertificateScreen: React.FC<IAddCertificateScreenProps> = ({
         <Text style={styles.requestTitle}>Do you want to add?</Text>
         <View style={styles.certificateInfoContainer}>
           <View style={styles.certificateInfoTitleContainer}>
-            <Image
-              style={styles.certificateInfoTitleImage}
-              source={IMAGES.MAN}
-            />
-
             <Text style={styles.certificateInfoTitle}>
-              Program - {certificate.credentialSubject?.name}
+              {certificate.credentialSubject?.hasCredential.name}
             </Text>
           </View>
 
-          <Text style={styles.certificateInfoIssuer}>{issuer.name}</Text>
+          <View style={styles.certificateInfoFieldContainer} key='issuer'>
+            <Text style={styles.certificateInfoFieldName}>Issuer: </Text>
+            <Text style={styles.certificateInfoFieldValue}>
+              {issuer.name}
+            </Text>
+          </View>
 
-          {_.map(FIELDS, ({ fieldName, getFieldValue }) => (
-            <View style={styles.certificateInfoFieldContainer}>
-              <Text style={styles.certificateInfoFieldName}>{fieldName}</Text>
+          {_.map(FIELDS, ({ fieldName, getFieldValue }, index) => (
+            <View style={styles.certificateInfoFieldContainer} key={index}>
+              <Text style={styles.certificateInfoFieldName}>{fieldName}: </Text>
               <Text style={styles.certificateInfoFieldValue}>
                 {getFieldValue(certificate)}
               </Text>
