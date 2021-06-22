@@ -13,16 +13,16 @@ export const AboutScreen: React.FC<IAboutScreenProps> = ({
     <View style={styles.container}>
       <SettingsHeader title="About" />
       <View style={styles.contentContainer}>
-        <Text>
+        <Text style={styles.paragraph}>
           { app_name } { app_version }
         </Text>
-        <Text>
+        <Text style={styles.paragraph}>
           This mobile wallet was developed by the Digital Credentials Consortium, a network of leading international universities designing an open infrastructure for academic credentials.
         </Text>
-        <Text>
-            More information at <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://digitalcredentials.mit.edu')} >https://digitalcredentials.mit.edu</Text>.
+        <Text style={styles.paragraph}>
+            More information at <Text style={styles.link} onPress={() => Linking.openURL('https://digitalcredentials.mit.edu')} >https://digitalcredentials.mit.edu</Text>.
         </Text>
-        <Text>
+        <Text style={styles.paragraph}>
           Copyright 2021 Massachusetts Institute of Technology
         </Text>
       </View>

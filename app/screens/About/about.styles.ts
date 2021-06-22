@@ -3,17 +3,15 @@ import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
 
-interface ISettingsScreenStyles {
+interface IAboutScreenStyles {
   container: ViewStyle;
   contentContainer: ViewStyle;
   sectionTitle: TextStyle;
-  itemImage: ImageStyle;
-  itemTitle: TextStyle;
-  itemContainer: ViewStyle;
-  itemChevron: ImageStyle;
+  link: TextStyle;
+  paragraph: TextStyle;
 }
 
-export const styles = StyleSheet.create<ISettingsScreenStyles>({
+export const styles = StyleSheet.create<IAboutScreenStyles>({
   container: {
     flex: 1,
     backgroundColor: COLORS.WHITE,
@@ -30,27 +28,11 @@ export const styles = StyleSheet.create<ISettingsScreenStyles>({
     fontSize: 11,
     lineHeight: 14,
   },
-  itemImage: {
-    width: 26,
-    height: 19,
-    marginRight: 10,
+  paragraph: {
+    marginBottom: 5,
+    marginTop: 10,
   },
-  itemTitle: {
-    fontFamily: FONTS.POPPINS_600,
-    fontSize: 17,
-    lineHeight: 25.5,
-    flex: 1,
-    color: COLORS.BAY_OF_MANY,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: `${COLORS.FRENCH_LILAC}99`,
-  },
-  itemChevron: {
-    marginLeft: 10,
+  link: {
+    color: 'blue',
   },
 });
